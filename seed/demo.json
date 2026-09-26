@@ -1,0 +1,456 @@
+[
+  {
+    "_type": "area",
+    "title": "Downtown Tucson",
+    "slug": {
+      "_type": "slug",
+      "current": "downtown-tucson"
+    },
+    "summary": "Ejemplo editorial para explorar una zona urbana y organizar una futura guía del centro.",
+    "description": [
+      {
+        "_type": "block",
+        "_key": "intro",
+        "style": "normal",
+        "markDefs": [],
+        "children": [
+          {
+            "_type": "span",
+            "_key": "text",
+            "marks": [],
+            "text": "Ejemplo editorial para explorar una zona urbana y organizar una futura guía del centro. Contenido de prueba: reemplazar con información verificada antes del lanzamiento."
+          }
+        ]
+      }
+    ],
+    "highlights": [
+      "Recorridos urbanos"
+    ],
+    "housingTypes": [
+      "Condominios"
+    ],
+    "sortOrder": 1,
+    "isDemo": true,
+    "seedKey": "vive-demo-v1:downtown-tucson",
+    "seo": {
+      "_type": "seo",
+      "title": "Downtown Tucson | Vive en Tucson",
+      "description": "Ejemplo editorial para explorar una zona urbana y organizar una futura guía del centro.",
+      "noIndex": true
+    },
+    "_id": "62f2c218-6855-474d-ad0b-7f9fdcfbf523"
+  },
+  {
+    "_type": "area",
+    "title": "Oro Valley",
+    "slug": {
+      "_type": "slug",
+      "current": "oro-valley"
+    },
+    "summary": "Ejemplo editorial para una guía de Oro Valley con espacios para servicios, recorridos y vivienda.",
+    "description": [
+      {
+        "_type": "block",
+        "_key": "intro",
+        "style": "normal",
+        "markDefs": [],
+        "children": [
+          {
+            "_type": "span",
+            "_key": "text",
+            "marks": [],
+            "text": "Ejemplo editorial para una guía de Oro Valley con espacios para servicios, recorridos y vivienda. Contenido de prueba: reemplazar con información verificada antes del lanzamiento."
+          }
+        ]
+      }
+    ],
+    "highlights": [
+      "Servicios por investigar"
+    ],
+    "housingTypes": [
+      "Casas unifamiliares"
+    ],
+    "sortOrder": 2,
+    "isDemo": true,
+    "seedKey": "vive-demo-v1:oro-valley",
+    "seo": {
+      "_type": "seo",
+      "title": "Oro Valley | Vive en Tucson",
+      "description": "Ejemplo editorial para una guía de Oro Valley con espacios para servicios, recorridos y vivienda.",
+      "noIndex": true
+    },
+    "_id": "789389ca-54e9-4600-9f58-cc673e8357d3"
+  },
+  {
+    "_type": "area",
+    "title": "Marana",
+    "slug": {
+      "_type": "slug",
+      "current": "marana"
+    },
+    "summary": "Ejemplo editorial para comparar sectores de Marana y documentar visitas a la zona.",
+    "description": [
+      {
+        "_type": "block",
+        "_key": "intro",
+        "style": "normal",
+        "markDefs": [],
+        "children": [
+          {
+            "_type": "span",
+            "_key": "text",
+            "marks": [],
+            "text": "Ejemplo editorial para comparar sectores de Marana y documentar visitas a la zona. Contenido de prueba: reemplazar con información verificada antes del lanzamiento."
+          }
+        ]
+      }
+    ],
+    "highlights": [
+      "Recorridos por documentar"
+    ],
+    "housingTypes": [
+      "Casas unifamiliares"
+    ],
+    "sortOrder": 3,
+    "isDemo": true,
+    "seedKey": "vive-demo-v1:marana",
+    "seo": {
+      "_type": "seo",
+      "title": "Marana | Vive en Tucson",
+      "description": "Ejemplo editorial para comparar sectores de Marana y documentar visitas a la zona.",
+      "noIndex": true
+    },
+    "_id": "fe718258-4111-4818-859f-da8976680cb0"
+  },
+  {
+    "_type": "area",
+    "title": "Dove Mountain",
+    "slug": {
+      "_type": "slug",
+      "current": "dove-mountain"
+    },
+    "summary": "Ejemplo editorial para presentar Dove Mountain y preparar contenido audiovisual de la zona.",
+    "description": [
+      {
+        "_type": "block",
+        "_key": "intro",
+        "style": "normal",
+        "markDefs": [],
+        "children": [
+          {
+            "_type": "span",
+            "_key": "text",
+            "marks": [],
+            "text": "Ejemplo editorial para presentar Dove Mountain y preparar contenido audiovisual de la zona. Contenido de prueba: reemplazar con información verificada antes del lanzamiento."
+          }
+        ]
+      }
+    ],
+    "highlights": [
+      "Entorno por documentar"
+    ],
+    "housingTypes": [
+      "Casas unifamiliares"
+    ],
+    "sortOrder": 4,
+    "isDemo": true,
+    "seedKey": "vive-demo-v1:dove-mountain",
+    "seo": {
+      "_type": "seo",
+      "title": "Dove Mountain | Vive en Tucson",
+      "description": "Ejemplo editorial para presentar Dove Mountain y preparar contenido audiovisual de la zona.",
+      "noIndex": true
+    },
+    "_id": "3c86a0c7-51af-4811-8595-6e1977d5ffb6"
+  },
+  {
+    "_type": "area",
+    "title": "Northwest Tucson",
+    "slug": {
+      "_type": "slug",
+      "current": "northwest-tucson"
+    },
+    "summary": "Ejemplo editorial para organizar sectores del noroeste de Tucson y futuras comparaciones.",
+    "description": [
+      {
+        "_type": "block",
+        "_key": "intro",
+        "style": "normal",
+        "markDefs": [],
+        "children": [
+          {
+            "_type": "span",
+            "_key": "text",
+            "marks": [],
+            "text": "Ejemplo editorial para organizar sectores del noroeste de Tucson y futuras comparaciones. Contenido de prueba: reemplazar con información verificada antes del lanzamiento."
+          }
+        ]
+      }
+    ],
+    "highlights": [
+      "Sectores por comparar"
+    ],
+    "housingTypes": [
+      "Casas y condominios"
+    ],
+    "sortOrder": 5,
+    "isDemo": true,
+    "seedKey": "vive-demo-v1:northwest-tucson",
+    "seo": {
+      "_type": "seo",
+      "title": "Northwest Tucson | Vive en Tucson",
+      "description": "Ejemplo editorial para organizar sectores del noroeste de Tucson y futuras comparaciones.",
+      "noIndex": true
+    },
+    "_id": "f2367416-d162-447c-aef0-6097550e9eca"
+  },
+  {
+    "_type": "area",
+    "title": "Sahuarita",
+    "slug": {
+      "_type": "slug",
+      "current": "sahuarita"
+    },
+    "summary": "Ejemplo editorial para una guía de Sahuarita con información de servicios y recorridos por validar.",
+    "description": [
+      {
+        "_type": "block",
+        "_key": "intro",
+        "style": "normal",
+        "markDefs": [],
+        "children": [
+          {
+            "_type": "span",
+            "_key": "text",
+            "marks": [],
+            "text": "Ejemplo editorial para una guía de Sahuarita con información de servicios y recorridos por validar. Contenido de prueba: reemplazar con información verificada antes del lanzamiento."
+          }
+        ]
+      }
+    ],
+    "highlights": [
+      "Servicios por documentar"
+    ],
+    "housingTypes": [
+      "Casas unifamiliares"
+    ],
+    "sortOrder": 6,
+    "isDemo": true,
+    "seedKey": "vive-demo-v1:sahuarita",
+    "seo": {
+      "_type": "seo",
+      "title": "Sahuarita | Vive en Tucson",
+      "description": "Ejemplo editorial para una guía de Sahuarita con información de servicios y recorridos por validar.",
+      "noIndex": true
+    },
+    "_id": "63532cf6-43e7-4614-94b4-4332ec14cfd3"
+  },
+  {
+    "_id": "siteSettings",
+    "title": "Vive en Tucson",
+    "tagline": "Con Jorge Ramirez",
+    "agentName": "Jorge Ramirez",
+    "isDemo": true,
+    "navigation": [
+      {
+        "_type": "link",
+        "_key": "inicio",
+        "label": "Inicio",
+        "href": "/"
+      },
+      {
+        "_type": "link",
+        "_key": "zonas",
+        "label": "Zonas de Tucson",
+        "href": "/zonas"
+      },
+      {
+        "_type": "link",
+        "_key": "videos",
+        "label": "Videos",
+        "href": "/videos"
+      },
+      {
+        "_type": "link",
+        "_key": "contacto",
+        "label": "Contacto",
+        "href": "/contacto"
+      }
+    ],
+    "footerText": "Contenido de prueba. Sustituir antes del lanzamiento.",
+    "seo": {
+      "_type": "seo",
+      "title": "Vive en Tucson",
+      "description": "Conoce las zonas de Tucson. Sitio de demostración.",
+      "noIndex": true
+    },
+    "_type": "siteSettings"
+  },
+  {
+    "_id": "homepage",
+    "title": "Inicio",
+    "heroTitle": "CONOCE TUCSON",
+    "heroSubtitle": "ANTES DE COMPRAR CASA",
+    "heroDescription": "Explora las zonas y prepara tus preguntas para tu próximo recorrido. Contenido de demostración.",
+    "heroActions": [
+      {
+        "_type": "link",
+        "_key": "videos",
+        "label": "Ver videos",
+        "href": "/videos"
+      },
+      {
+        "_type": "link",
+        "_key": "zonas",
+        "label": "Explorar zonas",
+        "href": "/zonas"
+      }
+    ],
+    "featuredAreas": [
+      {
+        "_type": "reference",
+        "_key": "area0",
+        "_ref": "62f2c218-6855-474d-ad0b-7f9fdcfbf523"
+      },
+      {
+        "_type": "reference",
+        "_key": "area1",
+        "_ref": "789389ca-54e9-4600-9f58-cc673e8357d3"
+      },
+      {
+        "_type": "reference",
+        "_key": "area2",
+        "_ref": "fe718258-4111-4818-859f-da8976680cb0"
+      },
+      {
+        "_type": "reference",
+        "_key": "area3",
+        "_ref": "3c86a0c7-51af-4811-8595-6e1977d5ffb6"
+      },
+      {
+        "_type": "reference",
+        "_key": "area4",
+        "_ref": "f2367416-d162-447c-aef0-6097550e9eca"
+      },
+      {
+        "_type": "reference",
+        "_key": "area5",
+        "_ref": "63532cf6-43e7-4614-94b4-4332ec14cfd3"
+      }
+    ],
+    "contactHeading": "Conversemos sobre tu próxima visita",
+    "contactAction": {
+      "_type": "link",
+      "label": "Contacto",
+      "href": "/contacto"
+    },
+    "isDemo": true,
+    "seo": {
+      "_type": "seo",
+      "title": "Conoce Tucson | Vive en Tucson",
+      "noIndex": true
+    },
+    "_type": "homepage",
+    "featuredVideos": [
+      {
+        "_type": "reference",
+        "_key": "video1",
+        "_ref": "2641f14a-be5f-48f2-968e-b4ce8dc0bb1e"
+      }
+    ],
+    "featuredArticles": [
+      {
+        "_type": "reference",
+        "_key": "article1",
+        "_ref": "5a7287ef-4e41-4fa4-a8d3-b933534f2592"
+      }
+    ]
+  },
+  {
+    "title": "Recorrido de ejemplo: Downtown Tucson",
+    "slug": {
+      "_type": "slug",
+      "current": "recorrido-demo-downtown-tucson"
+    },
+    "summary": "Ficha de prueba. Agrega la URL y miniatura de un video real antes de usarla públicamente.",
+    "areas": [
+      {
+        "_type": "reference",
+        "_key": "area0",
+        "_ref": "62f2c218-6855-474d-ad0b-7f9fdcfbf523"
+      }
+    ],
+    "isDemo": true,
+    "seedKey": "vive-demo-v1:video",
+    "seo": {
+      "_type": "seo",
+      "noIndex": true
+    },
+    "_type": "video",
+    "_id": "2641f14a-be5f-48f2-968e-b4ce8dc0bb1e"
+  },
+  {
+    "title": "Cómo organizar tu recorrido por las zonas de Tucson",
+    "slug": {
+      "_type": "slug",
+      "current": "organiza-tu-recorrido-demo"
+    },
+    "excerpt": "Artículo de demostración para comprobar el contenido editorial y sus relaciones con las zonas.",
+    "body": [
+      {
+        "_type": "block",
+        "_key": "intro",
+        "style": "normal",
+        "markDefs": [],
+        "children": [
+          {
+            "_type": "span",
+            "_key": "text",
+            "marks": [],
+            "text": "Contenido de prueba. Prepara una lista de lugares que quieres conocer, anota tus preguntas y registra tus observaciones durante cada recorrido. Reemplaza este ejemplo con tu guía editorial antes de publicar el sitio."
+          }
+        ]
+      }
+    ],
+    "areas": [
+      {
+        "_type": "reference",
+        "_key": "area0",
+        "_ref": "62f2c218-6855-474d-ad0b-7f9fdcfbf523"
+      },
+      {
+        "_type": "reference",
+        "_key": "area1",
+        "_ref": "789389ca-54e9-4600-9f58-cc673e8357d3"
+      },
+      {
+        "_type": "reference",
+        "_key": "area2",
+        "_ref": "fe718258-4111-4818-859f-da8976680cb0"
+      },
+      {
+        "_type": "reference",
+        "_key": "area3",
+        "_ref": "3c86a0c7-51af-4811-8595-6e1977d5ffb6"
+      },
+      {
+        "_type": "reference",
+        "_key": "area4",
+        "_ref": "f2367416-d162-447c-aef0-6097550e9eca"
+      },
+      {
+        "_type": "reference",
+        "_key": "area5",
+        "_ref": "63532cf6-43e7-4614-94b4-4332ec14cfd3"
+      }
+    ],
+    "isDemo": true,
+    "seedKey": "vive-demo-v1:article",
+    "seo": {
+      "_type": "seo",
+      "noIndex": true
+    },
+    "_type": "article",
+    "_id": "5a7287ef-4e41-4fa4-a8d3-b933534f2592"
+  }
+]

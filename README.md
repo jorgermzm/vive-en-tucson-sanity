@@ -79,3 +79,12 @@ Los esquemas están definidos en este código. Para registrar el esquema tras
 iniciar sesión en Sanity: `npm run schema:deploy`.
 El alojamiento del Studio no forma parte de este repositorio inicial.
 No se crearon proyectos, datasets ni integraciones IDX nuevos.
+
+## Verificación de esta entrega
+- TypeScript: sin errores.
+- Extracción de esquema y TypeGen: correctas (7 consultas).
+- Compilación de Studio: correcta.
+- Las 7 consultas se ejecutaron contra production por MCP; el filtro sin demos devolvió cero zonas.
+- La validación completa con `sanity documents validate` y el despliegue remoto del esquema requieren `sanity login` local. No se han ejecutado con autenticación local.
+- La auditoría npm reportó 14 avisos en dependencias transitivas (11 moderados, 3 altos), principalmente herramientas de CLI. No se aplicó la degradación de Sanity que propone `npm audit fix --force`. Revisar actualizaciones antes de desplegar el Studio.
+

@@ -1,0 +1,32 @@
+{
+  "name": "vive-en-tucson-sanity",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "dev": "sanity dev",
+    "build": "sanity build",
+    "typecheck": "tsc --noEmit",
+    "typegen": "sanity schema extract --enforce-required-fields && sanity typegen generate",
+    "schema:deploy": "sanity schema deploy",
+    "seed": "sanity exec scripts/seed.ts --with-user-token"
+  },
+  "dependencies": {
+    "@sanity/client": "8.7.0",
+    "@sanity/icons": "5.2.2",
+    "@sanity/vision": "6.16.0",
+    "groq": "6.16.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "sanity": "6.16.0",
+    "styled-components": "6.5.3"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.3",
+    "@types/react": "19.3.0",
+    "typescript": "7.0.2"
+  }
+}
