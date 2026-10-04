@@ -8,6 +8,43 @@ const heroFallback='https://images.unsplash.com/photo-1697933804242-aa8278a54d08
 const downtownFallback='https://images.unsplash.com/photo-1572766862815-14bce94d081c?auto=format&fit=crop&w=1400&q=85'
 const desertFallback='https://images.unsplash.com/photo-1584407593900-277920f8ee42?auto=format&fit=crop&w=1400&q=85'
 const buildingFallback='https://images.unsplash.com/photo-1589399517000-0c8a5be8fcb4?auto=format&fit=crop&w=1400&q=85'
+type AreaCard = {
+  _key?: string
+  _id?: string
+  title?: string | null
+  slug?: string | null
+  summary?: string | null
+  mainImage?: unknown
+  housingTypes?: string[] | null
+  highlights?: string[] | null
+}
+
+type FeaturedVideo = {
+  _key?: string
+  _id?: string
+  title?: string | null
+  slug?: string | null
+  summary?: string | null
+  youtubeUrl?: string | null
+  thumbnail?: unknown
+}
+
+type HomePayload = {
+  settings?: {
+    agentName?: string | null
+    phone?: string | null
+    whatsappUrl?: string | null
+  } | null
+  home?: {
+    heroTitle?: string | null
+    heroSubtitle?: string | null
+    heroDescription?: string | null
+    heroImage?: unknown
+    featuredAreas?: AreaCard[] | null
+    featuredVideos?: FeaturedVideo[] | null
+  } | null
+}
+
 const areaFallbacks:Record<string,string>={
   'downtown-tucson':downtownFallback,'oro-valley':desertFallback,'marana':heroFallback,
   'dove-mountain':desertFallback,'northwest-tucson':heroFallback,'sahuarita':desertFallback,
@@ -26,8 +63,9 @@ function sanityImage(image:unknown,fallback:string,width=1400){
 export default async function HomePage(){
   const {perspective,stega}=await getSanityFetchOptions()
   const {data}=await sanityFetch({query:HOME_QUERY,perspective,stega})
-  const settings=data?.settings
-  const home=data?.home
+  const content=data as HomePayload | null
+  const settings=content?.settings
+  const home=content?.home
   const phone=settings?.phone || '520-335-9349'
   const whatsapp=settings?.whatsappUrl || 'https://wa.me/15203359349'
   const areas=home?.featuredAreas?.filter(Boolean) || []
