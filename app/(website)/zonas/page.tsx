@@ -3,11 +3,20 @@ import Link from 'next/link'
 import {AREAS_QUERY} from '@/sanity/lib/queries'
 import {getSanityFetchOptions,sanityFetch} from '@/sanity/lib/live'
 import {urlFor} from '@/sanity/lib/image'
+type AreaCard = {
+  _id: string
+  title?: string | null
+  slug?: string | null
+  summary?: string | null
+  mainImage?: unknown
+}
+
 const fallback='https://images.unsplash.com/photo-1584407593900-277920f8ee42?auto=format&fit=crop&w=1400&q=85'
 
 export default async function AreasPage(){
   const {perspective,stega}=await getSanityFetchOptions()
-  const {data:areas}=await sanityFetch({query:AREAS_QUERY,perspective,stega})
+  const {data}=await sanityFetch({query:AREAS_QUERY,perspective,stega})
+  const areas=(Array.isArray(data) ? data : []) as AreaCard[]
   return <main className="min-h-screen bg-sand/40 py-12"><div className="shell">
     <Link href="/" className="font-bold text-blue-600">← Inicio</Link>
     <h1 className="mt-6 text-5xl font-black">Zonas de Tucson</h1>
