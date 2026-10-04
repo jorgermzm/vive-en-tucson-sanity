@@ -4,12 +4,23 @@ import {notFound} from 'next/navigation'
 import {AREA_QUERY} from '@/sanity/lib/queries'
 import {getSanityFetchOptions,sanityFetch} from '@/sanity/lib/live'
 import {urlFor} from '@/sanity/lib/image'
+type AreaDetail = {
+  _id: string
+  title?: string | null
+  slug?: string | null
+  summary?: string | null
+  mainImage?: unknown
+  highlights?: string[] | null
+  housingTypes?: string[] | null
+}
+
 const fallback='https://images.unsplash.com/photo-1584407593900-277920f8ee42?auto=format&fit=crop&w=1800&q=85'
 
 export default async function AreaPage({params}:{params:Promise<{slug:string}>}){
   const {slug}=await params
   const {perspective,stega}=await getSanityFetchOptions()
-  const {data:area}=await sanityFetch({query:AREA_QUERY,params:{slug},perspective,stega})
+  const {data}=await sanityFetch({query:AREA_QUERY,params:{slug},perspective,stega})
+  const area=data as AreaDetail | null
   if(!area)notFound()
   const image=area.mainImage ? urlFor(area.mainImage).width(1800).height(900).fit('crop').url() : fallback
   return <main className="min-h-screen bg-white">
