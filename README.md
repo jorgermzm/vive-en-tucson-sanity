@@ -1,90 +1,44 @@
-# Vive en Tucson — Sanity Studio
+# Vive en Tucson — Next.js + Sanity
 
-Studio standalone en TypeScript para el proyecto existente **qpdnewuy**, dataset **production**.
-No contiene frontend Next.js ni Tailwind.
+Una sola aplicación para Vercel con frontend público, Sanity Studio en `/studio` y Presentation Tool / Visual Editing.
 
-## Inicio
-Requiere Node.js 22.12+ (recomendado Node 24) y npm.
+## Desarrollo local
 
-```sh
-npm ci
+```bash
+npm install
+cp .env.example .env.local
 npm run dev
 ```
 
-Abre http://localhost:3333 e inicia sesión con una cuenta autorizada en Sanity.
-Los identificadores públicos vienen configurados. No se necesitan tokens para compilar.
+Web: http://localhost:3000  
+Studio: http://localhost:3000/studio
 
-## Contenido
-- **siteSettings**: singleton para marca, navegación, contacto, redes y SEO.
-- **homepage**: singleton para hero, botones y referencias destacadas.
-- **area** (Zona): slug, descripción Portable Text, imágenes, galería, puntos de interés y videos.
-- **video**: YouTube, miniatura, transcripción y zonas.
-- **article**: contenido Portable Text y zonas relacionadas.
-- **seo**, **editorialImage**, **link** y **richText**: tipos reutilizables.
+## Variables de entorno
 
-Los singletons usan IDs siteSettings y homepage y no permiten duplicación desde Studio.
-Las imágenes admiten hotspot, texto alternativo y crédito.
-
-## Datos de demostración
-Se cargaron por MCP en production seis zonas: Downtown Tucson, Oro Valley, Marana,
-Dove Mountain, Northwest Tucson y Sahuarita; además configuración, portada, un artículo
-y una ficha de video. Son 10 documentos publicados para consultar por API.
-Todos tienen isDemo=true y seo.noIndex=true. No contienen precios, inventario MLS
-ni afirmaciones comerciales verificadas. La ficha de video no tiene URL real;
-las imágenes y el contacto están pendientes de contenido definitivo.
-
-seed/demo.json conserva los IDs reales asignados por Sanity. Para restaurar documentos
-faltantes después de iniciar sesión con `npx sanity login`:
-
-```sh
-npm run seed
+```
+NEXT_PUBLIC_SANITY_PROJECT_ID=qpdnewuy
+NEXT_PUBLIC_SANITY_DATASET=production
+NEXT_PUBLIC_SANITY_API_VERSION=2026-10-03
+SANITY_API_READ_TOKEN=...
 ```
 
-El seed omite documentos existentes (incluidos borradores), no reemplaza cambios
-editoriales y está limitado a este proyecto/dataset. Ejecutarlo de forma serial.
+`SANITY_API_READ_TOKEN` debe ser un token Viewer y nunca debe exponerse como `NEXT_PUBLIC_*`.
 
-## Preparado para un frontend separado
-lib/client.ts configura el cliente público con perspectiva published y API fechada.
-lib/queries.ts contiene consultas para configuración, portada, zonas, videos y artículos.
-Durante desarrollo pasa `{includeDemo: true}`; en producción usa
-`{includeDemo: false}` y maneja resultados vacíos. Para detalles añade `slug`.
-Las referencias destacadas también filtran demos.
+## Vercel
 
-Ejemplo de consumo (sin implementar frontend):
+1. Importa este repo como un solo proyecto.
+2. Framework Preset: Next.js.
+3. Root Directory: raíz del repo.
+4. Agrega las variables anteriores.
+5. Deploy.
+6. Agrega el dominio final a Sanity CORS con credenciales habilitadas. Para previews puede usarse `https://*.vercel.app`.
 
-```ts
-const areas = await client.fetch(AREAS_QUERY, {includeDemo: true})
-```
+## Rutas
 
-Las consultas devuelven claves de arrays, datos de imágenes, crop/hotspot y SEO
-con valores de respaldo. Respeta noIndex al generar metadatos. Quita isDemo y
-revisa el SEO únicamente después de reemplazar el contenido de prueba.
-Los listados están limitados a 100 elementos; implementar paginación al crecer.
+- `/` — homepage.
+- `/zonas` — zonas.
+- `/zonas/[slug]` — detalle.
+- `/studio` — Studio embebido.
+- `/api/draft-mode/enable` — Draft Mode para Presentation.
 
-```sh
-npm run typegen
-npm run typecheck
-npm run build
-```
-
-Copia/adapta las consultas, el cliente y sanity.types.ts en el futuro repositorio
-Next.js; Tailwind corresponde a ese frontend. Renderiza richText con Portable Text
-y configura cdn.sanity.io para imágenes. Un servidor Next.js puede consultar el
-dataset público sin token. Para previews autenticadas, usa un token de lectura
-solo en servidor y configura CORS para el origen concreto cuando exista.
-Nunca expongas tokens de escritura mediante SANITY_STUDIO_* o NEXT_PUBLIC_*.
-
-## Esquema remoto y alojamiento
-Los esquemas están definidos en este código. Para registrar el esquema tras
-iniciar sesión en Sanity: `npm run schema:deploy`.
-El alojamiento del Studio no forma parte de este repositorio inicial.
-No se crearon proyectos, datasets ni integraciones IDX nuevos.
-
-## Verificación de esta entrega
-- TypeScript: sin errores.
-- Extracción de esquema y TypeGen: correctas (7 consultas).
-- Compilación de Studio: correcta.
-- Las 7 consultas se ejecutaron contra production por MCP; el filtro sin demos devolvió cero zonas.
-- La validación completa con `sanity documents validate` y el despliegue remoto del esquema requieren `sanity login` local. No se han ejecutado con autenticación local.
-- La auditoría npm reportó 14 avisos en dependencias transitivas (11 moderados, 3 altos), principalmente herramientas de CLI. No se aplicó la degradación de Sanity que propone `npm audit fix --force`. Revisar actualizaciones antes de desplegar el Studio.
-
+Las propiedades de la homepage son placeholders marcados como Demo / IDX pendiente; no son listings MLS reales.

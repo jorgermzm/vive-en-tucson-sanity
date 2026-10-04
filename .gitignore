@@ -1,6 +1,9 @@
 node_modules/
+.next/
+out/
 dist/
 .sanity/
+.vercel/
 .env*
 !.env.example
 *.log
