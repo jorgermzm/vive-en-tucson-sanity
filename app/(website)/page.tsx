@@ -8,53 +8,83 @@ const heroFallback='https://images.unsplash.com/photo-1697933804242-aa8278a54d08
 const downtownFallback='https://images.unsplash.com/photo-1572766862815-14bce94d081c?auto=format&fit=crop&w=1400&q=85'
 const desertFallback='https://images.unsplash.com/photo-1584407593900-277920f8ee42?auto=format&fit=crop&w=1400&q=85'
 const buildingFallback='https://images.unsplash.com/photo-1589399517000-0c8a5be8fcb4?auto=format&fit=crop&w=1400&q=85'
-type AreaCard = {
-  _key?: string
-  _id?: string
-  title?: string | null
-  slug?: string | null
-  summary?: string | null
-  mainImage?: unknown
-  housingTypes?: string[] | null
-  highlights?: string[] | null
+
+type AreaCard={
+  _key?:string
+  _id?:string
+  title?:string|null
+  slug?:string|null
+  summary?:string|null
+  mainImage?:unknown
+  housingTypes?:string[]|null
+  highlights?:string[]|null
 }
 
-type FeaturedVideo = {
-  _key?: string
-  _id?: string
-  title?: string | null
-  slug?: string | null
-  summary?: string | null
-  youtubeUrl?: string | null
-  thumbnail?: unknown
+type FeaturedVideo={
+  _key?:string
+  _id?:string
+  title?:string|null
+  slug?:string|null
+  summary?:string|null
+  youtubeUrl?:string|null
+  thumbnail?:unknown
 }
 
-type HomePayload = {
-  settings?: {
-    agentName?: string | null
-    phone?: string | null
-    whatsappUrl?: string | null
-  } | null
-  home?: {
-    heroTitle?: string | null
-    heroSubtitle?: string | null
-    heroDescription?: string | null
-    heroImage?: unknown
-    featuredAreas?: AreaCard[] | null
-    featuredVideos?: FeaturedVideo[] | null
-  } | null
+type HomePayload={
+  settings?:{
+    agentName?:string|null
+    phone?:string|null
+    whatsappUrl?:string|null
+  }|null
+  home?:{
+    heroTitle?:string|null
+    heroSubtitle?:string|null
+    heroDescription?:string|null
+    heroImage?:unknown
+    featuredAreas?:AreaCard[]|null
+    featuredVideos?:FeaturedVideo[]|null
+  }|null
 }
 
 const areaFallbacks:Record<string,string>={
-  'downtown-tucson':downtownFallback,'oro-valley':desertFallback,'marana':heroFallback,
-  'dove-mountain':desertFallback,'northwest-tucson':heroFallback,'sahuarita':desertFallback,
+  'downtown-tucson':downtownFallback,
+  'oro-valley':desertFallback,
+  'marana':heroFallback,
+  'dove-mountain':desertFallback,
+  'northwest-tucson':heroFallback,
+  'sahuarita':desertFallback,
 }
-const demoProperties=[
-  {price:'$275,000',type:'Condominio moderno',beds:2,baths:2,sqft:'1,050 sqft',image:buildingFallback},
-  {price:'$349,000',type:'Loft estilo industrial',beds:1,baths:1,sqft:'1,200 sqft',image:downtownFallback},
-  {price:'$425,000',type:'Casa histórica remodelada',beds:3,baths:2,sqft:'1,680 sqft',image:desertFallback},
-  {price:'$510,000',type:'Townhome moderno',beds:3,baths:3,sqft:'1,950 sqft',image:heroFallback},
+
+const inspire=[
+  {title:'Restaurantes',subtitle:'Sabores únicos',icon:'🍴',image:'https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=900&q=85',href:'/videos'},
+  {title:'Hiking y Outdoors',subtitle:'Naturaleza increíble',icon:'△',image:'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=900&q=85',href:'/zonas'},
+  {title:'Familia',subtitle:'Planes para todos',icon:'◉',image:'https://images.unsplash.com/photo-1504150558240-0b4fd8946624?auto=format&fit=crop&w=900&q=85',href:'/zonas'},
+  {title:'Museos',subtitle:'Historia y cultura',icon:'⌂',image:downtownFallback,href:'/videos'},
+  {title:'Nightlife',subtitle:'Bares y vida nocturna',icon:'♫',image:'https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=900&q=85',href:'/videos'},
+  {title:'Eventos',subtitle:'Festivales y conciertos',icon:'▣',image:'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=900&q=85',href:'/videos'},
+  {title:'Shopping',subtitle:'Tiendas y mercados',icon:'▢',image:'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=900&q=85',href:'/zonas'},
 ]
+
+const demoProperties=[
+  {price:'$275,000',type:'Condominio moderno',beds:2,baths:2,sqft:'1,050 sqft',place:'Downtown Tucson, AZ',image:buildingFallback},
+  {price:'$349,000',type:'Loft estilo industrial',beds:1,baths:1,sqft:'1,200 sqft',place:'Downtown Tucson, AZ',image:downtownFallback},
+  {price:'$425,000',type:'Casa histórica remodelada',beds:3,baths:2,sqft:'1,680 sqft',place:'Tucson, AZ',image:desertFallback},
+  {price:'$510,000',type:'Townhome moderno',beds:3,baths:3,sqft:'1,950 sqft',place:'Oro Valley, AZ',image:heroFallback},
+]
+
+const stories=[
+  {title:'Las 10 mejores rutas de hiking en Tucson',tag:'OUTDOORS',image:'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=900&q=85',href:'/zonas'},
+  {title:'Dónde comer en Tucson: lugares que no te puedes perder',tag:'GASTRONOMÍA',image:'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=900&q=85',href:'/videos'},
+  {title:'Tucson vs Phoenix: ¿Cuál es mejor para ti?',tag:'VIVIR EN TUCSON',image:heroFallback,href:'/comprar'},
+  {title:'Guía para comprar tu primera casa en Tucson',tag:'REAL ESTATE',image:desertFallback,href:'/comprar'},
+  {title:'Eventos imperdibles en Tucson este año',tag:'EVENTOS',image:'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=900&q=85',href:'/videos'},
+]
+
+const living=[
+  ['⌂','Costo de vida'],['☀','Clima'],['▱','Escuelas'],['▰','Transporte'],['▦','Trabajo y economía'],
+  ['◇','Mejores zonas'],['◈','Seguridad'],['⊕','Salud'],['⇄','Tucson vs Phoenix'],['✈','Mudarse a Tucson'],
+]
+
 function sanityImage(image:unknown,fallback:string,width=1400){
   if(!image)return fallback
   try{return urlFor(image).width(width).height(Math.round(width*.65)).fit('crop').url()}catch{return fallback}
@@ -63,131 +93,171 @@ function sanityImage(image:unknown,fallback:string,width=1400){
 export default async function HomePage(){
   const {perspective,stega}=await getSanityFetchOptions()
   const {data}=await sanityFetch({query:HOME_QUERY,perspective,stega})
-  const content=data as HomePayload | null
+  const content=data as HomePayload|null
   const settings=content?.settings
   const home=content?.home
-  const phone=settings?.phone || '520-335-9349'
-  const whatsapp=settings?.whatsappUrl || 'https://wa.me/15203359349'
-  const areas=home?.featuredAreas?.filter(Boolean) || []
+  const phone=settings?.phone||'520-335-9349'
+  const whatsapp=settings?.whatsappUrl||'https://wa.me/15203359349'
+  const areas=(home?.featuredAreas||[]).filter((area):area is AreaCard=>Boolean(area?.slug))
   const heroImage=sanityImage(home?.heroImage,heroFallback,2200)
-  const featuredArea=areas.find((a)=>a?.slug==='downtown-tucson') || areas[0]
+  const featuredArea=areas.find((a)=>a.slug==='downtown-tucson')||areas[0]
   const featuredVideo=home?.featuredVideos?.[0]
 
-  return <main className="min-h-screen bg-white">
-    <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur">
-      <div className="shell flex h-[74px] items-center justify-between gap-5">
-        <Link href="/" className="flex items-center gap-3 font-black text-navy">
-          <span className="text-3xl text-green">♆</span>
+  return <main className="min-h-screen bg-[#fffdf9] text-navy">
+    <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/95 backdrop-blur">
+      <div className="shell flex h-[72px] items-center justify-between gap-5">
+        <Link href="/" className="flex shrink-0 items-center gap-3">
+          <span className="text-[30px] font-black text-green">♆</span>
           <span className="leading-none">
-            <span className="block text-xl tracking-tight">VIVE EN TUCSON</span>
-            <span className="mt-1 block text-[11px] font-semibold tracking-normal text-slate-600">Con {settings?.agentName || 'Jorge Ramirez'}</span>
+            <span className="block text-lg font-black tracking-tight">VIVE EN TUCSON</span>
+            <span className="mt-1 block text-[10px] font-semibold text-slate-600">Con {settings?.agentName||'Jorge Ramirez'}</span>
           </span>
         </Link>
-        <nav className="hidden items-center gap-7 text-sm font-semibold lg:flex">
-          <Link href="/">Inicio</Link><Link href="#zonas">Zonas de Tucson</Link><Link href="/comprar">Comprar</Link>
-          <Link href="/vender">Vender</Link><Link href="/videos">Videos</Link><Link href="/sobre-jorge">Sobre Jorge</Link><Link href="/contacto">Contacto</Link>
+        <nav className="hidden items-center gap-6 text-[13px] font-semibold xl:flex">
+          <Link href="/" className="border-b-2 border-navy pb-2">Inicio</Link>
+          <Link href="#zonas">Zonas</Link>
+          <Link href="#inspirate">Qué hacer⌄</Link>
+          <Link href="#vivir">Vivir en Tucson⌄</Link>
+          <Link href="/comprar">Comprar⌄</Link>
+          <Link href="/vender">Vender⌄</Link>
+          <Link href="/videos">Videos</Link>
+          <Link href="#historias">Guías</Link>
+          <Link href="/sobre-jorge">Sobre Jorge</Link>
+          <Link href="/contacto">Contacto</Link>
         </nav>
-        <a href={whatsapp} className="rounded-xl bg-green px-4 py-3 text-sm font-extrabold text-white shadow-card">WhatsApp {phone}</a>
+        <a href={whatsapp} className="rounded-lg bg-[#149b62] px-4 py-2.5 text-sm font-extrabold text-white shadow-card">◉ {phone}</a>
       </div>
     </header>
 
-    <section className="relative isolate min-h-[480px] overflow-hidden">
-      <Image src={heroImage} alt="Tucson, Arizona" fill priority className="object-cover" sizes="100vw"/>
-      <div className="absolute inset-0 bg-gradient-to-r from-navy/90 via-navy/55 to-navy/5"/>
-      <div className="shell relative z-10 flex min-h-[480px] items-center py-16">
-        <div className="max-w-3xl text-white">
-          <p className="mb-2 text-sm font-bold uppercase tracking-[.28em] text-sun">Vive Tucson con contexto local</p>
-          <h1 className="text-5xl font-black leading-[.95] tracking-tight sm:text-6xl lg:text-7xl">
-            {home?.heroTitle || 'CONOCE TUCSON'}<span className="mt-2 block text-sun">{home?.heroSubtitle || 'ANTES DE COMPRAR CASA'}</span>
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg font-medium leading-relaxed text-white/90">
-            {home?.heroDescription || 'Videos, zonas, precios y la experiencia local que necesitas para tomar una mejor decisión en Tucson, Arizona.'}
+    <section className="relative isolate min-h-[500px] overflow-hidden">
+      <Image src={heroImage} alt="Tucson, Arizona al atardecer" fill priority className="object-cover" sizes="100vw"/>
+      <div className="absolute inset-0 bg-gradient-to-r from-[#071a34]/90 via-[#0d2344]/55 to-transparent"/>
+      <div className="shell relative z-10 flex min-h-[500px] items-center py-16">
+        <div className="max-w-[760px] text-white">
+          <p className="mb-2 text-sm font-semibold uppercase tracking-[.5em]">Descubre</p>
+          <h1 className="display-serif text-[66px] font-black leading-[.92] tracking-[-.03em] sm:text-[82px]">Tucson</h1>
+          <h2 className="display-serif mt-1 text-4xl font-bold leading-tight sm:text-5xl">como alguien que vive aquí</h2>
+          <p className="mt-5 max-w-2xl text-base leading-6 text-white/95">
+            {home?.heroDescription||'Explora zonas, conoce qué hacer, mira videos, descubre tu próximo vecindario y encuentra la casa ideal en Tucson, Arizona.'}
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
-            <Link href="/videos" className="rounded-xl border border-white/80 bg-navy/80 px-6 py-3 font-extrabold text-white">▶ Ver Videos</Link>
-            <Link href="#propiedades" className="rounded-xl bg-white px-6 py-3 font-extrabold text-navy">⌂ Buscar casas en Tucson</Link>
+            <Link href="/videos" className="rounded-lg border border-white/80 bg-navy/85 px-6 py-3 font-extrabold text-white">▶ Ver Videos</Link>
+            <Link href="#propiedades" className="rounded-lg bg-white px-6 py-3 font-extrabold text-navy shadow-lg">⌂ Buscar Casas en Tucson</Link>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="zonas" className="shell py-8 sm:py-10">
-      <div className="flex items-end justify-between gap-6">
-        <div><h2 className="text-3xl font-black tracking-tight text-navy">Zonas Populares en Tucson</h2>
-        <p className="mt-1 text-sm text-slate-600">Explora áreas para vivir en Tucson con información, videos y propiedades.</p></div>
-        <Link href="/zonas" className="hidden text-sm font-bold text-blue-600 sm:block">Ver todas las zonas →</Link>
+    <section id="inspirate" className="shell py-8">
+      <div className="flex items-end justify-between gap-4">
+        <div><h2 className="display-serif text-3xl font-black">Inspírate en Tucson</h2><p className="text-sm text-slate-600">Explora todo lo que hace especial a esta ciudad.</p></div>
+        <Link href="/videos" className="hidden text-xs font-bold text-blue-700 md:block">Ver todas las categorías →</Link>
       </div>
-      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
-        {areas.map((area,index)=>{
-          if(!area?.slug)return null
-          const img=sanityImage(area.mainImage,areaFallbacks[area.slug] || desertFallback,800)
-          return <Link key={area._key || area._id || index} href={`/zonas/${area.slug}`} className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-card transition hover:-translate-y-1">
-            <div className="relative h-28"><Image src={img} alt={area.title || 'Zona de Tucson'} fill className="object-cover" sizes="240px"/></div>
-            <div className="p-4"><h3 className="font-black text-navy">{area.title}</h3><p className="mt-1 line-clamp-2 text-xs leading-relaxed text-slate-600">{area.summary}</p></div>
-          </Link>
-        })}
+      <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-7">
+        {inspire.map((item)=><Link key={item.title} href={item.href} className="group overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+          <div className="relative h-24 overflow-hidden"><Image src={item.image} alt={item.title} fill className="object-cover transition duration-500 group-hover:scale-105" sizes="220px"/></div>
+          <div className="relative px-3 pb-3 pt-5"><span className="absolute -top-4 left-3 flex h-8 w-8 items-center justify-center rounded-full bg-white text-sm shadow">{item.icon}</span><h3 className="text-sm font-extrabold">{item.title}</h3><p className="mt-1 text-[11px] text-slate-500">{item.subtitle}</p></div>
+        </Link>)}
       </div>
     </section>
 
-    <section id="video-destacado" className="editorial-grid border-y border-slate-100 bg-sand/70 py-10">
-      <div className="shell grid gap-8 lg:grid-cols-[1.35fr_.95fr] lg:items-center">
-        <div className="relative min-h-[360px] overflow-hidden rounded-2xl shadow-card">
-          <Image src={sanityImage(featuredVideo?.thumbnail || featuredArea?.mainImage,downtownFallback,1400)} alt={featuredVideo?.title || 'Downtown Tucson'} fill className="object-cover" sizes="(max-width:1024px) 100vw,60vw"/>
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"/>
-          <div className="absolute left-7 top-6 max-w-[70%] text-5xl font-black leading-none text-sun">Aquí empezó<br/>Tucson</div>
-          <div className="absolute inset-0 flex items-center justify-center"><span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-red-600 text-3xl text-white shadow-xl">▶</span></div>
+    <section id="zonas" className="border-y border-slate-100 bg-[#fbf7f1] py-9">
+      <div className="shell">
+        <div className="flex items-end justify-between gap-4">
+          <div><h2 className="display-serif text-3xl font-black">Explora Tucson por Zona</h2><p className="text-sm text-slate-600">Conoce cada zona, mira videos, descubre qué hacer y explora casas en venta.</p></div>
+          <Link href="/zonas" className="hidden text-xs font-bold text-blue-700 md:block">Ver todas las zonas →</Link>
+        </div>
+        <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {areas.map((area,index)=>{
+            const slug=area.slug as string
+            const img=sanityImage(area.mainImage,areaFallbacks[slug]||desertFallback,1200)
+            return <Link key={area._key||area._id||index} href={`/zonas/${slug}`} className="area-tile group relative min-h-[310px] overflow-hidden rounded-2xl shadow-card">
+              <Image src={img} alt={area.title||'Zona de Tucson'} fill className="object-cover transition duration-700 group-hover:scale-105" sizes="(max-width:768px) 100vw, 50vw"/>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"/>
+              <div className="absolute inset-x-0 bottom-0 p-6 text-white">
+                <h3 className="display-serif text-3xl font-black leading-none">{area.title}</h3>
+                <p className="mt-2 line-clamp-2 max-w-md text-sm text-white/85">{area.summary}</p>
+                <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-xs font-bold text-white/95"><span>▶ Videos</span><span>⌖ Qué hacer</span><span>⌂ Casas en venta</span></div>
+                <span className="absolute bottom-6 right-6 flex h-10 w-10 items-center justify-center rounded-full bg-white text-xl font-black text-navy">›</span>
+              </div>
+            </Link>
+          })}
+        </div>
+      </div>
+    </section>
+
+    <section id="video-destacado" className="editorial-grid py-10">
+      <div className="shell grid gap-8 lg:grid-cols-[1.25fr_.95fr] lg:items-center">
+        <div className="relative min-h-[390px] overflow-hidden rounded-2xl shadow-card">
+          <Image src={sanityImage(featuredVideo?.thumbnail||featuredArea?.mainImage,downtownFallback,1500)} alt={featuredVideo?.title||'Downtown Tucson'} fill className="object-cover" sizes="(max-width:1024px) 100vw,60vw"/>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent"/>
+          <div className="absolute bottom-6 left-7 display-serif text-5xl font-black leading-[.9] text-white">Aquí empezó<br/>Tucson</div>
+          <div className="absolute inset-0 flex items-center justify-center"><span className="flex h-16 w-16 items-center justify-center rounded-full bg-white text-2xl text-navy shadow-xl">▶</span></div>
+          <span className="absolute bottom-5 right-5 rounded bg-black/75 px-2 py-1 text-xs font-bold text-white">20:55</span>
         </div>
         <div>
-          <span className="rounded-full bg-blue-100 px-4 py-2 text-xs font-extrabold uppercase tracking-wider text-blue-700">Zona destacada</span>
-          <h2 className="mt-4 text-4xl font-black tracking-tight">{featuredArea?.title || 'Downtown Tucson'}</h2>
-          <p className="mt-4 leading-7 text-slate-700">{featuredArea?.summary || 'Downtown Tucson es el corazón de la ciudad: cultura, historia, restaurantes, arte, vida nocturna y un ambiente urbano muy particular.'}</p>
-          <p className="mt-4 leading-7 text-slate-700">En este espacio conectamos tus videos con información útil de cada zona para que la página funcione como una guía local, no solo como un portal inmobiliario.</p>
-          <a href={featuredVideo?.youtubeUrl || '/videos'} className="mt-6 inline-flex rounded-xl bg-navy px-5 py-3 font-extrabold text-white">▶ Ver video completo</a>
+          <span className="rounded-full bg-blue-100 px-4 py-2 text-[11px] font-extrabold uppercase tracking-wider text-blue-700">Video destacado</span>
+          <h2 className="display-serif mt-4 text-4xl font-black">{featuredArea?.title||'Downtown Tucson'}</h2>
+          <p className="mt-4 text-base leading-7 text-slate-700">{featuredArea?.summary||'Historia, cultura, arte, gastronomía y una vibra urbana incomparable. En este recorrido te muestro por qué Downtown es una de las zonas más interesantes de Tucson.'}</p>
+          <a href={featuredVideo?.youtubeUrl||'/videos'} className="mt-6 inline-flex rounded-lg bg-navy px-5 py-3 text-sm font-extrabold text-white">▶ Ver video completo en YouTube →</a>
+          <div className="mt-5 grid grid-cols-4 gap-2">
+            {[downtownFallback,desertFallback,heroFallback,buildingFallback].map((img,i)=><div key={i} className="relative aspect-[1.45] overflow-hidden rounded-lg"><Image src={img} alt="" fill className="object-cover" sizes="160px"/></div>)}
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="propiedades" className="shell grid gap-6 py-8 lg:grid-cols-[.75fr_1.55fr]">
-      <aside className="rounded-2xl bg-blue-50 p-6 shadow-card">
-        <h3 className="text-xl font-black">⌂ ¿Qué tipo de casas encuentras en {featuredArea?.title || 'Downtown Tucson'}?</h3>
-        <ul className="mt-5 space-y-3 text-sm text-slate-700">
-          {(featuredArea?.housingTypes?.length ? featuredArea.housingTypes : ['Condominios modernos','Lofts con estilo urbano','Townhomes','Casas históricas remodeladas','Opciones para inversión']).map((item)=><li key={item} className="flex gap-3"><span className="font-black text-green">✓</span>{item}</li>)}
-        </ul>
-        <p className="mt-5 text-sm font-bold text-navy">Las propiedades mostradas a la derecha son ejemplos visuales hasta conectar IDX/MLS.</p>
+    <section id="vivir" className="shell grid gap-7 py-8 lg:grid-cols-[.8fr_1.2fr]">
+      <aside className="rounded-2xl bg-gradient-to-br from-blue-50 to-slate-50 p-6 shadow-sm">
+        <h2 className="display-serif text-3xl font-black">Vivir en Tucson</h2>
+        <p className="mt-1 text-sm text-slate-600">Todo lo que necesitas saber para tomar una mejor decisión.</p>
+        <div className="mt-5 grid grid-cols-2 gap-x-6 gap-y-3">
+          {living.map(([icon,label])=><div key={label} className="flex items-center gap-3 text-sm"><span className="w-5 text-center font-black">{icon}</span><span>{label}</span></div>)}
+        </div>
+        <Link href="/comprar" className="mt-6 inline-flex rounded-lg bg-navy px-5 py-3 text-sm font-extrabold text-white">Ver guía completa →</Link>
       </aside>
-      <div>
-        <div className="flex items-center justify-between"><h3 className="text-xl font-black">⌂ Casas actualmente en venta en {featuredArea?.title || 'Downtown Tucson'}</h3><span className="text-xs font-bold uppercase tracking-wide text-amber-700">Demo · IDX pendiente</span></div>
-        <div className="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          {demoProperties.map((p)=><article key={p.price} className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-card">
-            <div className="relative h-40"><Image src={p.image} alt={p.type} fill className="object-cover" sizes="320px"/></div>
-            <div className="p-4"><p className="text-lg font-black">{p.price}</p><p className="mt-1 text-sm font-bold">{p.type}</p><p className="mt-3 text-xs text-slate-600">{p.beds} rec · {p.baths} baños · {p.sqft}</p><p className="mt-2 text-xs text-slate-500">Downtown Tucson, AZ</p></div>
+      <div id="propiedades">
+        <div className="flex items-end justify-between gap-4"><div><h2 className="display-serif text-3xl font-black">Casas en Venta en Tucson</h2><p className="text-sm text-slate-600">Explora propiedades actuales en las mejores zonas.</p></div><span className="text-[10px] font-bold uppercase tracking-wide text-amber-700">Demo · IDX pendiente</span></div>
+        <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+          {demoProperties.map((p)=><article key={p.price} className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+            <div className="relative h-36"><Image src={p.image} alt={p.type} fill className="object-cover" sizes="300px"/><span className="absolute right-2 top-2 flex h-8 w-8 items-center justify-center rounded-full bg-white/90">♡</span></div>
+            <div className="p-4"><p className="text-lg font-black">{p.price}</p><p className="mt-1 text-xs font-bold">{p.type}</p><p className="mt-3 text-[11px] text-slate-600">⌂ {p.beds} &nbsp; ◇ {p.baths} &nbsp; {p.sqft}</p><p className="mt-2 text-[11px] text-slate-500">⌖ {p.place}</p></div>
           </article>)}
         </div>
       </div>
     </section>
 
-    <section className="relative overflow-hidden bg-navy py-8 text-white">
+    <section className="relative overflow-hidden bg-navy py-7 text-white">
       <div className="absolute inset-0 opacity-20"><Image src={heroFallback} alt="" fill className="object-cover" sizes="100vw"/></div>
       <div className="shell relative z-10 flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
-        <div><h3 className="text-2xl font-black">¿Te gustaría conocer Downtown Tucson en persona?</h3><p className="mt-2 max-w-2xl text-sm text-white/85">Ya sea que quieras hacer un recorrido, conocer opciones disponibles o resolver preguntas, aquí puedes contactarme.</p></div>
-        <div className="flex flex-wrap gap-3"><a href={whatsapp} className="rounded-xl bg-green px-5 py-3 font-extrabold">WhatsApp {phone}</a><a href={`tel:${phone.replace(/[^0-9]/g,'')}`} className="rounded-xl bg-white px-5 py-3 font-extrabold text-navy">☎ Llámame {phone}</a></div>
+        <div><h2 className="display-serif text-3xl font-black">¿Te gustaría conocer Tucson en persona?</h2><p className="mt-1 max-w-2xl text-sm text-white/90">Ya sea que quieras hacer un recorrido, conocer opciones disponibles o simplemente resolver tus preguntas, estoy aquí para ayudarte.</p></div>
+        <div className="flex flex-wrap gap-3"><a href={whatsapp} className="rounded-xl bg-green px-6 py-3 text-sm font-extrabold">◉ Envíame un WhatsApp<br/><span className="text-base">{phone}</span></a><a href={`tel:${phone.replace(/[^0-9]/g,'')}`} className="rounded-xl bg-white px-6 py-3 text-sm font-extrabold text-navy">☎ Llámame<br/><span className="text-base">{phone}</span></a></div>
       </div>
     </section>
 
-    <section className="shell py-10">
-      <h2 className="text-3xl font-black">Más formas de explorar Tucson</h2><p className="mt-1 text-sm text-slate-600">Recursos, videos y guías para ayudarte en cada paso.</p>
-      <div className="mt-6 grid gap-5 md:grid-cols-3">
-        {[
-          {title:'Más videos de Tucson',body:'Recorridos, consejos, zonas, estilo de vida y mucho más en mi canal.',href:'/videos',image:downtownFallback},
-          {title:'Comprar casa en Tucson',body:'Guías, consejos y propiedades para encontrar la casa ideal en Tucson.',href:'/comprar',image:desertFallback},
-          {title:'Vender tu casa',body:'Estrategia, análisis de mercado y promoción para obtener el mejor resultado.',href:'/vender',image:heroFallback},
-        ].map((card)=><Link key={card.title} href={card.href} className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-card">
-          <div className="relative h-36"><Image src={card.image} alt={card.title} fill className="object-cover" sizes="400px"/></div>
-          <div className="p-5"><h3 className="text-xl font-black">{card.title}</h3><p className="mt-2 text-sm leading-6 text-slate-600">{card.body}</p><p className="mt-4 text-sm font-extrabold text-blue-600">Explorar →</p></div>
+    <section id="historias" className="shell py-9">
+      <div className="flex items-end justify-between gap-4"><div><h2 className="display-serif text-3xl font-black">Historias, Guías y Consejos</h2><p className="text-sm text-slate-600">Artículos, videos y recursos para que conozcas más de Tucson.</p></div><Link href="/videos" className="hidden text-xs font-bold text-blue-700 md:block">Ver todas las guías →</Link></div>
+      <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        {stories.map((story)=><Link key={story.title} href={story.href} className="group overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+          <div className="relative h-32 overflow-hidden"><Image src={story.image} alt={story.title} fill className="object-cover transition duration-500 group-hover:scale-105" sizes="300px"/></div>
+          <div className="p-4"><h3 className="text-sm font-extrabold leading-5">{story.title}</h3><p className="mt-3 text-[10px] font-extrabold text-blue-700">{story.tag} →</p></div>
         </Link>)}
       </div>
     </section>
 
-    <footer className="border-t border-slate-200 bg-slate-50 py-8"><div className="shell flex flex-col gap-3 text-sm text-slate-600 sm:flex-row sm:items-center sm:justify-between"><p>© Vive en Tucson · {settings?.agentName || 'Jorge Ramirez'}</p><div className="flex gap-5"><Link href="/studio">Sanity Studio</Link><Link href="/contacto">Contacto</Link></div></div></footer>
+    <section className="border-t border-slate-200 bg-[#f8f4ed] py-9">
+      <div className="shell grid gap-7 lg:grid-cols-[1.05fr_1.4fr] lg:items-center">
+        <div className="relative min-h-[250px] overflow-hidden rounded-2xl"><Image src={desertFallback} alt="Desierto de Tucson" fill className="object-cover" sizes="600px"/><div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/10"/></div>
+        <div>
+          <p className="text-xs font-bold uppercase tracking-[.3em] text-slate-500">Hola, soy</p>
+          <h2 className="display-serif mt-1 text-4xl font-black">Jorge Ramírez</h2>
+          <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-700">Agente de bienes raíces y creador de Vive en Tucson. Mi objetivo es mostrarte todo lo que esta ciudad tiene para ofrecer y ayudarte a encontrar el lugar ideal para que la llames hogar.</p>
+          <div className="mt-6 flex flex-wrap gap-3"><Link href="/sobre-jorge" className="rounded-lg bg-navy px-5 py-3 text-sm font-extrabold text-white">Conoce más sobre mí →</Link><Link href="/contacto" className="rounded-lg border border-slate-300 bg-white px-5 py-3 text-sm font-extrabold">Contáctame →</Link></div>
+          <div className="mt-7 grid max-w-2xl grid-cols-3 divide-x divide-slate-300 text-center"><div><p className="text-2xl font-black">100+</p><p className="text-[11px] text-slate-500">Familias asesoradas</p></div><div><p className="text-2xl font-black">1,300+</p><p className="text-[11px] text-slate-500">Seguidores en YouTube</p></div><div><p className="text-lg font-black">Tucson</p><p className="text-[11px] text-slate-500">Tu guía local</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <footer className="border-t border-slate-200 bg-white py-6"><div className="shell flex flex-col gap-3 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between"><p>© Vive en Tucson · {settings?.agentName||'Jorge Ramirez'}</p><div className="flex gap-5"><Link href="/studio">Sanity Studio</Link><Link href="/contacto">Contacto</Link></div></div></footer>
   </main>
 }
