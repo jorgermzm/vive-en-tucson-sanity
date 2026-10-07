@@ -232,7 +232,7 @@ export default async function HomePage(){
     </section>
 
     <section className="relative overflow-hidden bg-navy py-7 text-white">
-      {home?.contactBackgroundImage?.asset&&<div className="absolute inset-0 opacity-25"><CmsImage value={home.contactBackgroundImage} alt="Tucson" sizes="100vw"/></div>}
+      {Boolean(home?.contactBackgroundImage?.asset)&&<div className="absolute inset-0 opacity-25"><CmsImage value={home?.contactBackgroundImage} alt="Tucson" sizes="100vw"/></div>}
       <div className="shell relative z-10 flex flex-col gap-5 md:flex-row md:items-center md:justify-between"><div><h2 className="display-serif text-3xl font-black">¿Te gustaría conocer Tucson en persona?</h2><p className="mt-1 max-w-2xl text-sm text-white/90">Ya sea que quieras hacer un recorrido, conocer opciones disponibles o simplemente resolver tus preguntas, estoy aquí para ayudarte.</p></div><div className="flex flex-wrap gap-3"><a href={whatsapp} className="rounded-xl bg-green px-6 py-3 text-sm font-extrabold">◉ Envíame un WhatsApp<br/><span className="text-base">{phone}</span></a><a href={`tel:${phone.replace(/[^0-9]/g,'')}`} className="rounded-xl bg-white px-6 py-3 text-sm font-extrabold text-navy">☎ Llámame<br/><span className="text-base">{phone}</span></a></div></div>
     </section>
 
