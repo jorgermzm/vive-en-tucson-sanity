@@ -219,7 +219,7 @@ export default async function HomePage(){
         </div>
         <div>
           <span className="rounded-full bg-blue-100 px-4 py-2 text-[11px] font-extrabold uppercase tracking-wider text-blue-700">{featuredVideo?'Video destacado':'Zona destacada'}</span><h2 className="display-serif mt-4 text-4xl font-black">{featuredArea?.title||'Downtown Tucson'}</h2><p className="mt-4 text-base leading-7 text-slate-700">{featuredArea?.summary||'Historia, cultura, arte, gastronomía y una vibra urbana incomparable.'}</p><a href={featuredVideo?.youtubeUrl||`/zonas/${featuredArea?.slug||'downtown-tucson'}`} className="mt-6 inline-flex rounded-lg bg-navy px-5 py-3 text-sm font-extrabold text-white">{featuredVideo?'▶ Ver video completo en YouTube →':'Explora Downtown Tucson →'}</a>
-          <div className="mt-5 grid grid-cols-4 gap-2">{(home?.videoGallery||[]).slice(0,4).map((img)=><div key={img._key} className="relative aspect-[1.45] overflow-hidden rounded-lg bg-slate-200"><CmsImage value={img} alt={img.alt||'Galería'} sizes="56px" placeholder="Sube foto"/></div>)}</div>
+          <div className="mt-5 grid grid-cols-4 gap-2">{(home?.videoGallery||[]).slice(0,4).map((img)=><div key={img._key} className="relative aspect-[1.45] overflow-hidden rounded-lg bg-slate-200"><CmsImage value={img} alt={img.alt||'Galería'} sizes="160px" placeholder="Sube foto"/></div>)}</div>
         </div>
       </div>
     </section>
