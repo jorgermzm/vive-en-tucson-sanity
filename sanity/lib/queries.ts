@@ -3,7 +3,7 @@ import {defineQuery} from 'next-sanity'
 export const HOME_QUERY = defineQuery(`
 {
   "settings": *[_id == "siteSettings"][0]{
-    _id,_type,title,tagline,agentName,phone,email,whatsappUrl,siteUrl,
+    _id,_type,title,tagline,agentName,agentBio,areasServed,languages,specialties,responseTime,phone,email,whatsappUrl,siteUrl,
     logo{asset->{_id,url,metadata{lqip,dimensions}},alt,crop,hotspot},
     agentPhoto{asset->{_id,url,metadata{lqip,dimensions}},alt,crop,hotspot},
     navigation[]{_key,label,href}
@@ -29,7 +29,7 @@ export const HOME_QUERY = defineQuery(`
     featuredVideos[]{
       _key,
       ...@->{
-        _id,_type,title,"slug":slug.current,summary,youtubeUrl,
+        _id,_type,title,isDemo,"slug":slug.current,summary,youtubeUrl,
         thumbnail{asset->{_id,url,metadata{lqip,dimensions}},alt,crop,hotspot}
       }
     },

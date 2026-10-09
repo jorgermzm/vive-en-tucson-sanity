@@ -1,4 +1,4 @@
-import {defineQuery} from 'groq'
+import {defineQuery} from 'next-sanity'
 const image = `{alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}}`
 const seo = `"seo": {"title": coalesce(seo.title, title), "description": coalesce(seo.description, summary, excerpt, heroDescription, ""), "noIndex": seo.noIndex == true || isDemo == true, "canonicalUrl": seo.canonicalUrl, "image": seo.image ${image}}`
 export const SITE_SETTINGS_QUERY = defineQuery(`*[_id == "siteSettings" && ($includeDemo == true || isDemo != true)][0]{_id,title,tagline,agentName,phone,email,whatsappUrl,siteUrl,logo ${image},navigation[]{_key,label,href},socialLinks[]{_key,label,href},footerText,isDemo,${seo}}`)

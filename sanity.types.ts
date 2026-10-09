@@ -28,10 +28,10 @@ export type Article = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
-  slug: Slug;
+  title?: string;
+  slug?: Slug;
   excerpt?: string;
-  body: RichText;
+  body?: RichText;
   mainImage?: EditorialImage;
   authorName?: string;
   publishedAt?: string;
@@ -58,7 +58,7 @@ export type EditorialImage = {
   media?: unknown;
   hotspot?: SanityImageHotspot;
   crop?: SanityImageCrop;
-  alt: string;
+  alt?: string;
   caption?: string;
   credit?: string;
 };
@@ -93,8 +93,8 @@ export type Video = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
-  slug: Slug;
+  title?: string;
+  slug?: Slug;
   summary?: string;
   youtubeUrl?: string;
   thumbnail?: EditorialImage;
@@ -123,9 +123,9 @@ export type Area = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
-  slug: Slug;
-  summary: string;
+  title?: string;
+  slug?: Slug;
+  summary?: string;
   description?: RichText;
   mainImage?: EditorialImage;
   gallery?: Array<
@@ -150,8 +150,8 @@ export type Area = {
 
 export type Link = {
   _type: "link";
-  label: string;
-  href: string;
+  label?: string;
+  href?: string;
 };
 
 export type Geopoint = {
@@ -163,7 +163,7 @@ export type Geopoint = {
 
 export type Slug = {
   _type: "slug";
-  current: string;
+  current?: string;
   source?: string;
 };
 
@@ -180,8 +180,8 @@ export type Homepage = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
-  heroTitle: string;
+  title?: string;
+  heroTitle?: string;
   heroSubtitle?: string;
   heroDescription?: string;
   heroImage?: EditorialImage;
@@ -189,6 +189,11 @@ export type Homepage = {
     {
       _key: string;
     } & Link
+  >;
+  inspirationItems?: Array<
+    {
+      _key: string;
+    } & HomepageInspiration
   >;
   featuredAreas?: Array<
     {
@@ -200,15 +205,41 @@ export type Homepage = {
       _key: string;
     } & VideoReference
   >;
+  videoGallery?: Array<
+    {
+      _key: string;
+    } & EditorialImage
+  >;
+  propertyShowcase?: Array<
+    {
+      _key: string;
+    } & HomepageProperty
+  >;
+  contactHeading?: string;
+  contactAction?: Link;
+  contactBackgroundImage?: EditorialImage;
   featuredArticles?: Array<
     {
       _key: string;
     } & ArticleReference
   >;
-  contactHeading?: string;
-  contactAction?: Link;
+  storyCards?: Array<
+    {
+      _key: string;
+    } & HomepageStory
+  >;
+  aboutImage?: EditorialImage;
   seo?: Seo;
   isDemo?: boolean;
+};
+
+export type Seo = {
+  _type: "seo";
+  title?: string;
+  description?: string;
+  image?: EditorialImage;
+  canonicalUrl?: string;
+  noIndex?: boolean;
 };
 
 export type SiteSettings = {
@@ -217,10 +248,16 @@ export type SiteSettings = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
+  title?: string;
   tagline?: string;
   agentName?: string;
+  agentPhoto?: EditorialImage;
   logo?: EditorialImage;
+  agentBio?: string;
+  areasServed?: string;
+  languages?: string;
+  specialties?: string;
+  responseTime?: string;
   phone?: string;
   email?: string;
   whatsappUrl?: string;
@@ -240,29 +277,48 @@ export type SiteSettings = {
   isDemo?: boolean;
 };
 
-export type Seo = {
-  _type: "seo";
-  title?: string;
-  description?: string;
+export type HomepageStory = {
+  _type: "homepageStory";
   image?: EditorialImage;
-  canonicalUrl?: string;
-  noIndex?: boolean;
+  title?: string;
+  tag?: string;
+  href?: string;
+};
+
+export type HomepageProperty = {
+  _type: "homepageProperty";
+  image?: EditorialImage;
+  price?: string;
+  propertyType?: string;
+  bedrooms?: number;
+  bathrooms?: number;
+  size?: string;
+  location?: string;
+};
+
+export type HomepageInspiration = {
+  _type: "homepageInspiration";
+  title?: string;
+  subtitle?: string;
+  icon?: string;
+  image?: EditorialImage;
+  href?: string;
 };
 
 export type SanityImageCrop = {
   _type: "sanity.imageCrop";
-  top: number;
-  bottom: number;
-  left: number;
-  right: number;
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
 };
 
 export type SanityImageHotspot = {
   _type: "sanity.imageHotspot";
-  x: number;
-  y: number;
-  height: number;
-  width: number;
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
 };
 
 export type SanityImagePaletteSwatch = {
@@ -286,9 +342,9 @@ export type SanityImagePalette = {
 
 export type SanityImageDimensions = {
   _type: "sanity.imageDimensions";
-  height: number;
-  width: number;
-  aspectRatio: number;
+  height?: number;
+  width?: number;
+  aspectRatio?: number;
 };
 
 export type SanityImageMetadata = {
@@ -314,14 +370,14 @@ export type SanityFileAsset = {
   title?: string;
   description?: string;
   altText?: string;
-  sha1hash: string;
-  extension: string;
-  mimeType: string;
-  size: number;
-  assetId: string;
+  sha1hash?: string;
+  extension?: string;
+  mimeType?: string;
+  size?: number;
+  assetId?: string;
   uploadId?: string;
-  path: string;
-  url: string;
+  path?: string;
+  url?: string;
   source?: SanityAssetSourceData;
 };
 
@@ -343,14 +399,14 @@ export type SanityImageAsset = {
   title?: string;
   description?: string;
   altText?: string;
-  sha1hash: string;
-  extension: string;
-  mimeType: string;
-  size: number;
-  assetId: string;
+  sha1hash?: string;
+  extension?: string;
+  mimeType?: string;
+  size?: number;
+  assetId?: string;
   uploadId?: string;
-  path: string;
-  url: string;
+  path?: string;
+  url?: string;
   metadata?: SanityImageMetadata;
   source?: SanityAssetSourceData;
 };
@@ -369,8 +425,11 @@ export type AllSanitySchemaTypes =
   | Slug
   | ArticleReference
   | Homepage
-  | SiteSettings
   | Seo
+  | SiteSettings
+  | HomepageStory
+  | HomepageProperty
+  | HomepageInspiration
   | SanityImageCrop
   | SanityImageHotspot
   | SanityImagePaletteSwatch
@@ -381,799 +440,598 @@ export type AllSanitySchemaTypes =
   | SanityAssetSourceData
   | SanityImageAsset;
 
-// Source: lib/queries.ts
-// Variable: SITE_SETTINGS_QUERY
-// Query: *[_id == "siteSettings" && ($includeDemo == true || isDemo != true)][0]{_id,title,tagline,agentName,phone,email,whatsappUrl,siteUrl,logo {alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}},navigation[]{_key,label,href},socialLinks[]{_key,label,href},footerText,isDemo,"seo": {"title": coalesce(seo.title, title), "description": coalesce(seo.description, summary, excerpt, heroDescription, ""), "noIndex": seo.noIndex == true || isDemo == true, "canonicalUrl": seo.canonicalUrl, "image": seo.image {alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}}}}
-export type SITE_SETTINGS_QUERY_RESULT =
-  | {
-      _id: string;
-      title: string;
-      tagline: null;
-      agentName: null;
-      phone: null;
-      email: null;
-      whatsappUrl: null;
-      siteUrl: null;
-      logo: null;
-      navigation: null;
-      socialLinks: null;
-      footerText: null;
-      isDemo: boolean | null;
-      seo: {
-        title: string;
-        description: string;
-        noIndex: boolean | false;
-        canonicalUrl: string | null;
-        image: {
-          alt: string;
-          caption: string | null;
-          credit: string | null;
-          crop: SanityImageCrop | null;
-          hotspot: SanityImageHotspot | null;
-          asset: {
-            _id: string;
-            url: string;
-            metadata: {
-              lqip: string | null;
-              dimensions: SanityImageDimensions | null;
-            } | null;
-          } | null;
-        } | null;
-      };
-    }
-  | {
-      _id: string;
-      title: string;
-      tagline: null;
-      agentName: null;
-      phone: null;
-      email: null;
-      whatsappUrl: null;
-      siteUrl: null;
-      logo: null;
-      navigation: null;
-      socialLinks: null;
-      footerText: null;
-      isDemo: boolean | null;
-      seo: {
-        title: string;
-        description: string | "";
-        noIndex: boolean | false;
-        canonicalUrl: string | null;
-        image: {
-          alt: string;
-          caption: string | null;
-          credit: string | null;
-          crop: SanityImageCrop | null;
-          hotspot: SanityImageHotspot | null;
-          asset: {
-            _id: string;
-            url: string;
-            metadata: {
-              lqip: string | null;
-              dimensions: SanityImageDimensions | null;
-            } | null;
-          } | null;
-        } | null;
-      };
-    }
-  | {
-      _id: string;
-      title: string;
-      tagline: string | null;
-      agentName: string | null;
-      phone: string | null;
-      email: string | null;
-      whatsappUrl: string | null;
-      siteUrl: string | null;
-      logo: {
-        alt: string;
-        caption: string | null;
-        credit: string | null;
-        crop: SanityImageCrop | null;
-        hotspot: SanityImageHotspot | null;
-        asset: {
-          _id: string;
-          url: string;
-          metadata: {
-            lqip: string | null;
-            dimensions: SanityImageDimensions | null;
-          } | null;
-        } | null;
-      } | null;
-      navigation: Array<{
-        _key: string;
-        label: string;
-        href: string;
-      }> | null;
-      socialLinks: Array<{
-        _key: string;
-        label: string;
-        href: string;
-      }> | null;
-      footerText: string | null;
-      isDemo: boolean | null;
-      seo: {
-        title: string;
-        description: string | "";
-        noIndex: boolean | false;
-        canonicalUrl: string | null;
-        image: {
-          alt: string;
-          caption: string | null;
-          credit: string | null;
-          crop: SanityImageCrop | null;
-          hotspot: SanityImageHotspot | null;
-          asset: {
-            _id: string;
-            url: string;
-            metadata: {
-              lqip: string | null;
-              dimensions: SanityImageDimensions | null;
-            } | null;
-          } | null;
-        } | null;
-      };
-    }
-  | {
-      _id: "siteSettings";
-      title: string | null;
-      tagline: null;
-      agentName: null;
-      phone: null;
-      email: null;
-      whatsappUrl: null;
-      siteUrl: null;
-      logo: null;
-      navigation: null;
-      socialLinks: null;
-      footerText: null;
-      isDemo: null;
-      seo: {
+// Source: sanity/lib/queries.ts
+// Variable: HOME_QUERY
+// Query: {  "settings": *[_id == "siteSettings"][0]{    _id,_type,title,tagline,agentName,agentBio,areasServed,languages,specialties,responseTime,phone,email,whatsappUrl,siteUrl,    logo{asset->{_id,url,metadata{lqip,dimensions}},alt,crop,hotspot},    agentPhoto{asset->{_id,url,metadata{lqip,dimensions}},alt,crop,hotspot},    navigation[]{_key,label,href}  },  "home": *[_id == "homepage"][0]{    _id,_type,title,heroTitle,heroSubtitle,heroDescription,    heroImage{asset->{_id,url,metadata{lqip,dimensions}},alt,crop,hotspot},    heroActions[]{_key,label,href},    inspirationItems[]{      _key,title,subtitle,icon,href,      image{asset->{_id,url,metadata{lqip,dimensions}},alt,crop,hotspot}    },    contactHeading,contactAction{label,href},    contactBackgroundImage{asset->{_id,url,metadata{lqip,dimensions}},alt,crop,hotspot},    aboutImage{asset->{_id,url,metadata{lqip,dimensions}},alt,crop,hotspot},    featuredAreas[]{      _key,      ...@->{        _id,_type,title,"slug":slug.current,summary,housingTypes,highlights,sortOrder,        mainImage{asset->{_id,url,metadata{lqip,dimensions}},alt,crop,hotspot}      }    },    featuredVideos[]{      _key,      ...@->{        _id,_type,title,isDemo,"slug":slug.current,summary,youtubeUrl,        thumbnail{asset->{_id,url,metadata{lqip,dimensions}},alt,crop,hotspot}      }    },    videoGallery[]{      _key,asset->{_id,url,metadata{lqip,dimensions}},alt,crop,hotspot    },    propertyShowcase[]{      _key,price,propertyType,bedrooms,bathrooms,size,location,      image{asset->{_id,url,metadata{lqip,dimensions}},alt,crop,hotspot}    },    storyCards[]{      _key,title,tag,href,      image{asset->{_id,url,metadata{lqip,dimensions}},alt,crop,hotspot}    },    featuredArticles[]{      _key,      ...@->{        _id,title,"slug":slug.current,excerpt,        mainImage{asset->{_id,url,metadata{lqip,dimensions}},alt,crop,hotspot}      }    }  }}
+export type HOME_QUERY_RESULT = {
+  settings:
+    | {
+        _id: "siteSettings";
+        _type: "area";
         title: string | null;
-        description: "";
-        noIndex: false;
-        canonicalUrl: null;
-        image: null;
-      };
-    }
-  | null;
-
-// Source: lib/queries.ts
-// Variable: HOMEPAGE_QUERY
-// Query: *[_id == "homepage" && ($includeDemo == true || isDemo != true)][0]{_id,title,heroTitle,heroSubtitle,heroDescription,heroImage {alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}},heroActions[]{_key,label,href},featuredAreas[]{_key,"area": @-> {_id,title,"slug":slug.current,summary,isDemo,mainImage {alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}}}}[defined(area) && ($includeDemo == true || area.isDemo != true)],featuredVideos[]{_key,"video": @->{_id,title,"slug":slug.current,youtubeUrl,isDemo,thumbnail {alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}}}}[defined(video) && ($includeDemo == true || video.isDemo != true)],featuredArticles[]{_key,"article": @->{_id,title,"slug":slug.current,excerpt,isDemo}}[defined(article) && ($includeDemo == true || article.isDemo != true)],contactHeading,contactAction{label,href},isDemo,"seo": {"title": coalesce(seo.title, title), "description": coalesce(seo.description, summary, excerpt, heroDescription, ""), "noIndex": seo.noIndex == true || isDemo == true, "canonicalUrl": seo.canonicalUrl, "image": seo.image {alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}}}}
-export type HOMEPAGE_QUERY_RESULT =
-  | {
-      _id: "homepage";
-      title: string | null;
-      heroTitle: null;
-      heroSubtitle: null;
-      heroDescription: null;
-      heroImage: null;
-      heroActions: null;
-      featuredAreas: null;
-      featuredVideos: null;
-      featuredArticles: null;
-      contactHeading: null;
-      contactAction: null;
-      isDemo: null;
-      seo: {
+        tagline: null;
+        agentName: null;
+        agentBio: null;
+        areasServed: null;
+        languages: null;
+        specialties: null;
+        responseTime: null;
+        phone: null;
+        email: null;
+        whatsappUrl: null;
+        siteUrl: null;
+        logo: null;
+        agentPhoto: null;
+        navigation: null;
+      }
+    | {
+        _id: "siteSettings";
+        _type: "article";
         title: string | null;
-        description: "";
-        noIndex: false;
-        canonicalUrl: null;
-        image: null;
-      };
-    }
-  | {
-      _id: string;
-      title: string;
-      heroTitle: null;
-      heroSubtitle: null;
-      heroDescription: null;
-      heroImage: null;
-      heroActions: null;
-      featuredAreas: null;
-      featuredVideos: null;
-      featuredArticles: null;
-      contactHeading: null;
-      contactAction: null;
-      isDemo: boolean | null;
-      seo: {
-        title: string;
-        description: string | "";
-        noIndex: boolean | false;
-        canonicalUrl: string | null;
-        image: {
-          alt: string;
-          caption: string | null;
-          credit: string | null;
-          crop: SanityImageCrop | null;
-          hotspot: SanityImageHotspot | null;
+        tagline: null;
+        agentName: null;
+        agentBio: null;
+        areasServed: null;
+        languages: null;
+        specialties: null;
+        responseTime: null;
+        phone: null;
+        email: null;
+        whatsappUrl: null;
+        siteUrl: null;
+        logo: null;
+        agentPhoto: null;
+        navigation: null;
+      }
+    | {
+        _id: "siteSettings";
+        _type: "homepage";
+        title: string | null;
+        tagline: null;
+        agentName: null;
+        agentBio: null;
+        areasServed: null;
+        languages: null;
+        specialties: null;
+        responseTime: null;
+        phone: null;
+        email: null;
+        whatsappUrl: null;
+        siteUrl: null;
+        logo: null;
+        agentPhoto: null;
+        navigation: null;
+      }
+    | {
+        _id: "siteSettings";
+        _type: "sanity.fileAsset";
+        title: string | null;
+        tagline: null;
+        agentName: null;
+        agentBio: null;
+        areasServed: null;
+        languages: null;
+        specialties: null;
+        responseTime: null;
+        phone: null;
+        email: null;
+        whatsappUrl: null;
+        siteUrl: null;
+        logo: null;
+        agentPhoto: null;
+        navigation: null;
+      }
+    | {
+        _id: "siteSettings";
+        _type: "sanity.imageAsset";
+        title: string | null;
+        tagline: null;
+        agentName: null;
+        agentBio: null;
+        areasServed: null;
+        languages: null;
+        specialties: null;
+        responseTime: null;
+        phone: null;
+        email: null;
+        whatsappUrl: null;
+        siteUrl: null;
+        logo: null;
+        agentPhoto: null;
+        navigation: null;
+      }
+    | {
+        _id: "siteSettings";
+        _type: "siteSettings";
+        title: string | null;
+        tagline: string | null;
+        agentName: string | null;
+        agentBio: string | null;
+        areasServed: string | null;
+        languages: string | null;
+        specialties: string | null;
+        responseTime: string | null;
+        phone: string | null;
+        email: string | null;
+        whatsappUrl: string | null;
+        siteUrl: string | null;
+        logo: {
           asset: {
             _id: string;
-            url: string;
+            url: string | null;
             metadata: {
               lqip: string | null;
               dimensions: SanityImageDimensions | null;
             } | null;
           } | null;
-        } | null;
-      };
-    }
-  | {
-      _id: string;
-      title: string;
-      heroTitle: null;
-      heroSubtitle: null;
-      heroDescription: null;
-      heroImage: null;
-      heroActions: null;
-      featuredAreas: null;
-      featuredVideos: null;
-      featuredArticles: null;
-      contactHeading: null;
-      contactAction: null;
-      isDemo: boolean | null;
-      seo: {
-        title: string;
-        description: string | "";
-        noIndex: boolean | false;
-        canonicalUrl: string | null;
-        image: {
-          alt: string;
-          caption: string | null;
-          credit: string | null;
+          alt: string | null;
           crop: SanityImageCrop | null;
           hotspot: SanityImageHotspot | null;
+        } | null;
+        agentPhoto: {
           asset: {
             _id: string;
-            url: string;
+            url: string | null;
             metadata: {
               lqip: string | null;
               dimensions: SanityImageDimensions | null;
             } | null;
           } | null;
-        } | null;
-      };
-    }
-  | {
-      _id: string;
-      title: string;
-      heroTitle: null;
-      heroSubtitle: null;
-      heroDescription: null;
-      heroImage: null;
-      heroActions: null;
-      featuredAreas: null;
-      featuredVideos: null;
-      featuredArticles: null;
-      contactHeading: null;
-      contactAction: {
-        label: string;
-        href: string;
-      } | null;
-      isDemo: boolean | null;
-      seo: {
-        title: string;
-        description: string;
-        noIndex: boolean | false;
-        canonicalUrl: string | null;
-        image: {
-          alt: string;
-          caption: string | null;
-          credit: string | null;
+          alt: string | null;
           crop: SanityImageCrop | null;
           hotspot: SanityImageHotspot | null;
+        } | null;
+        navigation: Array<{
+          _key: string;
+          label: string | null;
+          href: string | null;
+        }> | null;
+      }
+    | {
+        _id: "siteSettings";
+        _type: "video";
+        title: string | null;
+        tagline: null;
+        agentName: null;
+        agentBio: null;
+        areasServed: null;
+        languages: null;
+        specialties: null;
+        responseTime: null;
+        phone: null;
+        email: null;
+        whatsappUrl: null;
+        siteUrl: null;
+        logo: null;
+        agentPhoto: null;
+        navigation: null;
+      }
+    | null;
+  home:
+    | {
+        _id: "homepage";
+        _type: "area";
+        title: string | null;
+        heroTitle: null;
+        heroSubtitle: null;
+        heroDescription: null;
+        heroImage: null;
+        heroActions: null;
+        inspirationItems: null;
+        contactHeading: null;
+        contactAction: {
+          label: string | null;
+          href: string | null;
+        } | null;
+        contactBackgroundImage: null;
+        aboutImage: null;
+        featuredAreas: null;
+        featuredVideos: null;
+        videoGallery: null;
+        propertyShowcase: null;
+        storyCards: null;
+        featuredArticles: null;
+      }
+    | {
+        _id: "homepage";
+        _type: "article";
+        title: string | null;
+        heroTitle: null;
+        heroSubtitle: null;
+        heroDescription: null;
+        heroImage: null;
+        heroActions: null;
+        inspirationItems: null;
+        contactHeading: null;
+        contactAction: null;
+        contactBackgroundImage: null;
+        aboutImage: null;
+        featuredAreas: null;
+        featuredVideos: null;
+        videoGallery: null;
+        propertyShowcase: null;
+        storyCards: null;
+        featuredArticles: null;
+      }
+    | {
+        _id: "homepage";
+        _type: "homepage";
+        title: string | null;
+        heroTitle: string | null;
+        heroSubtitle: string | null;
+        heroDescription: string | null;
+        heroImage: {
           asset: {
             _id: string;
-            url: string;
+            url: string | null;
             metadata: {
               lqip: string | null;
               dimensions: SanityImageDimensions | null;
             } | null;
           } | null;
+          alt: string | null;
+          crop: SanityImageCrop | null;
+          hotspot: SanityImageHotspot | null;
         } | null;
-      };
-    }
-  | {
-      _id: string;
-      title: string;
-      heroTitle: string;
-      heroSubtitle: string | null;
-      heroDescription: string | null;
-      heroImage: {
-        alt: string;
-        caption: string | null;
-        credit: string | null;
-        crop: SanityImageCrop | null;
-        hotspot: SanityImageHotspot | null;
-        asset: {
+        heroActions: Array<{
+          _key: string;
+          label: string | null;
+          href: string | null;
+        }> | null;
+        inspirationItems: Array<{
+          _key: string;
+          title: string | null;
+          subtitle: string | null;
+          icon: string | null;
+          href: string | null;
+          image: {
+            asset: {
+              _id: string;
+              url: string | null;
+              metadata: {
+                lqip: string | null;
+                dimensions: SanityImageDimensions | null;
+              } | null;
+            } | null;
+            alt: string | null;
+            crop: SanityImageCrop | null;
+            hotspot: SanityImageHotspot | null;
+          } | null;
+        }> | null;
+        contactHeading: string | null;
+        contactAction: {
+          label: string | null;
+          href: string | null;
+        } | null;
+        contactBackgroundImage: {
+          asset: {
+            _id: string;
+            url: string | null;
+            metadata: {
+              lqip: string | null;
+              dimensions: SanityImageDimensions | null;
+            } | null;
+          } | null;
+          alt: string | null;
+          crop: SanityImageCrop | null;
+          hotspot: SanityImageHotspot | null;
+        } | null;
+        aboutImage: {
+          asset: {
+            _id: string;
+            url: string | null;
+            metadata: {
+              lqip: string | null;
+              dimensions: SanityImageDimensions | null;
+            } | null;
+          } | null;
+          alt: string | null;
+          crop: SanityImageCrop | null;
+          hotspot: SanityImageHotspot | null;
+        } | null;
+        featuredAreas: Array<{
+          _key: string;
           _id: string;
-          url: string;
-          metadata: {
-            lqip: string | null;
-            dimensions: SanityImageDimensions | null;
-          } | null;
-        } | null;
-      } | null;
-      heroActions: Array<{
-        _key: string;
-        label: string;
-        href: string;
-      }> | null;
-      featuredAreas: Array<{
-        _key: string;
-        area: {
-          _id: string;
-          title: string;
-          slug: string;
-          summary: string;
-          isDemo: boolean | null;
+          _type: "area";
+          title: string | null;
+          slug: string | null;
+          summary: string | null;
+          housingTypes: Array<string> | null;
+          highlights: Array<string> | null;
+          sortOrder: number | null;
           mainImage: {
-            alt: string;
-            caption: string | null;
-            credit: string | null;
-            crop: SanityImageCrop | null;
-            hotspot: SanityImageHotspot | null;
             asset: {
               _id: string;
-              url: string;
+              url: string | null;
               metadata: {
                 lqip: string | null;
                 dimensions: SanityImageDimensions | null;
               } | null;
             } | null;
+            alt: string | null;
+            crop: SanityImageCrop | null;
+            hotspot: SanityImageHotspot | null;
           } | null;
-        };
-      }> | null;
-      featuredVideos: Array<{
-        _key: string;
-        video: {
+        }> | null;
+        featuredVideos: Array<{
+          _key: string;
           _id: string;
-          title: string;
-          slug: string;
+          _type: "video";
+          title: string | null;
+          isDemo: boolean | null;
+          slug: string | null;
+          summary: string | null;
           youtubeUrl: string | null;
-          isDemo: boolean | null;
           thumbnail: {
-            alt: string;
-            caption: string | null;
-            credit: string | null;
-            crop: SanityImageCrop | null;
-            hotspot: SanityImageHotspot | null;
             asset: {
               _id: string;
-              url: string;
+              url: string | null;
               metadata: {
                 lqip: string | null;
                 dimensions: SanityImageDimensions | null;
               } | null;
             } | null;
+            alt: string | null;
+            crop: SanityImageCrop | null;
+            hotspot: SanityImageHotspot | null;
           } | null;
-        };
-      }> | null;
-      featuredArticles: Array<{
-        _key: string;
-        article: {
-          _id: string;
-          title: string;
-          slug: string;
-          excerpt: string | null;
-          isDemo: boolean | null;
-        };
-      }> | null;
-      contactHeading: string | null;
-      contactAction: {
-        label: string;
-        href: string;
-      } | null;
-      isDemo: boolean | null;
-      seo: {
-        title: string;
-        description: string | "";
-        noIndex: boolean | false;
-        canonicalUrl: string | null;
-        image: {
-          alt: string;
-          caption: string | null;
-          credit: string | null;
-          crop: SanityImageCrop | null;
-          hotspot: SanityImageHotspot | null;
+        }> | null;
+        videoGallery: Array<{
+          _key: string;
           asset: {
             _id: string;
-            url: string;
+            url: string | null;
             metadata: {
               lqip: string | null;
               dimensions: SanityImageDimensions | null;
             } | null;
           } | null;
-        } | null;
-      };
-    }
-  | null;
+          alt: string | null;
+          crop: SanityImageCrop | null;
+          hotspot: SanityImageHotspot | null;
+        }> | null;
+        propertyShowcase: Array<{
+          _key: string;
+          price: string | null;
+          propertyType: string | null;
+          bedrooms: number | null;
+          bathrooms: number | null;
+          size: string | null;
+          location: string | null;
+          image: {
+            asset: {
+              _id: string;
+              url: string | null;
+              metadata: {
+                lqip: string | null;
+                dimensions: SanityImageDimensions | null;
+              } | null;
+            } | null;
+            alt: string | null;
+            crop: SanityImageCrop | null;
+            hotspot: SanityImageHotspot | null;
+          } | null;
+        }> | null;
+        storyCards: Array<{
+          _key: string;
+          title: string | null;
+          tag: string | null;
+          href: string | null;
+          image: {
+            asset: {
+              _id: string;
+              url: string | null;
+              metadata: {
+                lqip: string | null;
+                dimensions: SanityImageDimensions | null;
+              } | null;
+            } | null;
+            alt: string | null;
+            crop: SanityImageCrop | null;
+            hotspot: SanityImageHotspot | null;
+          } | null;
+        }> | null;
+        featuredArticles: Array<{
+          _key: string;
+          _id: string;
+          title: string | null;
+          slug: string | null;
+          excerpt: string | null;
+          mainImage: {
+            asset: {
+              _id: string;
+              url: string | null;
+              metadata: {
+                lqip: string | null;
+                dimensions: SanityImageDimensions | null;
+              } | null;
+            } | null;
+            alt: string | null;
+            crop: SanityImageCrop | null;
+            hotspot: SanityImageHotspot | null;
+          } | null;
+        }> | null;
+      }
+    | {
+        _id: "homepage";
+        _type: "sanity.fileAsset";
+        title: string | null;
+        heroTitle: null;
+        heroSubtitle: null;
+        heroDescription: null;
+        heroImage: null;
+        heroActions: null;
+        inspirationItems: null;
+        contactHeading: null;
+        contactAction: null;
+        contactBackgroundImage: null;
+        aboutImage: null;
+        featuredAreas: null;
+        featuredVideos: null;
+        videoGallery: null;
+        propertyShowcase: null;
+        storyCards: null;
+        featuredArticles: null;
+      }
+    | {
+        _id: "homepage";
+        _type: "sanity.imageAsset";
+        title: string | null;
+        heroTitle: null;
+        heroSubtitle: null;
+        heroDescription: null;
+        heroImage: null;
+        heroActions: null;
+        inspirationItems: null;
+        contactHeading: null;
+        contactAction: null;
+        contactBackgroundImage: null;
+        aboutImage: null;
+        featuredAreas: null;
+        featuredVideos: null;
+        videoGallery: null;
+        propertyShowcase: null;
+        storyCards: null;
+        featuredArticles: null;
+      }
+    | {
+        _id: "homepage";
+        _type: "siteSettings";
+        title: string | null;
+        heroTitle: null;
+        heroSubtitle: null;
+        heroDescription: null;
+        heroImage: null;
+        heroActions: null;
+        inspirationItems: null;
+        contactHeading: null;
+        contactAction: null;
+        contactBackgroundImage: null;
+        aboutImage: null;
+        featuredAreas: null;
+        featuredVideos: null;
+        videoGallery: null;
+        propertyShowcase: null;
+        storyCards: null;
+        featuredArticles: null;
+      }
+    | {
+        _id: "homepage";
+        _type: "video";
+        title: string | null;
+        heroTitle: null;
+        heroSubtitle: null;
+        heroDescription: null;
+        heroImage: null;
+        heroActions: null;
+        inspirationItems: null;
+        contactHeading: null;
+        contactAction: null;
+        contactBackgroundImage: null;
+        aboutImage: null;
+        featuredAreas: null;
+        featuredVideos: null;
+        videoGallery: null;
+        propertyShowcase: null;
+        storyCards: null;
+        featuredArticles: null;
+      }
+    | null;
+};
 
-// Source: lib/queries.ts
+// Source: sanity/lib/queries.ts
 // Variable: AREAS_QUERY
-// Query: *[_type == "area" && defined(slug.current) && ($includeDemo == true || isDemo != true)] | order(sortOrder asc, title asc)[0...100]{_id,title,"slug":slug.current,summary,mainImage {alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}},housingTypes,highlights,isDemo,"seo": {"title": coalesce(seo.title, title), "description": coalesce(seo.description, summary, excerpt, heroDescription, ""), "noIndex": seo.noIndex == true || isDemo == true, "canonicalUrl": seo.canonicalUrl, "image": seo.image {alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}}}}
+// Query: *[_type == "area" && defined(slug.current)] | order(sortOrder asc,title asc)[0...50]{  _id,_type,title,"slug":slug.current,summary,housingTypes,highlights,sortOrder,  mainImage{asset->{_id,url,metadata{lqip,dimensions}},alt,crop,hotspot}}
 export type AREAS_QUERY_RESULT = Array<{
   _id: string;
-  title: string;
-  slug: string;
-  summary: string;
-  mainImage: {
-    alt: string;
-    caption: string | null;
-    credit: string | null;
-    crop: SanityImageCrop | null;
-    hotspot: SanityImageHotspot | null;
-    asset: {
-      _id: string;
-      url: string;
-      metadata: {
-        lqip: string | null;
-        dimensions: SanityImageDimensions | null;
-      } | null;
-    } | null;
-  } | null;
+  _type: "area";
+  title: string | null;
+  slug: string | null;
+  summary: string | null;
   housingTypes: Array<string> | null;
   highlights: Array<string> | null;
-  isDemo: boolean | null;
-  seo: {
-    title: string;
-    description: string;
-    noIndex: boolean | false;
-    canonicalUrl: string | null;
-    image: {
-      alt: string;
-      caption: string | null;
-      credit: string | null;
-      crop: SanityImageCrop | null;
-      hotspot: SanityImageHotspot | null;
-      asset: {
-        _id: string;
-        url: string;
-        metadata: {
-          lqip: string | null;
-          dimensions: SanityImageDimensions | null;
-        } | null;
-      } | null;
-    } | null;
-  };
-}>;
-
-// Source: lib/queries.ts
-// Variable: AREA_QUERY
-// Query: *[_type == "area" && slug.current == $slug && ($includeDemo == true || isDemo != true)][0]{_id,title,"slug":slug.current,summary,description[]{...,_type == "editorialImage" => {alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}}},mainImage {alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}},gallery[]{_key,...,asset->{_id,url,metadata{lqip,dimensions}}},housingTypes,highlights,location,contactAction{label,href},relatedVideos[]{_key,"video": @->{_id,title,youtubeUrl,isDemo}}[defined(video) && ($includeDemo == true || video.isDemo != true)],isDemo,"seo": {"title": coalesce(seo.title, title), "description": coalesce(seo.description, summary, excerpt, heroDescription, ""), "noIndex": seo.noIndex == true || isDemo == true, "canonicalUrl": seo.canonicalUrl, "image": seo.image {alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}}}}
-export type AREA_QUERY_RESULT = {
-  _id: string;
-  title: string;
-  slug: string;
-  summary: string;
-  description: Array<
-    | {
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: "span";
-          _key: string;
-        }>;
-        style?:
-          "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-        listItem?: "bullet" | "number";
-        markDefs?: Array<{
-          href?: string;
-          _type: "link";
-          _key: string;
-        }>;
-        level?: number;
-        _type: "block";
-        _key: string;
-      }
-    | {
-        _key: string;
-        _type: "editorialImage";
-        asset: {
-          _id: string;
-          url: string;
-          metadata: {
-            lqip: string | null;
-            dimensions: SanityImageDimensions | null;
-          } | null;
-        } | null;
-        media?: unknown;
-        hotspot: SanityImageHotspot | null;
-        crop: SanityImageCrop | null;
-        alt: string;
-        caption: string | null;
-        credit: string | null;
-      }
-  > | null;
+  sortOrder: number | null;
   mainImage: {
-    alt: string;
-    caption: string | null;
-    credit: string | null;
-    crop: SanityImageCrop | null;
-    hotspot: SanityImageHotspot | null;
     asset: {
       _id: string;
-      url: string;
+      url: string | null;
       metadata: {
         lqip: string | null;
         dimensions: SanityImageDimensions | null;
       } | null;
     } | null;
+    alt: string | null;
+    crop: SanityImageCrop | null;
+    hotspot: SanityImageHotspot | null;
+  } | null;
+}>;
+
+// Source: sanity/lib/queries.ts
+// Variable: AREA_QUERY
+// Query: *[_type == "area" && slug.current == $slug][0]{  _id,_type,title,"slug":slug.current,summary,description,housingTypes,highlights,  mainImage{asset->{_id,url,metadata{lqip,dimensions}},alt,crop,hotspot},  gallery[]{_key,asset->{_id,url,metadata{lqip,dimensions}},alt,crop,hotspot},  relatedVideos[]->{    _id,title,summary,youtubeUrl,    thumbnail{asset->{_id,url,metadata{lqip,dimensions}},alt,crop,hotspot}  }}
+export type AREA_QUERY_RESULT = {
+  _id: string;
+  _type: "area";
+  title: string | null;
+  slug: string | null;
+  summary: string | null;
+  description: RichText | null;
+  housingTypes: Array<string> | null;
+  highlights: Array<string> | null;
+  mainImage: {
+    asset: {
+      _id: string;
+      url: string | null;
+      metadata: {
+        lqip: string | null;
+        dimensions: SanityImageDimensions | null;
+      } | null;
+    } | null;
+    alt: string | null;
+    crop: SanityImageCrop | null;
+    hotspot: SanityImageHotspot | null;
   } | null;
   gallery: Array<{
     _key: string;
-    _type: "editorialImage";
     asset: {
       _id: string;
-      url: string;
+      url: string | null;
       metadata: {
         lqip: string | null;
         dimensions: SanityImageDimensions | null;
       } | null;
     } | null;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt: string;
-    caption?: string;
-    credit?: string;
+    alt: string | null;
+    crop: SanityImageCrop | null;
+    hotspot: SanityImageHotspot | null;
   }> | null;
-  housingTypes: Array<string> | null;
-  highlights: Array<string> | null;
-  location: Geopoint | null;
-  contactAction: {
-    label: string;
-    href: string;
-  } | null;
   relatedVideos: Array<{
-    _key: string;
-    video: {
-      _id: string;
-      title: string;
-      youtubeUrl: string | null;
-      isDemo: boolean | null;
-    };
+    _id: string;
+    title: string | null;
+    summary: string | null;
+    youtubeUrl: string | null;
+    thumbnail: {
+      asset: {
+        _id: string;
+        url: string | null;
+        metadata: {
+          lqip: string | null;
+          dimensions: SanityImageDimensions | null;
+        } | null;
+      } | null;
+      alt: string | null;
+      crop: SanityImageCrop | null;
+      hotspot: SanityImageHotspot | null;
+    } | null;
   }> | null;
-  isDemo: boolean | null;
-  seo: {
-    title: string;
-    description: string;
-    noIndex: boolean | false;
-    canonicalUrl: string | null;
-    image: {
-      alt: string;
-      caption: string | null;
-      credit: string | null;
-      crop: SanityImageCrop | null;
-      hotspot: SanityImageHotspot | null;
-      asset: {
-        _id: string;
-        url: string;
-        metadata: {
-          lqip: string | null;
-          dimensions: SanityImageDimensions | null;
-        } | null;
-      } | null;
-    } | null;
-  };
-} | null;
-
-// Source: lib/queries.ts
-// Variable: VIDEOS_QUERY
-// Query: *[_type == "video" && ($includeDemo == true || isDemo != true)] | order(publishedAt desc, _id asc)[0...100]{_id,title,"slug":slug.current,summary,youtubeUrl,thumbnail {alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}},publishedAt,areas[]{_key,"area": @->{_id,title,"slug":slug.current,isDemo}}[defined(area) && ($includeDemo == true || area.isDemo != true)],isDemo,"seo": {"title": coalesce(seo.title, title), "description": coalesce(seo.description, summary, excerpt, heroDescription, ""), "noIndex": seo.noIndex == true || isDemo == true, "canonicalUrl": seo.canonicalUrl, "image": seo.image {alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}}}}
-export type VIDEOS_QUERY_RESULT = Array<{
-  _id: string;
-  title: string;
-  slug: string;
-  summary: string | null;
-  youtubeUrl: string | null;
-  thumbnail: {
-    alt: string;
-    caption: string | null;
-    credit: string | null;
-    crop: SanityImageCrop | null;
-    hotspot: SanityImageHotspot | null;
-    asset: {
-      _id: string;
-      url: string;
-      metadata: {
-        lqip: string | null;
-        dimensions: SanityImageDimensions | null;
-      } | null;
-    } | null;
-  } | null;
-  publishedAt: string | null;
-  areas: Array<{
-    _key: string;
-    area: {
-      _id: string;
-      title: string;
-      slug: string;
-      isDemo: boolean | null;
-    };
-  }> | null;
-  isDemo: boolean | null;
-  seo: {
-    title: string;
-    description: string | "";
-    noIndex: boolean | false;
-    canonicalUrl: string | null;
-    image: {
-      alt: string;
-      caption: string | null;
-      credit: string | null;
-      crop: SanityImageCrop | null;
-      hotspot: SanityImageHotspot | null;
-      asset: {
-        _id: string;
-        url: string;
-        metadata: {
-          lqip: string | null;
-          dimensions: SanityImageDimensions | null;
-        } | null;
-      } | null;
-    } | null;
-  };
-}>;
-
-// Source: lib/queries.ts
-// Variable: ARTICLES_QUERY
-// Query: *[_type == "article" && ($includeDemo == true || isDemo != true)] | order(publishedAt desc, _id asc)[0...100]{_id,title,"slug":slug.current,excerpt,publishedAt,mainImage {alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}},isDemo,"seo": {"title": coalesce(seo.title, title), "description": coalesce(seo.description, summary, excerpt, heroDescription, ""), "noIndex": seo.noIndex == true || isDemo == true, "canonicalUrl": seo.canonicalUrl, "image": seo.image {alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}}}}
-export type ARTICLES_QUERY_RESULT = Array<{
-  _id: string;
-  title: string;
-  slug: string;
-  excerpt: string | null;
-  publishedAt: string | null;
-  mainImage: {
-    alt: string;
-    caption: string | null;
-    credit: string | null;
-    crop: SanityImageCrop | null;
-    hotspot: SanityImageHotspot | null;
-    asset: {
-      _id: string;
-      url: string;
-      metadata: {
-        lqip: string | null;
-        dimensions: SanityImageDimensions | null;
-      } | null;
-    } | null;
-  } | null;
-  isDemo: boolean | null;
-  seo: {
-    title: string;
-    description: string | "";
-    noIndex: boolean | false;
-    canonicalUrl: string | null;
-    image: {
-      alt: string;
-      caption: string | null;
-      credit: string | null;
-      crop: SanityImageCrop | null;
-      hotspot: SanityImageHotspot | null;
-      asset: {
-        _id: string;
-        url: string;
-        metadata: {
-          lqip: string | null;
-          dimensions: SanityImageDimensions | null;
-        } | null;
-      } | null;
-    } | null;
-  };
-}>;
-
-// Source: lib/queries.ts
-// Variable: ARTICLE_QUERY
-// Query: *[_type == "article" && slug.current == $slug && ($includeDemo == true || isDemo != true)][0]{_id,title,"slug":slug.current,excerpt,body[]{...,_type == "editorialImage" => {alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}}},authorName,publishedAt,mainImage {alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}},areas[]{_key,"area": @->{_id,title,"slug":slug.current,isDemo}}[defined(area) && ($includeDemo == true || area.isDemo != true)],isDemo,"seo": {"title": coalesce(seo.title, title), "description": coalesce(seo.description, summary, excerpt, heroDescription, ""), "noIndex": seo.noIndex == true || isDemo == true, "canonicalUrl": seo.canonicalUrl, "image": seo.image {alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}}}}
-export type ARTICLE_QUERY_RESULT = {
-  _id: string;
-  title: string;
-  slug: string;
-  excerpt: string | null;
-  body: Array<
-    | {
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: "span";
-          _key: string;
-        }>;
-        style?:
-          "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-        listItem?: "bullet" | "number";
-        markDefs?: Array<{
-          href?: string;
-          _type: "link";
-          _key: string;
-        }>;
-        level?: number;
-        _type: "block";
-        _key: string;
-      }
-    | {
-        _key: string;
-        _type: "editorialImage";
-        asset: {
-          _id: string;
-          url: string;
-          metadata: {
-            lqip: string | null;
-            dimensions: SanityImageDimensions | null;
-          } | null;
-        } | null;
-        media?: unknown;
-        hotspot: SanityImageHotspot | null;
-        crop: SanityImageCrop | null;
-        alt: string;
-        caption: string | null;
-        credit: string | null;
-      }
-  >;
-  authorName: string | null;
-  publishedAt: string | null;
-  mainImage: {
-    alt: string;
-    caption: string | null;
-    credit: string | null;
-    crop: SanityImageCrop | null;
-    hotspot: SanityImageHotspot | null;
-    asset: {
-      _id: string;
-      url: string;
-      metadata: {
-        lqip: string | null;
-        dimensions: SanityImageDimensions | null;
-      } | null;
-    } | null;
-  } | null;
-  areas: Array<{
-    _key: string;
-    area: {
-      _id: string;
-      title: string;
-      slug: string;
-      isDemo: boolean | null;
-    };
-  }> | null;
-  isDemo: boolean | null;
-  seo: {
-    title: string;
-    description: string | "";
-    noIndex: boolean | false;
-    canonicalUrl: string | null;
-    image: {
-      alt: string;
-      caption: string | null;
-      credit: string | null;
-      crop: SanityImageCrop | null;
-      hotspot: SanityImageHotspot | null;
-      asset: {
-        _id: string;
-        url: string;
-        metadata: {
-          lqip: string | null;
-          dimensions: SanityImageDimensions | null;
-        } | null;
-      } | null;
-    } | null;
-  };
 } | null;
 
 // Query TypeMap
 declare global {
   interface SanityQueries {
-    '*[_id == "siteSettings" && ($includeDemo == true || isDemo != true)][0]{_id,title,tagline,agentName,phone,email,whatsappUrl,siteUrl,logo {alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}},navigation[]{_key,label,href},socialLinks[]{_key,label,href},footerText,isDemo,"seo": {"title": coalesce(seo.title, title), "description": coalesce(seo.description, summary, excerpt, heroDescription, ""), "noIndex": seo.noIndex == true || isDemo == true, "canonicalUrl": seo.canonicalUrl, "image": seo.image {alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}}}}': SITE_SETTINGS_QUERY_RESULT;
-    '*[_id == "homepage" && ($includeDemo == true || isDemo != true)][0]{_id,title,heroTitle,heroSubtitle,heroDescription,heroImage {alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}},heroActions[]{_key,label,href},featuredAreas[]{_key,"area": @-> {_id,title,"slug":slug.current,summary,isDemo,mainImage {alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}}}}[defined(area) && ($includeDemo == true || area.isDemo != true)],featuredVideos[]{_key,"video": @->{_id,title,"slug":slug.current,youtubeUrl,isDemo,thumbnail {alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}}}}[defined(video) && ($includeDemo == true || video.isDemo != true)],featuredArticles[]{_key,"article": @->{_id,title,"slug":slug.current,excerpt,isDemo}}[defined(article) && ($includeDemo == true || article.isDemo != true)],contactHeading,contactAction{label,href},isDemo,"seo": {"title": coalesce(seo.title, title), "description": coalesce(seo.description, summary, excerpt, heroDescription, ""), "noIndex": seo.noIndex == true || isDemo == true, "canonicalUrl": seo.canonicalUrl, "image": seo.image {alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}}}}': HOMEPAGE_QUERY_RESULT;
-    '*[_type == "area" && defined(slug.current) && ($includeDemo == true || isDemo != true)] | order(sortOrder asc, title asc)[0...100]{_id,title,"slug":slug.current,summary,mainImage {alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}},housingTypes,highlights,isDemo,"seo": {"title": coalesce(seo.title, title), "description": coalesce(seo.description, summary, excerpt, heroDescription, ""), "noIndex": seo.noIndex == true || isDemo == true, "canonicalUrl": seo.canonicalUrl, "image": seo.image {alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}}}}': AREAS_QUERY_RESULT;
-    '*[_type == "area" && slug.current == $slug && ($includeDemo == true || isDemo != true)][0]{_id,title,"slug":slug.current,summary,description[]{...,_type == "editorialImage" => {alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}}},mainImage {alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}},gallery[]{_key,...,asset->{_id,url,metadata{lqip,dimensions}}},housingTypes,highlights,location,contactAction{label,href},relatedVideos[]{_key,"video": @->{_id,title,youtubeUrl,isDemo}}[defined(video) && ($includeDemo == true || video.isDemo != true)],isDemo,"seo": {"title": coalesce(seo.title, title), "description": coalesce(seo.description, summary, excerpt, heroDescription, ""), "noIndex": seo.noIndex == true || isDemo == true, "canonicalUrl": seo.canonicalUrl, "image": seo.image {alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}}}}': AREA_QUERY_RESULT;
-    '*[_type == "video" && ($includeDemo == true || isDemo != true)] | order(publishedAt desc, _id asc)[0...100]{_id,title,"slug":slug.current,summary,youtubeUrl,thumbnail {alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}},publishedAt,areas[]{_key,"area": @->{_id,title,"slug":slug.current,isDemo}}[defined(area) && ($includeDemo == true || area.isDemo != true)],isDemo,"seo": {"title": coalesce(seo.title, title), "description": coalesce(seo.description, summary, excerpt, heroDescription, ""), "noIndex": seo.noIndex == true || isDemo == true, "canonicalUrl": seo.canonicalUrl, "image": seo.image {alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}}}}': VIDEOS_QUERY_RESULT;
-    '*[_type == "article" && ($includeDemo == true || isDemo != true)] | order(publishedAt desc, _id asc)[0...100]{_id,title,"slug":slug.current,excerpt,publishedAt,mainImage {alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}},isDemo,"seo": {"title": coalesce(seo.title, title), "description": coalesce(seo.description, summary, excerpt, heroDescription, ""), "noIndex": seo.noIndex == true || isDemo == true, "canonicalUrl": seo.canonicalUrl, "image": seo.image {alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}}}}': ARTICLES_QUERY_RESULT;
-    '*[_type == "article" && slug.current == $slug && ($includeDemo == true || isDemo != true)][0]{_id,title,"slug":slug.current,excerpt,body[]{...,_type == "editorialImage" => {alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}}},authorName,publishedAt,mainImage {alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}},areas[]{_key,"area": @->{_id,title,"slug":slug.current,isDemo}}[defined(area) && ($includeDemo == true || area.isDemo != true)],isDemo,"seo": {"title": coalesce(seo.title, title), "description": coalesce(seo.description, summary, excerpt, heroDescription, ""), "noIndex": seo.noIndex == true || isDemo == true, "canonicalUrl": seo.canonicalUrl, "image": seo.image {alt, caption, credit, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions}}}}}': ARTICLE_QUERY_RESULT;
+    '\n{\n  "settings": *[_id == "siteSettings"][0]{\n    _id,_type,title,tagline,agentName,agentBio,areasServed,languages,specialties,responseTime,phone,email,whatsappUrl,siteUrl,\n    logo{asset->{_id,url,metadata{lqip,dimensions}},alt,crop,hotspot},\n    agentPhoto{asset->{_id,url,metadata{lqip,dimensions}},alt,crop,hotspot},\n    navigation[]{_key,label,href}\n  },\n  "home": *[_id == "homepage"][0]{\n    _id,_type,title,heroTitle,heroSubtitle,heroDescription,\n    heroImage{asset->{_id,url,metadata{lqip,dimensions}},alt,crop,hotspot},\n    heroActions[]{_key,label,href},\n    inspirationItems[]{\n      _key,title,subtitle,icon,href,\n      image{asset->{_id,url,metadata{lqip,dimensions}},alt,crop,hotspot}\n    },\n    contactHeading,contactAction{label,href},\n    contactBackgroundImage{asset->{_id,url,metadata{lqip,dimensions}},alt,crop,hotspot},\n    aboutImage{asset->{_id,url,metadata{lqip,dimensions}},alt,crop,hotspot},\n    featuredAreas[]{\n      _key,\n      ...@->{\n        _id,_type,title,"slug":slug.current,summary,housingTypes,highlights,sortOrder,\n        mainImage{asset->{_id,url,metadata{lqip,dimensions}},alt,crop,hotspot}\n      }\n    },\n    featuredVideos[]{\n      _key,\n      ...@->{\n        _id,_type,title,isDemo,"slug":slug.current,summary,youtubeUrl,\n        thumbnail{asset->{_id,url,metadata{lqip,dimensions}},alt,crop,hotspot}\n      }\n    },\n    videoGallery[]{\n      _key,asset->{_id,url,metadata{lqip,dimensions}},alt,crop,hotspot\n    },\n    propertyShowcase[]{\n      _key,price,propertyType,bedrooms,bathrooms,size,location,\n      image{asset->{_id,url,metadata{lqip,dimensions}},alt,crop,hotspot}\n    },\n    storyCards[]{\n      _key,title,tag,href,\n      image{asset->{_id,url,metadata{lqip,dimensions}},alt,crop,hotspot}\n    },\n    featuredArticles[]{\n      _key,\n      ...@->{\n        _id,title,"slug":slug.current,excerpt,\n        mainImage{asset->{_id,url,metadata{lqip,dimensions}},alt,crop,hotspot}\n      }\n    }\n  }\n}\n': HOME_QUERY_RESULT;
+    '\n*[_type == "area" && defined(slug.current)] | order(sortOrder asc,title asc)[0...50]{\n  _id,_type,title,"slug":slug.current,summary,housingTypes,highlights,sortOrder,\n  mainImage{asset->{_id,url,metadata{lqip,dimensions}},alt,crop,hotspot}\n}\n': AREAS_QUERY_RESULT;
+    '\n*[_type == "area" && slug.current == $slug][0]{\n  _id,_type,title,"slug":slug.current,summary,description,housingTypes,highlights,\n  mainImage{asset->{_id,url,metadata{lqip,dimensions}},alt,crop,hotspot},\n  gallery[]{_key,asset->{_id,url,metadata{lqip,dimensions}},alt,crop,hotspot},\n  relatedVideos[]->{\n    _id,title,summary,youtubeUrl,\n    thumbnail{asset->{_id,url,metadata{lqip,dimensions}},alt,crop,hotspot}\n  }\n}\n': AREA_QUERY_RESULT;
   }
 }
 // Lets @sanity/client releases that predate the global registry read it too

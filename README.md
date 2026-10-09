@@ -41,4 +41,12 @@ SANITY_API_READ_TOKEN=...
 - `/studio` — Studio embebido.
 - `/api/draft-mode/enable` — Draft Mode para Presentation.
 
-Las propiedades de la homepage son placeholders marcados como Demo / IDX pendiente; no son listings MLS reales.
+Las tarjetas residenciales de la homepage son referencias visuales del entorno, no anuncios MLS. No muestran precios, disponibilidad ni características inventadas.
+
+## Contenido e imágenes
+
+Todas las fotografías se almacenan como assets de Sanity y pueden sustituirse por drag-and-drop en Studio. La biografía y los datos de perfil se editan en Configuración del sitio. Las descripciones completas y galerías se editan en cada Zona.
+
+Las fotografías importadas de Wikimedia Commons tienen sus autores, fuentes y licencias documentados en `content/photo-credits.json` y en la página pública `/creditos`. Al sustituir una fotografía, revisa también su atribución. Los recortes de imágenes CC BY-SA conservan la licencia del original. Las fuentes editoriales de las seis zonas están en `content/area-sources.json`.
+
+Las animaciones respetan `prefers-reduced-motion`; los enlaces mantienen un indicador de foco visible. Sin un video real publicado, el bloque destacado enlaza a la guía de la zona.
