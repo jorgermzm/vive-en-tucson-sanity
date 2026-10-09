@@ -4,6 +4,9 @@ import Link from 'next/link'
 import {HOME_QUERY} from '@/sanity/lib/queries'
 import {getSanityFetchOptions,sanityFetch} from '@/sanity/lib/live'
 import {urlFor} from '@/sanity/lib/image'
+import {getSiteVideos} from '@/lib/videos'
+
+export const revalidate=3600
 
 type CmsImageValue={
   asset?:unknown
@@ -155,7 +158,8 @@ export default async function HomePage(){
   const properties=home?.propertyShowcase||[]
   const stories=(home?.storyCards?.length?home.storyCards:defaultStories.map((item,i)=>({...item,_key:`default-story-${i}`}))) as StoryItem[]
   const featuredArea=areas.find((a)=>a.slug==='downtown-tucson')||areas[0]
-  const featuredVideo=home?.featuredVideos?.find(video=>!video.isDemo && /^https:\/\/(www\.)?(youtube\.com|youtu\.be)\//.test(video.youtubeUrl||''))
+  const {videos}=await getSiteVideos()
+  const featuredVideo=videos.find(video=>video.featured)||[...videos].sort((a,b)=>b.publishedAt.localeCompare(a.publishedAt))[0]
   const logoSrc=settings?.logo?.asset?urlFor(settings.logo).width(160).fit('max').url():null
 
   return <main className="min-h-screen bg-[#fffdf9] text-navy">
@@ -214,11 +218,11 @@ export default async function HomePage(){
     <section id="video-destacado" className="editorial-grid py-10">
       <div className="shell grid gap-8 lg:grid-cols-[1.25fr_.95fr] lg:items-center">
         <div className="relative min-h-[390px] overflow-hidden rounded-2xl bg-slate-200 shadow-card">
-          <CmsImage value={featuredVideo?.thumbnail||featuredArea?.mainImage} alt={featuredVideo?.title||'Video destacado'} sizes="(max-width:1024px) 100vw,60vw" placeholder="Miniatura del video · edítala en Sanity"/>
+          {featuredVideo?<Image src={featuredVideo.thumbnailUrl} alt={featuredVideo.thumbnailAlt} fill sizes="(max-width:1024px) 100vw,60vw" className="editorial-photo object-cover"/>:<CmsImage value={featuredArea?.mainImage} alt="Zona destacada" sizes="(max-width:1024px) 100vw,60vw"/>}
           <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent"/><div className="absolute bottom-6 left-7 display-serif text-5xl font-black leading-[.9] text-white">{featuredVideo?'Recorre Tucson':'Descubre Downtown'}</div>{featuredVideo&&<a aria-label={`Ver ${featuredVideo.title}`} href={featuredVideo.youtubeUrl||'/videos'} className="absolute inset-0 flex items-center justify-center"><span className="flex h-16 w-16 items-center justify-center rounded-full bg-white text-2xl text-navy shadow-xl">▶</span></a>}
         </div>
         <div>
-          <span className="rounded-full bg-blue-100 px-4 py-2 text-[11px] font-extrabold uppercase tracking-wider text-blue-700">{featuredVideo?'Video destacado':'Zona destacada'}</span><h2 className="display-serif mt-4 text-4xl font-black">{featuredArea?.title||'Downtown Tucson'}</h2><p className="mt-4 text-base leading-7 text-slate-700">{featuredArea?.summary||'Historia, cultura, arte, gastronomía y una vibra urbana incomparable.'}</p><a href={featuredVideo?.youtubeUrl||`/zonas/${featuredArea?.slug||'downtown-tucson'}`} className="mt-6 inline-flex rounded-lg bg-navy px-5 py-3 text-sm font-extrabold text-white">{featuredVideo?'▶ Ver video completo en YouTube →':'Explora Downtown Tucson →'}</a>
+          <span className="rounded-full bg-blue-100 px-4 py-2 text-[11px] font-extrabold uppercase tracking-wider text-blue-700">{featuredVideo?'Video destacado':'Zona destacada'}</span><h2 className="display-serif mt-4 text-4xl font-black">{featuredVideo?.title||featuredArea?.title||'Downtown Tucson'}</h2><p className="mt-4 line-clamp-5 whitespace-pre-line text-base leading-7 text-slate-700">{featuredVideo?.description||featuredArea?.summary||'Historia, cultura, arte, gastronomía y una vibra urbana incomparable.'}</p><a href={featuredVideo?.youtubeUrl||`/zonas/${featuredArea?.slug||'downtown-tucson'}`} className="mt-6 inline-flex rounded-lg bg-navy px-5 py-3 text-sm font-extrabold text-white">{featuredVideo?'▶ Ver video completo en YouTube →':'Explora Downtown Tucson →'}</a>
           <div className="mt-5 grid grid-cols-4 gap-2">{(home?.videoGallery||[]).slice(0,4).map((img)=><div key={img._key} className="relative aspect-[1.45] overflow-hidden rounded-lg bg-slate-200"><CmsImage value={img} alt={img.alt||'Galería'} sizes="160px" placeholder="Sube foto"/></div>)}</div>
         </div>
       </div>

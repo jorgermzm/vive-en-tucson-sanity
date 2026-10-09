@@ -6,6 +6,8 @@ import {AREA_QUERY} from '@/sanity/lib/queries'
 import {getSanityFetchOptions,sanityFetch} from '@/sanity/lib/live'
 import {urlFor} from '@/sanity/lib/image'
 import sources from '@/content/area-sources.json'
+import {getSiteVideos} from '@/lib/videos'
+import {VideoCard} from '@/app/components/VideoCard'
 
 type CmsImageValue={asset?:unknown;alt?:string|null}
 type AreaDetail={description?:PortableTextBlock[];gallery?:Array<CmsImageValue & {_key:string}>;_id:string;title?:string|null;slug?:string|null;summary?:string|null;mainImage?:CmsImageValue|null;highlights?:string[]|null;housingTypes?:string[]|null}
@@ -21,6 +23,8 @@ export default async function AreaPage({params}:{params:Promise<{slug:string}>})
   const {data}=await sanityFetch({query:AREA_QUERY,params:{slug},perspective,stega})
   const area=data as AreaDetail|null
   if(!area)notFound()
+  const {videos}=await getSiteVideos()
+  const relatedVideos=videos.filter(video=>video.areas.some(item=>item.slug===slug))
   const src=areaImage(area.mainImage)
   const references=sources.find(item=>item.id===area._id)?.sources||[]
   return <main className="min-h-screen bg-white">
@@ -34,5 +38,6 @@ export default async function AreaPage({params}:{params:Promise<{slug:string}>})
       <aside className="rounded-2xl bg-blue-50 p-6"><h3 className="text-xl font-black">Tipos de vivienda</h3><ul className="mt-4 space-y-3 text-sm">{(area.housingTypes||['Casas unifamiliares']).map((item)=><li key={item}>⌂ {item}</li>)}</ul><Link href="/contacto" className="mt-7 inline-block rounded-xl bg-green px-5 py-3 font-extrabold text-white">Quiero conocer esta zona</Link></aside>
     </div>
     <div className="shell pb-10"><div className="grid gap-4 sm:grid-cols-2">{area.gallery?.map(photo=>{const src=areaImage(photo);return src?<figure key={photo._key}><div className="relative aspect-[2/1] overflow-hidden rounded-xl"><Image src={src} alt={photo.alt||area.title||''} fill sizes="(max-width:640px) 100vw,50vw" className="editorial-photo object-cover"/></div><figcaption className="mt-2 text-xs text-slate-600">{photo.alt}</figcaption></figure>:null})}</div><div className="mt-4 flex flex-wrap gap-4 text-xs underline"><Link href="/creditos">Créditos de fotografías</Link>{references.map((url,index)=><a key={url} href={url}>Fuente local {index+1}</a>)}</div></div>
+    {relatedVideos.length>0&&<section className="shell pb-12"><h2 className="display-serif mb-6 text-3xl font-black">Videos de {area.title}</h2><div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">{relatedVideos.map(video=><VideoCard key={video.id} video={video}/>)}</div></section>}
   </main>
 }
