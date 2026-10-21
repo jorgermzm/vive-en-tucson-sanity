@@ -10,6 +10,7 @@ import {SiteIcon, type IconName} from '@/app/components/SiteIcon'
 import {ContactForm} from '@/app/components/ContactForm'
 import {ProfileFacts} from '@/app/components/ProfileFacts'
 import {WhatsAppIcon} from '@/app/components/WhatsAppIcon'
+import {HeroBackdrop} from '@/app/components/HeroBackdrop'
 
 export const revalidate = 3600
 
@@ -60,7 +61,7 @@ export default async function HomePage() {
     <a href="#contenido" className="vet-skip-link">Saltar al contenido</a>
     <main id="contenido">
       <section id="inicio" className="vet-hero">
-        <div className="vet-hero-image"><EditorialImage value={home?.heroImage} alt="Paisaje de Tucson, Arizona" sizes="100vw" priority/></div>
+        <HeroBackdrop/>
         <div className="vet-hero-overlay"/>
         <div className="vet-hero-corners shell">
           <div className="vet-hero-brand">{logoUrl && <span className="relative h-8 w-8 overflow-hidden rounded-full"><Image src={logoUrl} alt="" fill sizes="32px" className="object-cover"/></span>}<span>Vive en Tucson | Con Jorge</span></div>
