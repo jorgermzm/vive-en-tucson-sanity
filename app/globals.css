@@ -72,7 +72,7 @@ a:focus-visible{outline:3px solid #149b62;outline-offset:4px}
 .vet-button-green{background:#107a4c;color:white}.vet-button-green svg{display:block;flex:0 0 auto}
 .vet-button:hover{filter:brightness(1.07)}
 .vet-hero{position:relative;isolation:isolate;display:flex;align-items:center;min-height:max(650px,calc(100svh - 80px));overflow:hidden;background:#1b140d}
-.vet-hero::after{content:"";position:absolute;inset-inline:0;bottom:-1px;height:clamp(110px,14vw,170px);z-index:0;pointer-events:none;background:linear-gradient(to bottom,rgba(253,251,247,0) 0%,rgba(253,251,247,.1) 20%,rgba(253,251,247,.5) 52%,rgba(253,251,247,.9) 80%,#fdfbf7 100%)}
+.vet-hero::after{content:"";position:absolute;inset-inline:0;bottom:-1px;height:calc(clamp(70px,8vw,100px) + var(--hero-scroll-progress,0)*clamp(70px,8vw,110px));z-index:0;pointer-events:none;background:linear-gradient(to bottom,rgba(253,251,247,0) 0%,rgba(253,251,247,.1) 20%,rgba(253,251,247,.5) 52%,rgba(253,251,247,.9) 80%,#fdfbf7 100%)}
 .vet-hero-image,.vet-hero-overlay{position:absolute;inset:0;z-index:-2}
 .vet-hero-image img{object-position:center 55%}
 .vet-hero-backdrop{inset:-18px;pointer-events:none;will-change:opacity,filter}

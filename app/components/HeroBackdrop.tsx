@@ -21,8 +21,10 @@ export function HeroBackdrop() {
       const progress = Math.min(1, Math.max(0, Math.round(headerHeight - bounds.top) / Math.max(1, bounds.height * 0.85)))
       const opacity = (1 - progress).toFixed(3)
       const filter = reducedMotion.matches ? 'none' : `blur(${(progress * 16).toFixed(2)}px)`
+      const seamProgress = progress.toFixed(3)
       if (image.style.opacity !== opacity) image.style.opacity = opacity
       if (image.style.filter !== filter) image.style.filter = filter
+      if (hero.style.getPropertyValue('--hero-scroll-progress') !== seamProgress) hero.style.setProperty('--hero-scroll-progress', seamProgress)
     }
     function schedule() {
       if (!frame) frame = window.requestAnimationFrame(update)
