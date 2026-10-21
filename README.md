@@ -10,7 +10,7 @@ cp .env.example .env.local
 npm run dev
 ```
 
-Web: http://localhost:3000  
+Web: http://localhost:3000
 Studio: http://localhost:3000/studio
 
 ## Variables de entorno
@@ -40,6 +40,11 @@ SANITY_API_READ_TOKEN=...
 - `/zonas/[slug]` — detalle.
 - `/studio` — Studio embebido.
 - `/api/draft-mode/enable` — Draft Mode para Presentation.
+- `/que-hacer`, `/restaurantes`, `/vida-nocturna` — lugares desde Google Places.
+- `/api/places?category=restaurantes` — catálogo para nuevos diseños.
+
+La conexión de Places usa `GOOGLE_PLACES_API_KEY` exclusivamente en el servidor.
+Configuración, actualización, selección en Sanity y atribuciones: [docs/places.md](docs/places.md).
 
 Las tarjetas residenciales de la homepage son referencias visuales del entorno, no anuncios MLS. No muestran precios, disponibilidad ni características inventadas.
 

@@ -95,11 +95,11 @@ type HomePayload={
 }
 
 const defaultInspiration=[
-  {title:'Restaurantes',subtitle:'Sabores únicos',icon:'🍴',href:'/videos'},
+  {title:'Restaurantes',subtitle:'Sabores únicos',icon:'🍴',href:'/restaurantes'},
   {title:'Hiking y Outdoors',subtitle:'Naturaleza increíble',icon:'△',href:'/zonas'},
   {title:'Familia',subtitle:'Planes para todos',icon:'◉',href:'/zonas'},
-  {title:'Museos',subtitle:'Historia y cultura',icon:'⌂',href:'/videos'},
-  {title:'Nightlife',subtitle:'Bares y vida nocturna',icon:'♫',href:'/videos'},
+  {title:'Museos',subtitle:'Historia y cultura',icon:'⌂',href:'/que-hacer'},
+  {title:'Nightlife',subtitle:'Bares y vida nocturna',icon:'♫',href:'/vida-nocturna'},
   {title:'Eventos',subtitle:'Festivales y conciertos',icon:'▣',href:'/videos'},
   {title:'Shopping',subtitle:'Tiendas y mercados',icon:'▢',href:'/zonas'},
 ]
@@ -121,6 +121,17 @@ const living=[
 function imageUrl(image:CmsImageValue|null|undefined,width:number,height:number){
   if(!image?.asset)return null
   try{return urlFor(image).width(width).height(height).fit('crop').url()}catch{return null}
+}
+
+// Replace the old generic video destinations for the three connected categories.
+// Explicit editorial destinations remain editable in Sanity.
+function inspirationHref(item:InspirationItem){
+  if(item.href && item.href!=='/videos')return item.href
+  const title=(item.title||'').toLowerCase().trim()
+  if(title==='restaurantes')return '/restaurantes'
+  if(title==='museos'||title==='qué hacer')return '/que-hacer'
+  if(['nightlife','bares','vida nocturna','bares y vida nocturna'].includes(title))return '/vida-nocturna'
+  return item.href||'/que-hacer'
 }
 
 function CmsImage({
@@ -172,7 +183,7 @@ export default async function HomePage(){
           </>}
         </Link>
         <nav className="hidden items-center gap-6 text-[13px] font-semibold xl:flex">
-          <Link href="/" className="border-b-2 border-navy pb-2">Inicio</Link><Link href="#zonas">Zonas</Link><Link href="#inspirate">Qué hacer⌄</Link><Link href="#vivir">Vivir en Tucson⌄</Link><Link href="/comprar">Comprar⌄</Link><Link href="/vender">Vender⌄</Link><Link href="/videos">Videos</Link><Link href="#historias">Guías</Link><Link href="/sobre-jorge">Sobre Jorge</Link><Link href="/contacto">Contacto</Link>
+          <Link href="/" className="border-b-2 border-navy pb-2">Inicio</Link><Link href="#zonas">Zonas</Link><Link href="/que-hacer" prefetch={false}>Qué hacer⌄</Link><Link href="#vivir">Vivir en Tucson⌄</Link><Link href="/comprar">Comprar⌄</Link><Link href="/vender">Vender⌄</Link><Link href="/videos">Videos</Link><Link href="#historias">Guías</Link><Link href="/sobre-jorge">Sobre Jorge</Link><Link href="/contacto">Contacto</Link>
         </nav>
         <a href={whatsapp} className="rounded-lg bg-[#149b62] px-4 py-2.5 text-sm font-extrabold text-white shadow-card">◉ {phone}</a>
       </div>
@@ -193,9 +204,9 @@ export default async function HomePage(){
     </section>
 
     <section id="inspirate" className="shell py-8">
-      <div className="flex items-end justify-between gap-4"><div><h2 className="display-serif text-3xl font-black">Inspírate en Tucson</h2><p className="text-sm text-slate-600">Explora todo lo que hace especial a esta ciudad.</p></div><Link href="/videos" className="hidden text-xs font-bold text-blue-700 md:block">Ver todas las categorías →</Link></div>
+      <div className="flex items-end justify-between gap-4"><div><h2 className="display-serif text-3xl font-black">Inspírate en Tucson</h2><p className="text-sm text-slate-600">Explora todo lo que hace especial a esta ciudad.</p></div><Link href="/que-hacer" prefetch={false} className="hidden text-xs font-bold text-blue-700 md:block">Ver todas las categorías →</Link></div>
       <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-7">
-        {inspiration.map((item)=><Link key={item._key} href={item.href||'/videos'} className="group overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+        {inspiration.map((item)=><Link key={item._key} href={inspirationHref(item)} prefetch={false} className="group overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
           <div className="relative h-24 overflow-hidden"><CmsImage value={item.image} alt={item.title||'Categoría'} sizes="220px" className="object-cover transition duration-500 motion-safe:group-hover:scale-[1.025]" placeholder="Imagen editable"/></div>
           <div className="relative px-3 pb-3 pt-5"><span className="absolute -top-4 left-3 flex h-8 w-8 items-center justify-center rounded-full bg-white text-sm shadow">{item.icon||'•'}</span><h3 className="text-sm font-extrabold">{item.title}</h3><p className="mt-1 text-[11px] text-slate-500">{item.subtitle}</p></div>
         </Link>)}
