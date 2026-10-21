@@ -62,7 +62,6 @@ export default async function HomePage() {
     <main id="contenido">
       <section id="inicio" className="vet-hero">
         <HeroBackdrop/>
-        <div className="vet-hero-overlay"/>
         <div className="vet-hero-corners shell">
           <div className="vet-hero-brand">{logoUrl && <span className="relative h-8 w-8 overflow-hidden rounded-full"><Image src={logoUrl} alt="" fill sizes="32px" className="object-cover"/></span>}<span>Vive en Tucson | Con Jorge</span></div>
           <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="vet-hero-contact"><span className="vet-chat-mark"><WhatsAppIcon width={23} height={23}/></span><span><small>Escríbeme hoy</small><strong>{phone}</strong></span></a>
