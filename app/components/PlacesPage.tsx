@@ -13,6 +13,10 @@ export async function PlacesPage({category}: {category: PlaceCategory}) {
       <nav aria-label="Explora Tucson" className="mb-12 flex flex-wrap justify-center gap-3">
         {Object.entries(PLACE_CATEGORIES).map(([slug, item]) => <Link key={slug} href={`/${slug}`} prefetch={false} aria-current={slug === category ? 'page' : undefined} className={`vet-category-tab ${slug === category ? 'vet-category-tab-active' : ''}`}>{item.label}</Link>)}
       </nav>
+      <section className="mb-10 grid gap-4 md:grid-cols-2">
+        <article className="rounded-2xl border border-slate-200 bg-white p-6"><h2 className="text-xl font-black">¿Cómo usar esta guía?</h2><p className="mt-3 leading-7 text-slate-600">Explora lugares reales de Tucson, abre su ficha en Google Maps para confirmar horarios y detalles actuales, y usa las categorías para comparar diferentes planes en la ciudad.</p></article>
+        <article className="rounded-2xl border border-slate-200 bg-white p-6"><h2 className="text-xl font-black">¿La información está pensada para visitantes y residentes?</h2><p className="mt-3 leading-7 text-slate-600">Sí. La selección ayuda tanto a quienes visitan Tucson como a quienes están considerando vivir aquí y quieren entender mejor cada zona a través de sus lugares y experiencias.</p></article>
+      </section>
       {status !== 'ready' ? <div role="status" className="rounded-2xl border border-slate-200 bg-white p-8">
         <h2 className="text-xl font-bold">No pudimos cargar los lugares en este momento.</h2>
         <p className="mt-3 text-slate-600">Inténtalo de nuevo en unos minutos.</p>
@@ -31,6 +35,7 @@ export async function PlacesPage({category}: {category: PlaceCategory}) {
           </article>)}
         </div>
       </section>}
+      {status==='ready'&&places.length>0&&<script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({'@context':'https://schema.org','@type':'ItemList',name:section.title,itemListElement:places.map((place,index)=>({'@type':'ListItem',position:index+1,item:{'@type':'LocalBusiness',name:place.name,address:place.address,url:place.mapsUrl}}))}).replace(/</g,'\\u003c')}}/>}
     </div>
   </main>
 }

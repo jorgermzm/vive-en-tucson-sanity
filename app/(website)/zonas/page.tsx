@@ -1,8 +1,15 @@
+import type {Metadata} from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import {AREAS_QUERY} from '@/sanity/lib/queries'
 import {getSanityFetchOptions,sanityFetch} from '@/sanity/lib/live'
 import {urlFor} from '@/sanity/lib/image'
+
+export const metadata: Metadata = {
+  title: 'Zonas de Tucson, Arizona',
+  description: 'Compara zonas de Tucson en español: estilo de vida, puntos de interés, videos y tipos de vivienda en Downtown, Oro Valley, Marana y más.',
+  alternates: {canonical: '/zonas'},
+}
 
 type CmsImageValue={asset?:unknown;alt?:string|null}
 type AreaCard={_id:string;title?:string|null;slug?:string|null;summary?:string|null;mainImage?:CmsImageValue|null}
@@ -16,10 +23,11 @@ export default async function AreasPage(){
   const {perspective,stega}=await getSanityFetchOptions()
   const {data}=await sanityFetch({query:AREAS_QUERY,perspective,stega})
   const areas=(Array.isArray(data)?data:[]) as AreaCard[]
+  const schema={'@context':'https://schema.org','@type':'CollectionPage',name:'Zonas de Tucson, Arizona',inLanguage:'es-US',url:'https://www.vive-tucson.com/zonas',mainEntity:{'@type':'ItemList',itemListElement:areas.map((area,index)=>({'@type':'ListItem',position:index+1,url:`https://www.vive-tucson.com/zonas/${area.slug}`,name:area.title}))}}
   return <main className="min-h-screen bg-sand/40 py-12"><div className="shell">
     <Link href="/" className="font-bold text-blue-600">← Inicio</Link>
-    <h1 className="mt-6 text-5xl font-black">Zonas de Tucson</h1>
-    <p className="mt-3 max-w-2xl text-slate-600">Explora el paisaje, los puntos de interés y lo que conviene comparar en cada zona.</p>
+    <h1 className="mt-6 text-5xl font-black">Zonas de Tucson, Arizona</h1>
+    <p className="mt-3 max-w-3xl text-slate-600">Compara zonas de Tucson en español para entender su ambiente, puntos de interés, tipos de vivienda y videos relacionados antes de decidir dónde vivir o qué explorar.</p>
     <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {areas.map((area)=>{const src=areaImage(area.mainImage);return <Link key={area._id} href={`/zonas/${area.slug}`} className="group overflow-hidden rounded-2xl bg-white shadow-card">
         <div className="relative h-52 overflow-hidden bg-slate-200">{src?<Image src={src} alt={area.mainImage?.alt||area.title||''} fill className="editorial-photo object-cover motion-safe:group-hover:scale-[1.025]" sizes="420px"/>:<div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#dbe7ea] to-[#e5d6c5] px-6 text-center text-xs font-bold uppercase tracking-[.15em] text-navy/45">Imagen de la zona próximamente</div>}</div>
@@ -27,5 +35,6 @@ export default async function AreasPage(){
       </Link>})}
     </div>
     <Link href="/creditos" className="mt-6 inline-block text-xs underline">Créditos de fotografías</Link>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(schema).replace(/</g,'\\u003c')}}/>
   </div></main>
 }

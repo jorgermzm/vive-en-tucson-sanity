@@ -1,5 +1,10 @@
+import type {Metadata} from 'next'
 import {PlacesPage} from '@/app/components/PlacesPage'
 
 export const dynamic = 'force-dynamic'
-export const metadata = {title: 'Qué hacer en Tucson | Vive en Tucson'}
-export default function Page() { return <PlacesPage category="que-hacer"/> }
+export const metadata:Metadata={
+  title:'Qué hacer en Tucson, Arizona',
+  description:'Guía en español de museos, atracciones y lugares para conocer Tucson, Arizona, con opciones para visitantes y residentes.',
+  alternates:{canonical:'/que-hacer'},
+}
+export default function Page(){return <PlacesPage category="que-hacer"/>}
