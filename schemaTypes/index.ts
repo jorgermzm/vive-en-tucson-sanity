@@ -12,6 +12,7 @@ import {homepage} from './homepage'
 import {area} from './area'
 import {video} from './video'
 import {article} from './article'
+import {placeCollection} from './place-collection'
 
 export const schemaTypes = [
   editorialImage,
@@ -26,4 +27,5 @@ export const schemaTypes = [
   area,
   video,
   article,
+  placeCollection,
 ]
