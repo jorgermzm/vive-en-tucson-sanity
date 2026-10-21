@@ -18,13 +18,13 @@ export function HeroBackdrop() {
       if (!image || !hero) return
       const headerHeight = document.querySelector<HTMLElement>('.vet-header')?.offsetHeight || 0
       const bounds = hero.getBoundingClientRect()
-      const progress = Math.min(1, Math.max(0, Math.round(headerHeight - bounds.top) / Math.max(1, bounds.height * 0.85)))
+      const progress = Math.min(1, Math.max(0, Math.round(headerHeight - bounds.top) / Math.max(1, bounds.height * 0.65)))
       const opacity = (1 - progress).toFixed(3)
-      const filter = reducedMotion.matches ? 'none' : `blur(${(progress * 16).toFixed(2)}px)`
-      const seamProgress = progress.toFixed(3)
-      if (image.style.opacity !== opacity) image.style.opacity = opacity
+      const filter = reducedMotion.matches ? 'none' : `blur(${(progress * 8).toFixed(2)}px)`
+      if (hero.style.opacity !== opacity) hero.style.opacity = opacity
       if (image.style.filter !== filter) image.style.filter = filter
-      if (hero.style.getPropertyValue('--hero-scroll-progress') !== seamProgress) hero.style.setProperty('--hero-scroll-progress', seamProgress)
+      const hidden = progress >= 0.98
+      if (hero.inert !== hidden) hero.inert = hidden
     }
     function schedule() {
       if (!frame) frame = window.requestAnimationFrame(update)
@@ -39,6 +39,7 @@ export function HeroBackdrop() {
       window.removeEventListener('scroll', schedule)
       window.removeEventListener('resize', schedule)
       reducedMotion.removeEventListener('change', schedule)
+      hero.inert = false
     }
   }, [])
 
