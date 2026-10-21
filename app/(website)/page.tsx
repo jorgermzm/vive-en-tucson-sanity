@@ -9,6 +9,7 @@ import {CHANNEL_URL} from '@/lib/youtube'
 import {SiteIcon, type IconName} from '@/app/components/SiteIcon'
 import {ContactForm} from '@/app/components/ContactForm'
 import {ProfileFacts} from '@/app/components/ProfileFacts'
+import {WhatsAppIcon} from '@/app/components/WhatsAppIcon'
 
 export const revalidate = 3600
 
@@ -63,7 +64,7 @@ export default async function HomePage() {
         <div className="vet-hero-overlay"/>
         <div className="vet-hero-corners shell">
           <div className="vet-hero-brand">{logoUrl && <span className="relative h-8 w-8 overflow-hidden rounded-full"><Image src={logoUrl} alt="" fill sizes="32px" className="object-cover"/></span>}<span>Vive en Tucson | Con Jorge</span></div>
-          <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="vet-hero-contact"><span className="vet-chat-mark"><SiteIcon name="chat"/></span><span><small>Escríbeme hoy</small><strong>{phone}</strong></span></a>
+          <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="vet-hero-contact"><span className="vet-chat-mark"><WhatsAppIcon width={23} height={23}/></span><span><small>Escríbeme hoy</small><strong>{phone}</strong></span></a>
         </div>
         <div className="vet-hero-content shell">
           <p className="vet-hero-kicker">Arizona Lifestyle &amp; Real Estate</p>
@@ -105,7 +106,7 @@ export default async function HomePage() {
           <aside id="comprar" className="vet-property-panel"><p className="vet-eyebrow">Asesoría inmobiliaria</p><h3>Tu próximo hogar<br/>en Tucson</h3><p className="vet-property-intro">Conoce las zonas y conversemos sobre las opciones que se ajustan a lo que buscas.</p>
             <div className="vet-property-list">{properties.map(property => <div key={property._key} className="vet-property-preview"><div className="vet-property-image"><EditorialImage value={property.image} alt={property.image?.alt || 'Referencia del entorno residencial'} sizes="180px"/></div><div><p className="vet-property-location">{property.location || 'Tucson, Arizona'}</p><h4>{property.propertyType || 'Conoce tus opciones'}</h4><a href={whatsapp} className="vet-text-link text-xs">Consultar con Jorge <SiteIcon name="arrow" width={15} height={15}/></a></div></div>)}</div>
             {properties.length > 0 && <p className="mt-4 text-xs leading-5 text-slate-500">Imágenes de referencia del entorno. Consulta disponibilidad y precios actuales con Jorge.</p>}
-            <a href={whatsapp} className="vet-button vet-button-green mt-6 w-full"><SiteIcon name="chat"/>Hablemos de tu búsqueda</a>
+            <a href={whatsapp} className="vet-button vet-button-green mt-6 w-full"><WhatsAppIcon width={21} height={21}/>Hablemos de tu búsqueda</a>
           </aside>
         </div>
       </section>
@@ -118,7 +119,7 @@ export default async function HomePage() {
       {stories.length > 0 && <section id="guias" className="vet-section vet-guides shell"><SectionTitle eyebrow="Historias y consejos" title="Tu guía para vivir Tucson"/><div className="vet-video-grid">{stories.map(story => <Link href={story.href || '/videos'} key={story._key} className="vet-video-card"><div className="vet-video-thumb"><EditorialImage value={story.image} alt={story.title || 'Guía de Tucson'} sizes="(max-width:640px) 100vw,33vw"/></div><div className="p-6"><p className="vet-eyebrow">{story.tag || 'Vive en Tucson'}</p><h3>{story.title}</h3></div></Link>)}</div></section>}
 
       <section id="sobre-jorge" className="vet-about vet-section"><div className="shell vet-about-grid">
-        <div className="vet-about-copy"><p className="vet-eyebrow">Tu guía local y realtor</p><h2>Hola, soy Jorge</h2><span className="vet-rule"/><p className="vet-about-bio">{settings?.agentBio || 'Te acompaño a conocer Tucson y a encontrar el lugar que va contigo. Conversemos sobre tus planes y tu próximo paso.'}</p><ProfileFacts settings={settings}/><a href={whatsapp} className="vet-button vet-button-green mt-8"><SiteIcon name="chat"/>Escríbeme por WhatsApp</a></div>
+        <div className="vet-about-copy"><p className="vet-eyebrow">Tu guía local y realtor</p><h2>Hola, soy Jorge</h2><span className="vet-rule"/><p className="vet-about-bio">{settings?.agentBio || 'Te acompaño a conocer Tucson y a encontrar el lugar que va contigo. Conversemos sobre tus planes y tu próximo paso.'}</p><ProfileFacts settings={settings}/><a href={whatsapp} className="vet-button vet-button-green mt-8"><WhatsAppIcon width={21} height={21}/>Escríbeme por WhatsApp</a></div>
         <div id="contacto"><ContactForm/></div>
       </div></section>
     </main>
