@@ -22,8 +22,8 @@ type HomeData = {
 }
 const categories: {title: string; match: string[]; description: string; icon: IconName; href: string}[] = [
   {title: 'Restaurantes', match: ['restaurantes'], description: 'Sabores sonorenses, tacos icónicos y lugares para disfrutar la gastronomía local.', icon: 'food', href: '/restaurantes'},
-  {title: 'Hiking y Outdoors', match: ['hiking y outdoors', 'hiking'], description: 'Senderos, paisajes del desierto y aventuras al aire libre.', icon: 'mountain', href: '/zonas'},
-  {title: 'Museos', match: ['museos'], description: 'Arte, historia y cultura para descubrir otra cara de Tucson.', icon: 'museum', href: '/que-hacer'},
+  {title: 'Hiking y Outdoors', match: ['hiking y outdoors', 'hiking'], description: 'Senderos, paisajes del desierto y aventuras al aire libre.', icon: 'mountain', href: '/hiking-outdoors'},
+  {title: 'Museos', match: ['museos'], description: 'Arte, historia y cultura para descubrir otra cara de Tucson.', icon: 'museum', href: '/museos'},
   {title: 'Bares y vida nocturna', match: ['nightlife', 'bares', 'vida nocturna', 'bares y vida nocturna'], description: 'Bares con ambiente, música y planes para disfrutar la noche.', icon: 'night', href: '/vida-nocturna'},
   {title: 'Eventos', match: ['eventos'], description: 'Descubre la ciudad, sus encuentros y sus historias a través de nuestros videos.', icon: 'calendar', href: '/videos?categoria=Eventos'},
   {title: 'Shopping', match: ['shopping'], description: 'Tiendas, mercados y rincones para explorar los barrios de Tucson.', icon: 'bag', href: '/zonas'},

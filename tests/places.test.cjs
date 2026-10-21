@@ -14,9 +14,24 @@ const {isPlaceCategory} = require('../lib/place-categories.ts')
 const key = 'test-only-placeholder'
 const place = (id='ChIJ-test') => ({id, displayName: {text: 'Museo de prueba'}, formattedAddress: 'Tucson, AZ', photos: [{name: `places/${id}/photos/photo-token`, googleMapsUri: 'https://maps.google.com/photo', authorAttributions: [{displayName: 'Autor', uri: 'https://maps.google.com/author'}]}]})
 
-test('accepts only the three fixed categories, including prototype property rejection', () => {
-  for (const category of ['que-hacer','restaurantes','vida-nocturna']) assert.equal(isPlaceCategory(category), true)
+test('accepts only the fixed categories, including prototype property rejection', () => {
+  for (const category of ['que-hacer','restaurantes','atracciones','vida-nocturna','museos','hiking-outdoors']) assert.equal(isPlaceCategory(category), true)
   for (const category of ['__proto__','constructor','pizza','']) assert.equal(isPlaceCategory(category), false)
+})
+
+test('separates discovery searches for attractions, museums and outdoors', async () => {
+  const queries = {}
+  for (const category of ['atracciones','museos','hiking-outdoors']) {
+    queries[category] = []
+    const result = await searchPlaces(category, key, async (_url, options) => {
+      queries[category].push(JSON.parse(options.body).textQuery)
+      return Response.json({places: [place(category)]})
+    })
+    assert.equal(result.length, 1)
+  }
+  assert.deepEqual(queries.atracciones, ['tourist attractions in Tucson Arizona'])
+  assert.deepEqual(queries.museos, ['museums in Tucson Arizona'])
+  assert.deepEqual(queries['hiking-outdoors'], ['hiking trails in Tucson Arizona', 'outdoor parks in Tucson Arizona'])
 })
 test('queries Tucson with minimal field mask, Spanish and a credential header; never caches Google content', async () => {
   const result = await searchPlaces('restaurantes', key, async (url, options) => {

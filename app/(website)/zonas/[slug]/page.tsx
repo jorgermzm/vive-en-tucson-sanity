@@ -10,6 +10,7 @@ import {urlFor} from '@/sanity/lib/image'
 import sources from '@/content/area-sources.json'
 import {getSiteVideos} from '@/lib/videos'
 import {VideoCard} from '@/app/components/VideoCard'
+import {AREA_LINKS} from '@/lib/site-navigation'
 
 type CmsImageValue={asset?:unknown;alt?:string|null}
 type AreaDetail={description?:PortableTextBlock[];gallery?:Array<CmsImageValue & {_key:string}>;_id:string;title?:string|null;slug?:string|null;summary?:string|null;mainImage?:CmsImageValue|null;highlights?:string[]|null;housingTypes?:string[]|null}
@@ -22,7 +23,10 @@ function areaImage(image:CmsImageValue|null|undefined){
 export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata>{
   const {slug}=await params
   const area=await client.fetch<AreaDetail|null>(AREA_QUERY,{slug}).catch(()=>null)
-  if(!area)return {}
+  if(!area){
+    const destination=AREA_LINKS.find(item=>item.slug===slug)
+    return destination?{title:`${destination.label} | Vivir en Tucson`,description:`Conversa con Jorge sobre tu búsqueda en ${destination.label}.`,alternates:{canonical:`/zonas/${slug}`}}:{}
+  }
   const title=`${area.title}: vivir, qué hacer y vivienda en Tucson`
   const description=(area.summary||`Guía en español de ${area.title}, Tucson: estilo de vida, lugares para explorar, videos y tipos de vivienda.`).slice(0,160)
   const image=areaImage(area.mainImage)
@@ -34,7 +38,17 @@ export default async function AreaPage({params}:{params:Promise<{slug:string}>})
   const {perspective,stega}=await getSanityFetchOptions()
   const {data}=await sanityFetch({query:AREA_QUERY,params:{slug},perspective,stega})
   const area=data as AreaDetail|null
-  if(!area)notFound()
+  if(!area){
+    const destination=AREA_LINKS.find(item=>item.slug===slug)
+    if(!destination)notFound()
+    return <main className="vet-catalog min-h-[70svh] py-16"><div className="shell">
+      <Link href="/zonas" className="vet-text-link">← Todas las zonas</Link>
+      <div className="vet-catalog-intro"><p className="vet-eyebrow">Vivir en Tucson</p><h1 className="display-serif mt-4 text-4xl font-bold sm:text-6xl">{destination.label}</h1><span className="vet-rule"/>
+        <p className="mx-auto max-w-2xl text-lg leading-8 text-slate-600">¿Estás considerando {destination.label}? Cuéntame qué buscas en tu próxima zona y conversemos sobre tus opciones.</p>
+        <Link href="/#contacto" className="vet-button vet-button-gold mt-8">Hablar con Jorge sobre esta zona</Link>
+      </div>
+    </div></main>
+  }
   const {videos}=await getSiteVideos()
   const relatedVideos=videos.filter(video=>video.areas.some(item=>item.slug===slug))
   const src=areaImage(area.mainImage)
