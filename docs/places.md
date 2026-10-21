@@ -1,10 +1,11 @@
 # Google Places
 
-Las rutas `/que-hacer`, `/restaurantes` y `/vida-nocturna` muestran nombre,
+Las rutas `/que-hacer`, `/restaurantes`, `/atracciones`, `/museos`,
+`/hiking-outdoors` y `/vida-nocturna` muestran nombre,
 dirección y fotos disponibles de lugares reales en el área de Tucson.
 El diseño está separado de la fuente de datos: se puede sustituir `PlacesPage`
 y conservar `getPlaces` o consumir `/api/places?category=restaurantes`.
-Las otras categorías aceptadas son `que-hacer` y `vida-nocturna`; no se admiten
+También se aceptan `que-hacer`, `atracciones`, `museos`, `hiking-outdoors` y `vida-nocturna`; no se admiten
 consultas libres de visitantes ni paginación ilimitada.
 
 ## Configuración
@@ -21,8 +22,8 @@ No hay importación masiva, cron ni almacenamiento de nombres, direcciones o fot
 de Google en Sanity. No se guardan respuestas en Data Cache, ISR ni CDN, conforme
 a las restricciones de Places. React.cache solo deduplica dentro de un render.
 
-Descubrimiento: una consulta de hasta 8 resultados para restaurantes y dos
-consultas de hasta 8 para qué hacer y vida nocturna. Los resultados se alternan,
+Descubrimiento: una consulta de hasta 8 resultados para restaurantes, atracciones
+y museos; dos consultas de hasta 8 para qué hacer, vida nocturna y hiking/outdoors. Los resultados se alternan,
 se deduplican por ID, se excluyen cierres permanentes y se limitan a 12 tarjetas.
 Los resultados no representan un censo completo ni una recomendación editorial.
 Las consultas solicitan solamente datos de catálogo, sin reviews, ratings ni horarios.
@@ -51,7 +52,7 @@ Si falta una foto o falla su carga, la tarjeta conserva nombre y dirección.
 ## Verificación
 
 `node --test tests/*.test.cjs`, `pnpm type-check`, `pnpm build`.
-Comprobar las tres rutas con la clave del entorno de Vercel; ver nombres,
+Comprobar las seis rutas con la clave del entorno de Vercel; ver nombres,
 direcciones y fotos, autores, enlaces y ausencia de credenciales en respuestas.
 Una categoría inválida debe devolver 400. Fotos con token inválido deben devolver
 400 sin consultar Google. Si Google falla o falta la clave, catálogo 503 y una
