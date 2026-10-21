@@ -123,10 +123,9 @@ function imageUrl(image:CmsImageValue|null|undefined,width:number,height:number)
   try{return urlFor(image).width(width).height(height).fit('crop').url()}catch{return null}
 }
 
-// Replace the old generic video destinations for the three connected categories.
-// Explicit editorial destinations remain editable in Sanity.
+// Category cards open their connected catalogs, including cards with legacy CMS links.
+// Other inspiration cards keep their editorial destinations.
 function inspirationHref(item:InspirationItem){
-  if(item.href && item.href!=='/videos')return item.href
   const title=(item.title||'').toLowerCase().trim()
   if(title==='restaurantes')return '/restaurantes'
   if(title==='museos'||title==='qué hacer')return '/que-hacer'
