@@ -18,9 +18,11 @@ export function HeroBackdrop() {
       if (!image || !hero) return
       const headerHeight = document.querySelector<HTMLElement>('.vet-header')?.offsetHeight || 0
       const bounds = hero.getBoundingClientRect()
-      const progress = reducedMotion.matches ? 0 : Math.min(1, Math.max(0, (headerHeight - bounds.top) / Math.max(1, bounds.height * 0.8)))
+      const progress = Math.min(1, Math.max(0, Math.round(headerHeight - bounds.top) / Math.max(1, bounds.height * 0.85)))
       const opacity = (1 - progress).toFixed(3)
+      const filter = reducedMotion.matches ? 'none' : `blur(${(progress * 16).toFixed(2)}px)`
       if (image.style.opacity !== opacity) image.style.opacity = opacity
+      if (image.style.filter !== filter) image.style.filter = filter
     }
     function schedule() {
       if (!frame) frame = window.requestAnimationFrame(update)
