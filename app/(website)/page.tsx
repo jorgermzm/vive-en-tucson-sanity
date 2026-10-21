@@ -11,6 +11,7 @@ import {ContactForm} from '@/app/components/ContactForm'
 import {ProfileFacts} from '@/app/components/ProfileFacts'
 import {WhatsAppIcon} from '@/app/components/WhatsAppIcon'
 import {HeroBackdrop} from '@/app/components/HeroBackdrop'
+import {SiteIntro} from '@/app/components/SiteIntro'
 
 export const revalidate = 3600
 
@@ -51,6 +52,7 @@ export default async function HomePage() {
   const phone = settings?.phone || '520-335-9349'
   const whatsapp = settings?.whatsappUrl || 'https://wa.me/15203359349'
   const logoUrl = imageUrl(settings?.logo, 120, 120)
+  const introLogoUrl = imageUrl(settings?.logo, 600, 600)
   const areas = (home?.featuredAreas || []).filter(area => area?.slug).slice(0, 4)
   const featured = videos.find(video => video.featured) || [...videos].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))[0]
   const moreVideos = videos.filter(video => video.id !== featured?.id).slice(0, 3)
@@ -58,6 +60,7 @@ export default async function HomePage() {
   const properties = (home?.propertyShowcase || []).slice(0, 2)
 
   return <div className="vet-site">
+    <SiteIntro logoUrl={introLogoUrl}/>
     <a href="#contenido" className="vet-skip-link">Saltar al contenido</a>
     <main id="contenido">
       <section id="inicio" className="vet-hero">
