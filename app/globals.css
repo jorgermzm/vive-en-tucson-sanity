@@ -306,6 +306,14 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
   .vet-place-card address{font-size:13px;line-height:1.5;margin-top:8px}
   .vet-place-card-actions{margin-top:10px;gap:4px 12px}
   .vet-place-card-actions a{min-height:40px;display:inline-flex;align-items:center;font-size:12px;white-space:nowrap}
+  @supports(grid-template-rows:subgrid){
+    .vet-place-card{grid-template-rows:auto auto}
+    .vet-place-card>.vet-place-photo{grid-column:1/-1;grid-row:1/span 2;display:grid;grid-template-columns:subgrid;grid-template-rows:subgrid}
+    .vet-place-card>.vet-place-photo>a,.vet-place-card>.vet-place-photo>.vet-place-photo-frame{grid-column:1;grid-row:1;align-self:start}
+    .vet-place-card .vet-place-photo-credit{grid-column:1/-1;grid-row:2;display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;padding:8px 0 0;border-top:1px solid #d4c4ae66}
+    .vet-place-card .vet-place-photo-credit>*{margin:0}
+    .vet-place-card-body{grid-column:2;grid-row:1}
+  }
   .vet-places-pagination{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;margin-top:24px}
   .vet-places-pagination button{padding:10px 8px;min-height:44px;font-size:12px}
   .vet-places-pagination>span{font-size:12px;text-align:center}
