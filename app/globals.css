@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-:root{color-scheme:light;--navy:#1b140d;--green:#149b62;--sand:#fdfbf7;--sun:#e9ab32}
+:root{--vet-header-height:80px;color-scheme:light;--navy:#1b140d;--green:#149b62;--sand:#fdfbf7;--sun:#e9ab32}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--sand);color:var(--navy);font-family:Arial,Helvetica,sans-serif}
@@ -48,9 +48,9 @@ a:focus-visible{outline:3px solid #149b62;outline-offset:4px}
 @keyframes vet-intro-brand{0%{opacity:0;transform:translateY(8px)}16%,62%{opacity:1;transform:translateY(0)}85%,100%{opacity:0;transform:translateY(-10px)}}
 @keyframes vet-intro-wipe{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0)}}
 @media (prefers-reduced-motion:reduce){.vet-intro{display:none;animation:none}.vet-intro *{animation:none}}
-[id]{scroll-margin-top:100px}
+[id]{scroll-margin-top:calc(var(--vet-header-height) + 20px)}
 .vet-header{position:sticky;top:0;z-index:70;background:#1b140df7;color:#fff1d2;border-bottom:1px solid #e9ab3233;backdrop-filter:blur(12px)}
-.vet-header-row{height:80px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.vet-header-row{height:var(--vet-header-height);display:flex;align-items:center;justify-content:space-between;gap:22px}
 .vet-brand{display:flex;align-items:center;gap:12px;flex-shrink:0}
 .vet-brand-mark{position:relative;display:flex;width:48px;height:48px;align-items:center;justify-content:center;border:1px solid #e9ab32;border-radius:50%;overflow:hidden;color:#e9ab32;box-shadow:0 0 16px #e9ab321a}
 .vet-brand strong{display:block;max-width:150px;font:700 17px/1.18 Georgia,serif;letter-spacing:.025em}
@@ -82,7 +82,7 @@ a:focus-visible{outline:3px solid #149b62;outline-offset:4px}
 .vet-button-green{background:#107a4c;color:white}.vet-button-green svg{display:block;flex:0 0 auto}
 .vet-button:hover{filter:brightness(1.07)}
 .vet-site{--hero-blend-depth:clamp(220px,38svh,420px)}
-.vet-hero{position:relative;isolation:isolate;display:flex;align-items:center;min-height:max(calc(650px + var(--hero-blend-depth)),calc(100svh - 80px + var(--hero-blend-depth)));padding-bottom:var(--hero-blend-depth);overflow:hidden;background:#fdfbf7}
+.vet-hero{position:relative;isolation:isolate;display:flex;align-items:center;min-height:max(calc(650px + var(--hero-blend-depth)),calc(100svh - var(--vet-header-height) + var(--hero-blend-depth)));padding-bottom:var(--hero-blend-depth);overflow:hidden;background:#fdfbf7}
 .vet-hero + .vet-section{position:relative;margin-top:calc(-1 * var(--hero-blend-depth))}
 .vet-hero-background{
   --hero-blend:linear-gradient(to bottom,
@@ -219,3 +219,132 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
 @media (max-width:767px){.vet-section{padding-block:60px}.vet-section-title{margin-bottom:32px}.vet-section-description{font-size:15px}.vet-hero-brand{display:none}.vet-hero-corners{justify-content:flex-end;top:20px}.vet-hero-contact{padding:10px}.vet-hero-contact>span+span{display:none}.vet-hero-content{padding-block:130px 70px}.vet-hero h1{font-size:44px;line-height:1.14}.vet-hero-description{font-size:16px;line-height:1.75;margin-bottom:28px}.vet-hero-kicker{font-size:9px;letter-spacing:.12em}.vet-hero-buttons{gap:14px}.vet-hero-buttons .vet-button{width:100%;max-width:350px}.vet-about-grid{grid-template-columns:1fr}.vet-contact-form{padding:26px}.vet-video-grid{grid-template-columns:1fr}.vet-video-card h3{font-size:25px}.vet-footer-row{flex-direction:column;align-items:flex-start}.vet-section-heading-row{flex-direction:column;align-items:flex-start}.vet-brand strong{font-size:15px}.vet-brand-mark{width:42px;height:42px}.vet-whatsapp span{display:none}.vet-whatsapp{padding:11px}.vet-category-card{min-height:300px}.vet-category-copy{inset-inline:20px;bottom:22px}.vet-category-copy h3{font-size:25px}.vet-category-grid{gap:20px}.vet-property-list{grid-template-columns:1fr}}
 @media (max-width:540px){.vet-category-grid,.vet-zone-grid{grid-template-columns:1fr}.vet-category-card{min-height:320px}.vet-zone-image{height:220px}.vet-header-row{gap:12px}.vet-brand{gap:9px}.vet-zone-copy p{min-height:0}.vet-property-panel{padding:24px}.vet-category-tab{padding:12px 17px;font-size:12px}.vet-hero h1{font-size:40px}}
 @media (prefers-reduced-motion:no-preference){.vet-category-card img,.vet-video-thumb img{transition:transform .35s ease}.vet-category-card:hover img,.vet-video-thumb:hover img{transform:scale(1.035)}}
+
+.vet-compact-label{display:none}
+/* Compact mobile layouts keep icons small and touch controls comfortable. */
+@media (max-width:767px){
+  :root{--vet-header-height:64px}
+  .vet-header-row{gap:8px}
+  .vet-brand{gap:8px;min-width:0}
+  .vet-brand-mark{width:34px;height:34px;flex:0 0 34px}
+  .vet-brand strong{font-size:13px;letter-spacing:.015em;max-width:none}
+  .vet-brand small{margin-top:4px;font-size:8px;letter-spacing:.15em}
+  .vet-header-actions{gap:6px}
+  .vet-whatsapp,.vet-menu-button{display:flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;flex:0 0 44px}
+  .vet-whatsapp svg,.vet-menu-button svg{width:18px;height:18px}
+  .vet-mobile-nav{max-height:calc(100svh - var(--vet-header-height));padding-block:8px;font-size:14px;overscroll-behavior:contain}
+  .vet-mobile-nav>a,.vet-mobile-nav .vet-nav-dropdown summary,.vet-mobile-nav .vet-nav-submenu a{min-height:44px;display:flex;align-items:center}
+  .vet-button{min-height:46px;padding:12px 18px;font-size:14px;gap:8px}
+  .vet-button svg{width:18px;height:18px;flex-shrink:0}
+  .vet-hero-corners{display:none}
+  .vet-hero-content{padding-block:76px 56px}
+  .vet-hero h1{font-size:clamp(32px,8.5vw,40px);line-height:1.13;margin-block:20px}
+  .vet-hero-description{font-size:15px;line-height:1.65;margin-block:20px 26px}
+  .vet-hero-kicker{font-size:9px;padding:7px 12px;letter-spacing:.1em}
+  .vet-hero-buttons{gap:10px}
+  .vet-hero-buttons .vet-button{max-width:330px}
+  .vet-section{padding-block:44px}
+  .vet-section-title{margin-bottom:26px}
+  .vet-section-title h2,.vet-section-heading-row h2,.vet-about h2{font-size:30px}
+  .vet-section-description{font-size:14px;line-height:1.65}
+  .vet-rule{width:54px;margin-block:17px;height:2px}
+  .vet-category-grid,.vet-zone-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .vet-category-card{min-height:224px;border-radius:16px}
+  .vet-category-copy{inset-inline:14px;bottom:16px}
+  .vet-category-icon{width:32px;height:32px;border-radius:9px;margin-bottom:10px}
+  .vet-category-icon svg{width:18px;height:18px}
+  .vet-category-copy h3{font-size:20px;line-height:1.12;margin-bottom:8px}
+  .vet-category-copy p{font-size:12px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .vet-zone-image{height:118px}
+  .vet-zone-card{border-radius:14px}
+  .vet-zone-copy{padding:14px}
+  .vet-zone-copy h3{font-size:20px}
+  .vet-zone-copy p{font-size:12px;line-height:1.6;margin-block:10px;-webkit-line-clamp:2;min-height:0}
+  .vet-zones .vet-text-link{min-height:40px;gap:5px;font-size:12px}
+  .vet-play-button{width:48px;height:48px}
+  .vet-play-button svg{width:20px;height:20px}
+  .vet-play-small{width:36px;height:36px}
+  .vet-play-small svg{width:16px;height:16px}
+  .vet-feature-badge{left:12px;bottom:12px;font-size:8px;padding:6px 8px;letter-spacing:.08em}
+  .vet-duration{right:12px;bottom:12px;font-size:11px}
+  .vet-feature-description h3,.vet-property-panel h3{font-size:26px}
+  .vet-property-panel{padding:20px}
+  .vet-property-preview{grid-template-columns:80px minmax(0,1fr);gap:12px}
+  .vet-property-image{height:72px}
+  .vet-video-grid{gap:18px}
+  .vet-video-card h3{font-size:22px}
+  .vet-video-card>.p-6{padding:18px}
+  .vet-about-bio{font-size:15px;line-height:1.75}
+  .vet-contact-form{padding:22px;border-radius:18px}
+  .vet-contact-form input,.vet-contact-form select{font-size:16px;min-height:46px}
+  .vet-wide-label{display:none}.vet-compact-label{display:inline}
+  .vet-places-catalog,.vet-place-page{padding-block:24px}
+  .vet-catalog-intro{margin:22px auto 24px;text-align:left}
+  .vet-catalog-intro h1{font-size:32px;line-height:1.12}
+  .vet-catalog-intro .vet-rule{margin-left:0}
+  .vet-catalog-intro>p:last-child{font-size:15px;line-height:1.6;margin-top:12px}
+  .vet-catalog-tabs{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;gap:8px;max-width:100%;padding:2px 2px 10px;margin-bottom:14px;scroll-padding-inline:14px}
+  .vet-category-tab{flex:0 0 auto;white-space:nowrap;min-height:44px;padding:12px 16px;font-size:12px}
+  .vet-catalog-help{padding:4px 14px;border-radius:12px;margin-bottom:24px}
+  .vet-catalog-help summary{display:list-item;min-height:44px;padding-block:12px}
+  .vet-catalog-help p{font-size:14px;line-height:1.7}.vet-catalog-help p:last-child{padding-bottom:12px}
+  .vet-places-results{padding:0;border:0;background:transparent;border-radius:0}
+  .vet-places-results-heading{gap:10px;margin-bottom:14px}
+  .vet-places-results-heading h2{font-size:18px;scroll-margin-top:84px}
+  .vet-places-results-heading p{font-size:12px;line-height:1.6}
+  .vet-places-results>[aria-live]{font-size:12px;margin-bottom:14px}
+  .vet-places-grid{grid-template-columns:1fr;gap:12px}
+  .vet-place-card{display:grid;grid-template-columns:104px minmax(0,1fr);align-items:start;gap:12px;padding:12px;border-radius:14px}
+  .vet-place-card>.vet-place-photo{min-width:0}
+  .vet-place-card .vet-place-photo-frame{aspect-ratio:1;border-radius:10px}
+  .vet-place-card .vet-place-photo-credit{padding:8px 0 0;font-size:12px;line-height:1.45;overflow-wrap:anywhere}
+  .vet-place-card .vet-place-photo-credit>div{gap:4px;align-items:flex-start}
+  .vet-place-card .vet-place-photo-credit img{width:14px;height:14px;flex:0 0 14px;margin-top:2px}
+  .vet-place-card-body{padding:0;min-width:0}
+  .vet-place-card h2{font-size:19px;line-height:1.2}
+  .vet-place-card-rating{font-size:13px;line-height:1.5;margin-top:8px}
+  .vet-place-card address{font-size:13px;line-height:1.5;margin-top:8px}
+  .vet-place-card-actions{margin-top:10px;gap:4px 12px}
+  .vet-place-card-actions a{min-height:40px;display:inline-flex;align-items:center;font-size:12px;white-space:nowrap}
+  @supports(grid-template-rows:subgrid){
+    .vet-place-card{grid-template-rows:auto auto}
+    .vet-place-card>.vet-place-photo{grid-column:1/-1;grid-row:1/span 2;display:grid;grid-template-columns:subgrid;grid-template-rows:subgrid}
+    .vet-place-card>.vet-place-photo>a,.vet-place-card>.vet-place-photo>.vet-place-photo-frame{grid-column:1;grid-row:1;align-self:start}
+    .vet-place-card .vet-place-photo-credit{grid-column:1/-1;grid-row:2;display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;padding:8px 0 0;border-top:1px solid #d4c4ae66}
+    .vet-place-card .vet-place-photo-credit>*{margin:0}
+    .vet-place-card-body{grid-column:2;grid-row:1}
+  }
+  .vet-places-pagination{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;margin-top:24px}
+  .vet-places-pagination button{padding:10px 8px;min-height:44px;font-size:12px}
+  .vet-places-pagination>span{font-size:12px;text-align:center}
+  .vet-place-breadcrumbs{gap:8px;font-size:12px;line-height:1.7;margin-bottom:20px}
+  .vet-place-breadcrumbs>a{min-height:32px;display:inline-flex;align-items:center}
+  .vet-place-breadcrumbs>span:last-child{align-self:center}
+  .vet-place-detail-layout{gap:20px}
+  .vet-place-information{padding:0;border-radius:18px}
+  .vet-place-summary{padding:16px;gap:14px;border-radius:17px}
+  .vet-place-summary .vet-place-photo-frame{aspect-ratio:16/9}
+  .vet-place-summary figcaption{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:10px 0 0;font-size:12px;line-height:1.5}
+  .vet-place-summary figcaption>*{margin:0}
+  .vet-place-summary .vet-eyebrow{font-size:10px}
+  .vet-place-summary h1{font-size:27px;line-height:1.14;margin:10px 0 12px}
+  .vet-place-summary address{font-size:14px;line-height:1.6}
+  .vet-place-summary-actions{margin-top:16px;gap:8px}
+  .vet-place-action{min-height:44px;padding:10px 14px;font-size:12px;gap:4px}
+  .vet-place-information-body{padding:22px 16px}
+  .vet-place-information h2{font-size:24px}
+  .vet-place-information-body p{font-size:14px;line-height:1.7}
+  .vet-place-information-body>section{margin-top:22px}
+  .vet-place-facts{gap:18px;font-size:14px;line-height:1.65}
+  .vet-place-panel{padding:18px;border-radius:16px}
+  .vet-place-panel h2{font-size:18px}
+  .vet-place-video-grid{grid-template-columns:1fr;gap:16px;margin-top:18px}
+  .vet-place-video-grid>a{display:grid;grid-template-columns:104px minmax(0,1fr);gap:12px;align-items:center}
+  .vet-place-video-grid p{margin:0;font-size:13px;line-height:1.5}
+  .vet-place-video-grid span.rounded-full{padding:5px 8px;font-size:12px}
+  .vet-place-reviews article{padding:16px}
+  .vet-place-reviews article img{width:28px;height:28px}
+  .vet-place-reviews article p{line-height:1.7}
+  .vet-place-reviews article button{min-height:40px}
+}
+@media(max-width:359px){.vet-place-card{grid-template-columns:88px minmax(0,1fr);gap:10px;padding:10px}.vet-place-card h2{font-size:18px}.vet-category-copy h3,.vet-zone-copy h3{font-size:18px}}

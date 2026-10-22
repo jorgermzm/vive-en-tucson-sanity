@@ -49,7 +49,6 @@ export default async function HomePage() {
   const content = data as HomeData | null
   const settings = content?.settings
   const home = content?.home
-  const phone = settings?.phone || '520-335-9349'
   const whatsapp = settings?.whatsappUrl || 'https://wa.me/15203359349'
   const logoUrl = imageUrl(settings?.logo, 120, 120)
   const introLogoUrl = imageUrl(settings?.logo, 600, 600)
@@ -67,7 +66,6 @@ export default async function HomePage() {
         <HeroBackdrop/>
         <div className="vet-hero-corners shell">
           <div className="vet-hero-brand">{logoUrl && <span className="relative h-8 w-8 overflow-hidden rounded-full"><Image src={logoUrl} alt="" fill sizes="32px" className="object-cover"/></span>}<span>Vive en Tucson | Con Jorge</span></div>
-          <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="vet-hero-contact"><span className="vet-chat-mark"><WhatsAppIcon width={23} height={23}/></span><span><small>Escríbeme hoy</small><strong>{phone}</strong></span></a>
         </div>
         <div className="vet-hero-content shell">
           <p className="vet-hero-kicker">Arizona Lifestyle &amp; Real Estate</p>
