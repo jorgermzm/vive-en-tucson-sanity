@@ -82,7 +82,21 @@ a:focus-visible{outline:3px solid #149b62;outline-offset:4px}
 .vet-button-green{background:#107a4c;color:white}.vet-button-green svg{display:block;flex:0 0 auto}
 .vet-button:hover{filter:brightness(1.07)}
 .vet-hero{position:relative;isolation:isolate;display:flex;align-items:center;min-height:max(650px,calc(100svh - 80px));overflow:hidden;background:#fdfbf7}
-.vet-hero-background{position:absolute;inset:0;z-index:-1;pointer-events:none;will-change:opacity;-webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - clamp(64px,8vw,100px)),transparent 100%);mask-image:linear-gradient(to bottom,#000 calc(100% - clamp(64px,8vw,100px)),transparent 100%)}
+.vet-hero-background{
+  --hero-blend-depth:clamp(220px,38svh,420px);
+  --hero-blend:linear-gradient(to bottom,
+    #000 calc(100% - var(--hero-blend-depth)),
+    rgb(0 0 0 / .96) calc(100% - var(--hero-blend-depth)*.875),
+    rgb(0 0 0 / .85) calc(100% - var(--hero-blend-depth)*.75),
+    rgb(0 0 0 / .69) calc(100% - var(--hero-blend-depth)*.625),
+    rgb(0 0 0 / .5) calc(100% - var(--hero-blend-depth)*.5),
+    rgb(0 0 0 / .31) calc(100% - var(--hero-blend-depth)*.375),
+    rgb(0 0 0 / .15) calc(100% - var(--hero-blend-depth)*.25),
+    rgb(0 0 0 / .04) calc(100% - var(--hero-blend-depth)*.125),
+    transparent 100%);
+  position:absolute;inset:0;z-index:-1;pointer-events:none;will-change:opacity;
+  -webkit-mask-image:var(--hero-blend);mask-image:var(--hero-blend)
+}
 .vet-hero-image,.vet-hero-overlay{position:absolute;inset:0}
 .vet-hero-image img{object-position:center 55%}
 .vet-hero-backdrop{inset:-18px;pointer-events:none;will-change:filter}
