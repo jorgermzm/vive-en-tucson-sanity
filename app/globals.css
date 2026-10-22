@@ -128,6 +128,28 @@ a:focus-visible{outline:3px solid #149b62;outline-offset:4px}
 .vet-rule{display:block;width:80px;height:3px;border-radius:5px;background:#e9ab32;margin:22px auto}
 .vet-section-description{font-size:17px;line-height:1.7;color:#65605b}
 .vet-category-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.vet-place-detail-layout{display:grid;gap:28px;align-items:start}
+.vet-place-detail-layout>*{min-width:0}
+.vet-place-information{border:1px solid #d9dfe3;border-radius:24px;padding:18px;background:white;overflow:hidden}
+.vet-place-summary{display:grid;gap:24px;padding:18px;border-radius:18px;background:#f5f1e8}
+.vet-place-summary figure{min-width:0;overflow:hidden;border-radius:14px;align-self:start}
+.vet-place-summary figcaption{padding:12px;font-size:11px}
+.vet-place-summary-copy{min-width:0;align-self:center;padding-block:4px}
+.vet-place-summary h1{font:700 clamp(28px,3vw,40px)/1.12 Georgia,serif;letter-spacing:-.025em;margin:12px 0 18px;overflow-wrap:anywhere}
+.vet-place-action{display:inline-flex;align-items:center;justify-content:center;padding:11px 17px;border-radius:999px;background:#e9ab32;color:#1b140d;font-weight:700;font-size:13px;line-height:1.5}
+.vet-place-action-secondary{background:white;border:1px solid #d8c9ac}
+.vet-place-information-body{padding:24px 6px 8px}
+.vet-place-information h2{font:700 29px/1.2 Georgia,serif}
+.vet-place-facts{margin-top:20px;display:grid;gap:22px;font-size:14px;line-height:1.8}
+.vet-place-facts>div{display:grid;gap:5px}
+.vet-place-facts dt{font-weight:700}.vet-place-facts dd{color:#5b6470;overflow-wrap:anywhere}
+.vet-place-panel{padding:24px;border-radius:22px;background:#f3efe5;overflow-wrap:anywhere}
+.vet-place-panel h2{font-size:19px;font-weight:800;line-height:1.4}
+.vet-place-videos{background:#eaf0f4}
+.vet-place-video-grid{display:grid;gap:22px;margin-top:22px}
+.vet-place-card{min-width:0;overflow-wrap:anywhere}
+@media(min-width:640px){.vet-place-summary{grid-template-columns:190px minmax(0,1fr)}.vet-place-facts>div{grid-template-columns:110px minmax(0,1fr);gap:18px}.vet-place-video-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(min-width:1280px){.vet-place-detail-layout{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr)}.vet-place-summary{grid-template-columns:170px minmax(0,1fr)}.vet-place-panel{padding:25px}}
 .vet-category-card{position:relative;min-height:330px;display:block;border-radius:24px;overflow:hidden;background:#625244;color:#fff1d2;box-shadow:0 14px 24px #1b140d1a}
 .vet-card-shade{position:absolute;inset:0;background:linear-gradient(0deg,#1b140df0 0%,#1b140d66 48%,transparent 85%)}
 .vet-category-copy{position:absolute;inset-inline:26px;bottom:26px}

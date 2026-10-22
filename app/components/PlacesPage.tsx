@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import {PLACE_CATEGORIES, type PlaceCategory} from '@/lib/place-categories'
 import {getPlaces} from '@/lib/places'
-import {PlacePhoto} from './PlacePhoto'
+import {PlacesGrid} from './PlacesGrid'
 
 export async function PlacesPage({category}: {category: PlaceCategory}) {
   const section = PLACE_CATEGORIES[category]
@@ -14,28 +14,14 @@ export async function PlacesPage({category}: {category: PlaceCategory}) {
         {Object.entries(PLACE_CATEGORIES).map(([slug, item]) => <Link key={slug} href={`/${slug}`} prefetch={false} aria-current={slug === category ? 'page' : undefined} className={`vet-category-tab ${slug === category ? 'vet-category-tab-active' : ''}`}>{item.label}</Link>)}
       </nav>
       <section className="mb-10 grid gap-4 md:grid-cols-2">
-        <article className="rounded-2xl border border-slate-200 bg-white p-6"><h2 className="text-xl font-black">¿Cómo usar esta guía?</h2><p className="mt-3 leading-7 text-slate-600">Explora lugares reales de Tucson, abre su ficha en Google Maps para confirmar horarios y detalles actuales, y usa las categorías para comparar diferentes planes en la ciudad.</p></article>
+        <article className="rounded-2xl border border-slate-200 bg-white p-6"><h2 className="text-xl font-black">¿Cómo usar esta guía?</h2><p className="mt-3 leading-7 text-slate-600">Explora hasta 60 lugares por categoría, ordenados por calificación de Google. Abre la foto o el nombre para ver su ficha con dirección, fotos, horarios y opiniones.</p></article>
         <article className="rounded-2xl border border-slate-200 bg-white p-6"><h2 className="text-xl font-black">¿La información está pensada para visitantes y residentes?</h2><p className="mt-3 leading-7 text-slate-600">Sí. La selección ayuda tanto a quienes visitan Tucson como a quienes están considerando vivir aquí y quieren entender mejor cada zona a través de sus lugares y experiencias.</p></article>
       </section>
       {status !== 'ready' ? <div role="status" className="rounded-2xl border border-slate-200 bg-white p-8">
         <h2 className="text-xl font-bold">No pudimos cargar los lugares en este momento.</h2>
         <p className="mt-3 text-slate-600">Inténtalo de nuevo en unos minutos.</p>
         <a href={`/${category}`} className="mt-5 inline-block font-bold text-blue-700 underline">Volver a intentar</a>
-      </div> : places.length === 0 ? <p role="status" className="rounded-2xl border border-slate-200 bg-white p-8">No hay lugares disponibles en esta sección por el momento.</p> : <section aria-label="Lugares" className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-6">
-        <p className="mb-5 text-sm text-[#5e5e5e]">Información de <span translate="no" className="whitespace-nowrap font-normal">Google Maps</span></p>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {places.map(place => <article key={place.id} className="vet-place-card overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-            <PlacePhoto place={place}/>
-            <div className="p-5">
-              <h2 className="font-serif text-2xl font-bold">{place.name}</h2>
-              <address className="mt-3 text-sm not-italic leading-6 text-slate-600">{place.address}</address>
-              <a href={place.mapsUrl} target="_blank" rel="noopener noreferrer" className="vet-text-link mt-5 text-sm">Ver en Google Maps<span className="sr-only">: {place.name}</span> ↗</a>
-              {place.attributions.map((a, i) => <p key={i} className="mt-2 text-xs text-slate-600">{a.providerUri ? <a href={a.providerUri} target="_blank" rel="noopener noreferrer" className="underline">{a.provider}</a> : a.provider}</p>)}
-            </div>
-          </article>)}
-        </div>
-      </section>}
-      {status==='ready'&&places.length>0&&<script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify({'@context':'https://schema.org','@type':'ItemList',name:section.title,itemListElement:places.map((place,index)=>({'@type':'ListItem',position:index+1,item:{'@type':'LocalBusiness',name:place.name,address:place.address,url:place.mapsUrl}}))}).replace(/</g,'\\u003c')}}/>}
+      </div> : places.length === 0 ? <p role="status" className="rounded-2xl border border-slate-200 bg-white p-8">No hay lugares disponibles en esta sección por el momento.</p> : <PlacesGrid key={category} places={places} category={category}/>}
     </div>
   </main>
 }
