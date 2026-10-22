@@ -71,7 +71,7 @@ export default async function HomePage() {
           <p className="vet-hero-kicker">Arizona Lifestyle &amp; Real Estate</p>
           <h1>Descubre Tucson<br/><span>como alguien que vive aquí</span></h1>
           <p className="vet-hero-description">{home?.heroDescription || 'Explora los mejores rincones de la ciudad, guías locales y encuentra tu próximo hogar de la mano de Jorge.'}</p>
-          <div className="vet-hero-buttons"><Link href="/videos" className="vet-button vet-button-gold"><SiteIcon name="play"/>VIDEOS</Link><Link href="/comprar" className="vet-button vet-button-outline"><SiteIcon name="home"/>Buscar casas en Tucson</Link></div>
+          <div className="vet-hero-buttons"><Link href="/videos" className="vet-button vet-button-gold"><SiteIcon name="play"/>VIDEOS</Link><Link href="/casas-tucson" className="vet-button vet-button-outline"><SiteIcon name="home"/>Buscar casas en Tucson</Link></div>
         </div>
       </section>
 
@@ -107,7 +107,7 @@ export default async function HomePage() {
           <aside id="comprar" className="vet-property-panel"><p className="vet-eyebrow">Asesoría inmobiliaria</p><h3>Tu próximo hogar<br/>en Tucson</h3><p className="vet-property-intro">Conoce las zonas y conversemos sobre las opciones que se ajustan a lo que buscas.</p>
             <div className="vet-property-list">{properties.map(property => <div key={property._key} className="vet-property-preview"><div className="vet-property-image"><EditorialImage value={property.image} alt={property.image?.alt || 'Referencia del entorno residencial'} sizes="180px"/></div><div><p className="vet-property-location">{property.location || 'Tucson, Arizona'}</p><h4>{property.propertyType || 'Conoce tus opciones'}</h4><a href={whatsapp} className="vet-text-link text-xs">Consultar con Jorge <SiteIcon name="arrow" width={15} height={15}/></a></div></div>)}</div>
             {properties.length > 0 && <p className="mt-4 text-xs leading-5 text-slate-500">Imágenes de referencia del entorno. Consulta disponibilidad y precios actuales con Jorge.</p>}
-            <a href={whatsapp} className="vet-button vet-button-green mt-6 w-full"><WhatsAppIcon width={21} height={21}/>Hablemos de tu búsqueda</a>
+            <Link href="/casas-tucson" className="vet-button vet-button-green mt-6 w-full"><SiteIcon name="home" width={21} height={21}/>Buscar casas en el mapa</Link>
           </aside>
         </div>
       </section>
