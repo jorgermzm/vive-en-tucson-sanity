@@ -13,6 +13,7 @@ import {area} from './area'
 import {video} from './video'
 import {article} from './article'
 import {placeCollection} from './place-collection'
+import {placeProfile} from './place-profile'
 
 export const schemaTypes = [
   editorialImage,
@@ -28,4 +29,5 @@ export const schemaTypes = [
   video,
   article,
   placeCollection,
+  placeProfile,
 ]

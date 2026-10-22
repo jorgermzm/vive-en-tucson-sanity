@@ -3,7 +3,7 @@ import {PLACE_CATEGORIES} from '../lib/place-categories'
 
 const placeIds = (name: string, title: string) => defineField({
   name, title, type: 'array', of: [{type: 'string', validation: r => r.regex(/^[A-Za-z0-9_-]{1,200}$/, {name: 'ID de Google Places'})}],
-  validation: r => r.unique().max(12),
+  validation: r => r.unique().max(60),
 })
 export const placeCollection = defineType({
   name: 'placeCollection', title: 'Selección de lugares', type: 'document',
@@ -16,7 +16,7 @@ export const placeCollection = defineType({
       const count = await context.getClient({apiVersion: '2026-10-03'}).fetch<number>('count(*[_type == "placeCollection" && category == $category && !(_id in [$id, $draft])])', {category: value, id: id || '', draft: `drafts.${id}`})
       return count === 0 || 'Ya existe una selección para esta sección.'
     })}),
-    {...placeIds('placeIds', 'Lugares seleccionados (Place IDs)'), description: 'Déjalo vacío para descubrir lugares automáticamente. Con IDs, se mostrarán estos lugares en el orden elegido.'},
+    {...placeIds('placeIds', 'Lugares seleccionados (Place IDs)'), description: 'Déjalo vacío para descubrir hasta 60 lugares automáticamente. Con IDs, se muestran esos lugares. Siempre se ordenan por calificación y, en empate, por número de reseñas.'},
     {...placeIds('hiddenPlaceIds', 'Lugares que no quieres mostrar (Place IDs)'), description: 'Se excluyen de los resultados automáticos.'},
   ],
   preview: {select: {title: 'title', subtitle: 'category'}},
