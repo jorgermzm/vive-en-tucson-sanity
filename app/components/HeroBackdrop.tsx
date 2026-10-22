@@ -19,7 +19,9 @@ export function HeroBackdrop() {
       if (!background || !image || !hero) return
       const headerHeight = document.querySelector<HTMLElement>('.vet-header')?.offsetHeight || 0
       const bounds = hero.getBoundingClientRect()
-      const progress = Math.min(1, Math.max(0, Math.round(headerHeight - bounds.top) / Math.max(1, bounds.height * 0.65)))
+      const blendDepth = parseFloat(window.getComputedStyle(hero).paddingBottom) || 0
+      const visibleHeight = Math.max(1, bounds.height - blendDepth)
+      const progress = Math.min(1, Math.max(0, Math.round(headerHeight - bounds.top) / (visibleHeight * 0.65)))
       const opacity = (1 - progress).toFixed(3)
       const filter = reducedMotion.matches ? 'none' : `blur(${(progress * 8).toFixed(2)}px)`
       if (background.style.opacity !== opacity) background.style.opacity = opacity
