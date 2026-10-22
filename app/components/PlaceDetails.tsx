@@ -18,7 +18,7 @@ export function PlaceInformation({place, editorial}: {place: SitePlaceDetail; ed
         <address className="not-italic leading-7 text-slate-600">{place.address}</address>
         <p className="mt-3 text-sm font-bold text-[#764315]">{place.rating ? <><span aria-label={`Calificación ${place.rating} de 5`}>★ {place.rating.toFixed(1)} / 5</span>{place.reviewCount !== undefined && <span className="font-normal text-slate-600"> · {place.reviewCount.toLocaleString('es-MX')} reseñas</span>}</> : 'Sin calificación disponible'}</p>
         {place.temporarilyClosed && <p className="mt-3 font-bold text-amber-800">Google indica que está cerrado temporalmente. Confirma antes de ir.</p>}
-        <div className="mt-6 flex flex-wrap gap-3">{place.website && <a className="vet-place-action" href={place.website} target="_blank" rel="noopener noreferrer">Web oficial ↗</a>}<a className="vet-place-action vet-place-action-secondary" href={place.mapsUrl} target="_blank" rel="noopener noreferrer">Mapa y cómo llegar ↗</a></div>
+        <div className="vet-place-summary-actions mt-6 flex flex-wrap gap-3">{place.website && <a className="vet-place-action" href={place.website} target="_blank" rel="noopener noreferrer">Web oficial ↗</a>}<a className="vet-place-action vet-place-action-secondary" aria-label="Mapa y cómo llegar" href={place.mapsUrl} target="_blank" rel="noopener noreferrer"><span className="vet-wide-label">Mapa y cómo llegar</span><span className="vet-compact-label">Cómo llegar</span> ↗</a></div>
       </div>
     </div>
     <div className="vet-place-information-body">
