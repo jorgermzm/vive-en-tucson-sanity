@@ -6,6 +6,7 @@ import {getSiteVideos} from '@/lib/videos'
 import {videoId} from '@/lib/youtube-data'
 import {PlacePhoto} from './PlacePhoto'
 import {PlaceCard} from './PlaceCard'
+import {PlaceReviewText} from './PlaceReviewText'
 
 export function PlaceInformation({place, editorial}: {place: SitePlaceDetail; editorial: PlaceEditorial}) {
   return <article className="vet-place-information">
@@ -43,7 +44,7 @@ export async function PlaceVideos({category, editorial}: {category: PlaceCategor
   const matches = linked.length ? linked : videos.filter(video => video.categories.some(tag => videoCategory[category].includes(tag))).slice(0, 3)
   return <section className="vet-place-panel vet-place-videos">
     <h2>Videos de Jorge</h2>
-    {matches.length ? <><p className="mt-2 text-sm leading-6 text-slate-600">{linked.length ? 'Videos seleccionados para este lugar.' : `Más ideas de ${PLACE_CATEGORIES[category].label.toLowerCase()} en Tucson. Estos videos son de la categoría y no necesariamente de este lugar.`}</p><div className="vet-place-video-grid">{matches.map(video => <a key={video.id} href={video.youtubeUrl} target="_blank" rel="noopener noreferrer" className="group block"><div className="relative aspect-video overflow-hidden rounded-xl bg-[#1b140d]"><Image src={video.thumbnailUrl} alt={video.thumbnailAlt} fill sizes="(max-width:767px) 90vw, (max-width:1279px) 30vw, 150px" className="object-cover"/><span className="absolute inset-0 flex items-center justify-center bg-black/20 text-white"><span className="rounded-full bg-black/70 px-3 py-2" aria-hidden="true">▶</span></span></div><p className="mt-3 text-sm font-bold leading-5 group-hover:underline">{video.title}</p></a>)}</div></> : <p className="mt-4 leading-7 text-slate-600">Todavía no hay videos publicados de esta categoría.</p>}
+    {matches.length ? <><p className="mt-2 text-sm leading-6 text-slate-600">{linked.length ? 'Videos seleccionados para este lugar.' : `Más ideas de ${PLACE_CATEGORIES[category].label.toLowerCase()} en Tucson. Estos videos son de la categoría y no necesariamente de este lugar.`}</p><div className="vet-place-video-grid">{matches.map(video => <a key={video.id} href={video.youtubeUrl} target="_blank" rel="noopener noreferrer" className="group block"><div className="relative aspect-video overflow-hidden rounded-xl bg-[#1b140d]"><Image src={video.thumbnailUrl} alt={video.thumbnailAlt} fill sizes="(max-width:767px) 90vw, (max-width:1279px) 30vw, 150px" className="object-cover"/><span className="absolute inset-0 flex items-center justify-center bg-black/20 text-white"><span className="rounded-full bg-black/70 px-3 py-2" aria-hidden="true">▶</span></span></div><p className="mt-3 line-clamp-3 text-sm font-bold leading-5 group-hover:underline">{video.title}</p></a>)}</div></> : <p className="mt-4 leading-7 text-slate-600">Todavía no hay videos publicados de esta categoría.</p>}
     <Link href={`/videos?categoria=${encodeURIComponent(PLACE_CATEGORIES[category].label)}`} className="vet-text-link mt-5 text-sm">Explorar videos →</Link>
   </section>
 }
@@ -54,7 +55,7 @@ export function PlaceReviews({place}: {place: SitePlaceDetail}) {
     <p className="mt-3 text-sm text-[#5e5e5e]"><span translate="no" className="whitespace-nowrap font-normal">Google Maps</span> · Reseñas ordenadas por relevancia por Google.</p>
     <div className="mt-5 space-y-4">{place.reviews.length ? place.reviews.map((review, i) => <article key={`${review.url}-${i}`} className="rounded-xl border border-slate-200 bg-white p-5">
       <div className="flex items-center gap-3">{review.author.photoUri && <img src={review.author.photoUri} alt="" width={36} height={36} loading="lazy" referrerPolicy="no-referrer" className="h-9 w-9 rounded-full"/>}<div><p className="text-sm font-bold">{review.author.uri ? <a href={review.author.uri} target="_blank" rel="noopener noreferrer" className="underline">{review.author.displayName}</a> : review.author.displayName}</p><p className="mt-1 text-xs text-slate-500">{review.relativeDate || (review.publishedAt ? new Intl.DateTimeFormat('es-MX', {dateStyle: 'long', timeZone: 'America/Phoenix'}).format(new Date(review.publishedAt)) : '')}{review.rating ? ` · ${review.rating} / 5` : ''}</p></div></div>
-      <p className="mt-4 whitespace-pre-line text-sm leading-7 text-slate-600">{review.text}</p>
+      <PlaceReviewText text={review.text}/>
       {review.originalLanguageCode && review.languageCode && review.originalLanguageCode !== review.languageCode && <details className="mt-3 text-xs text-slate-500"><summary className="cursor-pointer">Traducida por Google · Ver original</summary><p className="mt-3 whitespace-pre-line leading-6">{review.originalText}</p></details>}
       <a href={review.url} target="_blank" rel="noopener noreferrer" className="mt-3 inline-block text-xs font-bold text-[#764315] underline">Ver reseña en Google Maps ↗</a>
     </article>) : <p className="leading-7 text-slate-600">Google no proporcionó reseñas para mostrar aquí. Puedes consultar las opiniones en su ficha de Google Maps.</p>}</div>
