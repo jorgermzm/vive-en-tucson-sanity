@@ -7,7 +7,7 @@ const base=process.env.NEXT_PUBLIC_SITE_URL || 'https://www.vive-tucson.com'
 
 export default async function sitemap():Promise<MetadataRoute.Sitemap>{
   const staticRoutes=[
-    '', '/zonas','/restaurantes','/que-hacer','/atracciones','/museos','/hiking-outdoors','/vida-nocturna','/videos',
+    '', '/zonas','/restaurantes','/que-hacer','/atracciones','/museos','/hiking-outdoors','/vida-nocturna','/videos','/casas-tucson',
     '/comprar','/vender','/sobre-jorge','/contacto',
   ]
   const areas=await client.fetch<Array<{slug?:string|null}>>(AREAS_QUERY).catch(()=>[])
