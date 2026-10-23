@@ -25,6 +25,7 @@ export function PropertySearchShell({whatsappUrl = 'https://wa.me/15203359349'}:
   const [query, setQuery] = useState('')
   const [view, setView] = useState<'split' | 'map'>('split')
   const [saved, setSaved] = useState(false)
+  const [videosVisible, setVideosVisible] = useState(true)
 
   const whatsapp = useMemo(() => {
     const text = [
@@ -79,6 +80,10 @@ export function PropertySearchShell({whatsappUrl = 'https://wa.me/15203359349'}:
           <select value={filters.beds} onChange={event => updateFilter('beds', event.target.value)} className="h-11 rounded-xl border border-slate-300 bg-white px-3 text-sm outline-none focus:border-[#b8792d]"><option value="">Recámaras</option><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option><option value="5">5+</option></select>
           <select value={filters.baths} onChange={event => updateFilter('baths', event.target.value)} className="h-11 rounded-xl border border-slate-300 bg-white px-3 text-sm outline-none focus:border-[#b8792d]"><option value="">Baños</option><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option></select>
           <select value={filters.propertyType} onChange={event => updateFilter('propertyType', event.target.value)} className="h-11 rounded-xl border border-slate-300 bg-white px-3 text-sm outline-none focus:border-[#b8792d]"><option value="">Tipo</option><option>Casa</option><option>Townhome</option><option>Condo</option><option>Manufacturada</option><option>Terreno</option></select>
+          <button type="button" onClick={() => setVideosVisible(value => !value)} aria-pressed={videosVisible} className={`h-11 rounded-xl border px-4 text-sm font-black transition ${videosVisible ? 'border-red-200 bg-red-50 text-red-700 hover:bg-red-100' : 'border-slate-300 bg-white text-slate-600 hover:bg-slate-50'}`}>
+            <span className="mr-2 inline-flex h-5 w-5 items-center justify-center rounded-md bg-red-600 text-[10px] font-black text-white">▶</span>
+            {videosVisible ? 'Videos: ON' : 'Videos: OFF'}
+          </button>
           <button type="button" onClick={clearFilters} className="h-11 rounded-xl border border-slate-300 px-4 text-sm font-bold hover:bg-slate-50">Limpiar</button>
         </div>
       </div>
@@ -125,7 +130,7 @@ export function PropertySearchShell({whatsappUrl = 'https://wa.me/15203359349'}:
           />
           <div className="pointer-events-none absolute left-4 top-4 rounded-2xl border border-white/70 bg-white/95 px-4 py-3 shadow-lg backdrop-blur">
             <p className="text-xs font-black uppercase tracking-[.16em] text-[#8b5b24]">Mapa activo</p>
-            <p className="mt-1 max-w-[250px] text-xs leading-5 text-slate-600">Los pines de propiedades se activarán al conectar el feed IDX.</p>
+            <p className="mt-1 max-w-[250px] text-xs leading-5 text-slate-600">{videosVisible ? 'La capa de videos está activa. Los pines rojos abrirán el video grabado en ese lugar.' : 'La capa de videos está oculta. Puedes volver a activarla desde los filtros.'}</p>
           </div>
         </div>
       </div>
