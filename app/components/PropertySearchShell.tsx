@@ -3,6 +3,7 @@
 import {useEffect, useMemo, useState} from 'react'
 import Link from 'next/link'
 import {WhatsAppIcon} from './WhatsAppIcon'
+import {VideoMap} from './VideoMap'
 
 type SearchFilters = {
   minPrice: string
@@ -224,16 +225,15 @@ export function PropertySearchShell({whatsappUrl = 'https://wa.me/15203359349'}:
         </aside>}
 
         <div className="relative order-1 min-h-[480px] bg-slate-100 sm:min-h-[560px] lg:order-2 lg:min-h-[720px]">
-          <iframe
-            title="Mapa de Tucson, Arizona"
-            src="https://www.google.com/maps?q=Tucson%2C%20Arizona&z=11&output=embed"
-            className="absolute inset-0 h-full w-full border-0"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
+          <VideoMap
+            videos={videos}
+            videosVisible={videosVisible}
+            selectedVideoId={selectedVideo?.id}
+            onSelect={setSelectedVideo}
           />
           <div className="pointer-events-none absolute left-3 top-3 max-w-[calc(100%-1.5rem)] rounded-2xl border border-white/70 bg-white/95 px-4 py-3 shadow-lg backdrop-blur md:left-4 md:top-4">
             <p className="text-xs font-black uppercase tracking-[.16em] text-[#8b5b24]">Mapa Vive en Tucson</p>
-            <p className="mt-1 max-w-[280px] text-xs leading-5 text-slate-600">{videosVisible ? `${videos.length || 'Tus'} videos horizontales están activos en la capa de contenido. Los pines geográficos personalizados se activarán con Maps JS.` : 'La capa de videos está oculta. Puedes volver a activarla desde los filtros.'}</p>
+            <p className="mt-1 max-w-[280px] text-xs leading-5 text-slate-600">{videosVisible ? `${videos.length || 'Tus'} videos horizontales están visibles en el mapa. Toca un pin rojo para ver el video; si hay varios en el mismo punto, el número indica cuántos.` : 'La capa de videos está oculta. Puedes volver a activarla desde los filtros.'}</p>
           </div>
         </div>
       </div>
